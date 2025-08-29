@@ -1,0 +1,33 @@
+{
+  "name": "humanet",
+  "version": "1.0.0",
+  "description": "HumaNet - Open Innovation Platform",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "clean": "turbo run clean",
+    "inject-data": "node scripts/inject-dummy-data.js",
+    "inject-enhanced": "node scripts/inject-dummy-data-enhanced.js",
+    "clear-data": "node scripts/clear-data.js",
+    "reset-data": "npm run clear-data && npm run inject-data",
+    "data-manager": "node scripts/data-manager.js",
+    "data-status": "node scripts/data-manager.js status",
+    "data-analyze": "node scripts/data-manager.js analyze",
+    "data-backup": "node scripts/data-manager.js backup",
+    "data-cleanup": "node scripts/data-manager.js cleanup"
+  },
+  "devDependencies": {
+    "turbo": "latest"
+  },
+  "packageManager": "npm@10.0.0",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

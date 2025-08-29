@@ -1,0 +1,16 @@
+{
+  "generatedAt": "2025-07-04T14:17:33.990Z",
+  "ideasCount": 50,
+  "activitiesCount": 300,
+  "usersCount": 34,
+  "options": {
+    "seedDate": "2024-06-01T00:00:00.000Z",
+    "maxAge": 365,
+    "baseViewCount": 50,
+    "baseForkCount": 5,
+    "viewVariability": 0.5,
+    "forkVariability": 0.3,
+    "ideasCount": 50,
+    "activitiesCount": 300
+  }
+}

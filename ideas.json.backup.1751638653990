@@ -1,0 +1,104 @@
+[
+  {
+    "id": "idea-001",
+    "title": "Sustainable Enterprise Platform",
+    "description": "Develop sustainable enterprise platform that incorporates comprehensive reporting and intelligent recommendations. The system would provide improved accuracy and reduced manual effort, making it an essential tool for modern apis applications. Features include comprehensive integration capabilities and detailed performance metrics.",
+    "tags": [
+      "APIs",
+      "Cloud Computing",
+      "Security",
+      "Finance",
+      "GraphQL"
+    ],
+    "status": "merged",
+    "createdBy": "Xavier Lopez",
+    "createdAt": "2025-07-01T00:00:00.000Z",
+    "updatedAt": "2025-07-08T22:36:09.607Z",
+    "forkedFrom": null,
+    "viewCount": 19,
+    "forkCount": 2,
+    "lastViewedAt": "2025-07-08T22:36:09.607Z",
+    "lastForkedAt": "2025-07-08T22:36:09.607Z"
+  },
+  {
+    "id": "idea-002",
+    "title": "Voice-Controlled Mobile Simulator",
+    "description": "Engineer voice-controlled mobile simulator that incorporates advanced analytics and seamless integration. The system would provide enhanced user experience and improved efficiency, making it an essential tool for modern retail applications. Features include comprehensive integration capabilities and detailed performance metrics.",
+    "tags": [
+      "Retail",
+      "Edge Computing",
+      "Serverless"
+    ],
+    "status": "merged",
+    "createdBy": "Prof. Michael Johnson",
+    "createdAt": "2025-07-01T00:00:00.000Z",
+    "updatedAt": "2025-07-25T06:36:51.189Z",
+    "forkedFrom": null,
+    "viewCount": 89,
+    "forkCount": 7,
+    "lastViewedAt": "2025-07-25T06:36:51.189Z",
+    "lastForkedAt": "2025-07-25T06:36:51.189Z"
+  },
+  {
+    "id": "idea-003",
+    "title": "Community-Driven Healthcare Detector",
+    "description": "Establish community-driven healthcare detector that incorporates advanced analytics and machine learning capabilities. The system would provide enhanced security and cost reduction, making it an essential tool for modern agile applications. Features include comprehensive integration capabilities and detailed performance metrics.",
+    "tags": [
+      "Agile",
+      "Performance",
+      "Machine Learning",
+      "TypeScript",
+      "Agriculture"
+    ],
+    "status": "open",
+    "createdBy": "Alex Thompson",
+    "createdAt": "2025-07-01T00:00:00.000Z",
+    "updatedAt": "2025-07-13T10:20:10.289Z",
+    "forkedFrom": null,
+    "viewCount": 79,
+    "forkCount": 6,
+    "lastViewedAt": "2025-07-13T10:20:10.289Z",
+    "lastForkedAt": "2025-07-13T10:20:10.289Z"
+  },
+  {
+    "id": "idea-004",
+    "title": "Gamified Energy Platform",
+    "description": "Construct gamified energy platform that incorporates API-first design and machine learning capabilities. The system would provide enhanced security and enhanced user experience, making it an essential tool for modern go applications. Features include comprehensive integration capabilities and detailed performance metrics.",
+    "tags": [
+      "Go",
+      "Serverless",
+      "Security",
+      "Machine Learning"
+    ],
+    "status": "closed",
+    "createdBy": "Marcus Chen",
+    "createdAt": "2025-07-01T00:00:00.000Z",
+    "updatedAt": "2025-07-11T21:48:24.758Z",
+    "forkedFrom": null,
+    "viewCount": 46,
+    "forkCount": 4,
+    "lastViewedAt": "2025-07-11T21:48:24.758Z",
+    "lastForkedAt": "2025-07-11T21:48:24.758Z"
+  },
+  {
+    "id": "idea-005",
+    "title": "Cloud-Based Generator",
+    "description": "Develop cloud-based generator that incorporates customizable dashboards and API-first design. The system would provide cost reduction and enhanced user experience, making it an essential tool for modern ai applications. Features include comprehensive integration capabilities and detailed performance metrics.",
+    "tags": [
+      "AI",
+      "WebAssembly",
+      "Community",
+      "Retail",
+      "Innovation"
+    ],
+    "status": "in-progress",
+    "createdBy": "Alex Thompson",
+    "createdAt": "2025-07-01T00:00:00.000Z",
+    "updatedAt": "2025-07-10T18:22:56.557Z",
+    "forkedFrom": null,
+    "viewCount": 20,
+    "forkCount": 1,
+    "lastViewedAt": "2025-07-10T18:22:56.557Z",
+    "lastForkedAt": "2025-07-10T18:22:56.557Z"
+  }
+]

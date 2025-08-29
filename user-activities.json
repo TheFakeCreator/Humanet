@@ -1,0 +1,5626 @@
+[
+  {
+    "id": "activity-1751638653985-1",
+    "username": "Kate Williams",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-006",
+      "ideaTitle": "AI-Powered Agriculture Tool",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-2",
+    "username": "Uma Sharma",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-038",
+      "ideaTitle": "IoT-Enabled Education System",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-3",
+    "username": "Liam Anderson",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-018",
+      "ideaTitle": "Virtual Reality Retail Scheduler",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-4",
+    "username": "Sam Lewis",
+    "action": "search",
+    "details": {
+      "query": "TypeScript",
+      "resultsCount": 18,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-5",
+    "username": "Victor Kumar",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-037",
+      "ideaTitle": "Micro-Scheduler Scheduler",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-6",
+    "username": "Emily Chen",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-046",
+      "newId": "idea-013",
+      "originalTitle": "Smart Rural Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-7",
+    "username": "Sam Lewis",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-048",
+      "newId": "idea-024",
+      "originalTitle": "Sustainable Enterprise Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-8",
+    "username": "Carol Davis",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-016",
+      "ideaTitle": "Voice-Controlled Manufacturing Monitor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-9",
+    "username": "Olivia Martinez",
+    "action": "search",
+    "details": {
+      "query": "DevOps",
+      "resultsCount": 20,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-10",
+    "username": "Lisa Park",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-035",
+      "ideaTitle": "Machine Learning Scheduler",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-11",
+    "username": "Jack Taylor",
+    "action": "search",
+    "details": {
+      "query": "DevOps",
+      "resultsCount": 2,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-12",
+    "username": "Uma Sharma",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-034",
+      "newId": "idea-032",
+      "originalTitle": "Decentralized Communication Detector",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-13",
+    "username": "Noah Garcia",
+    "action": "search",
+    "details": {
+      "query": "Machine Learning",
+      "resultsCount": 18,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-14",
+    "username": "Bob Smith",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-009",
+      "ideaTitle": "Community-Driven Mobile Controller",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-15",
+    "username": "Jack Taylor",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-033",
+      "ideaTitle": "AI-Powered Entertainment Detector",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-16",
+    "username": "Marcus Chen",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-017",
+      "ideaTitle": "AI-Powered Development Generator",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-17",
+    "username": "Paul Thompson",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-027",
+      "ideaTitle": "Blockchain-Based Social Simulator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-18",
+    "username": "Tina Walker",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-049",
+      "newId": "idea-019",
+      "originalTitle": "Machine Learning Scheduler",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-19",
+    "username": "Frank Wilson",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-023",
+      "ideaTitle": "Decentralized Web Manager",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-20",
+    "username": "Kate Williams",
+    "action": "search",
+    "details": {
+      "query": "TypeScript",
+      "resultsCount": 6,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-21",
+    "username": "Noah Garcia",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-046",
+      "newId": "idea-035",
+      "originalTitle": "Cloud-Based Classifier",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-22",
+    "username": "Alex Thompson",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-035",
+      "newId": "idea-031",
+      "originalTitle": "Augmented Reality Security",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-23",
+    "username": "Grace Lee",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-028",
+      "ideaTitle": "Community-Driven Enterprise Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-24",
+    "username": "Grace Lee",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-024",
+      "ideaTitle": "Smart Mobile Translator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-25",
+    "username": "Rachel Clark",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-031",
+      "ideaTitle": "Community-Driven Energy Controller",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-26",
+    "username": "Henry Brown",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-050",
+      "newId": "idea-035",
+      "originalTitle": "Community-Driven Rural Monitor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-27",
+    "username": "Liam Anderson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-012",
+      "ideaTitle": "Machine Learning Monitor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-28",
+    "username": "Noah Garcia",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-045",
+      "ideaTitle": "Cloud-Based Validator",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-29",
+    "username": "Tina Walker",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-038",
+      "ideaTitle": "Micro-Validator Validator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-30",
+    "username": "Maria Gonzalez",
+    "action": "search",
+    "details": {
+      "query": "TypeScript",
+      "resultsCount": 10,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-31",
+    "username": "Dr. Sarah Williams",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "AR",
+      "resultsCount": 8,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-32",
+    "username": "Bob Smith",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-001",
+      "ideaTitle": "Machine Learning Classifier",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-33",
+    "username": "James Wilson",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-040",
+      "ideaTitle": "Blockchain-Based Manufacturing Generator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-34",
+    "username": "Bob Smith",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Virtual Reality Web Controller",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-35",
+    "username": "Sam Lewis",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-031",
+      "newId": "idea-042",
+      "originalTitle": "Automated Web Assistant",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-36",
+    "username": "Wendy Hall",
+    "action": "search",
+    "details": {
+      "query": "Python",
+      "resultsCount": 7,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-37",
+    "username": "Frank Wilson",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-038",
+      "newId": "idea-006",
+      "originalTitle": "Smart Energy Translator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-38",
+    "username": "Carol Davis",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "VR",
+      "resultsCount": 5,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-39",
+    "username": "Uma Sharma",
+    "action": "search",
+    "details": {
+      "query": "Innovation",
+      "resultsCount": 5,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-40",
+    "username": "Kate Williams",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-026",
+      "ideaTitle": "Smart Communication Classifier",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-41",
+    "username": "Zoe Adams",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-027",
+      "ideaTitle": "Cloud-Based Connector",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-42",
+    "username": "Sam Lewis",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "WebAssembly",
+      "resultsCount": 1,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-43",
+    "username": "Jack Taylor",
+    "action": "search",
+    "details": {
+      "query": "Sustainability",
+      "resultsCount": 12,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-44",
+    "username": "Xavier Lopez",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Voice-Controlled Enterprise Optimizer",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-45",
+    "username": "Henry Brown",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-040",
+      "ideaTitle": "Community-Driven Finance Tool",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-46",
+    "username": "Uma Sharma",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-007",
+      "newId": "idea-016",
+      "originalTitle": "Smart Consumer Predictor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-47",
+    "username": "Frank Wilson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-026",
+      "ideaTitle": "AI-Powered Entertainment Detector",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653986-48",
+    "username": "Paul Thompson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-008",
+      "ideaTitle": "Virtual Reality Research Generator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-49",
+    "username": "Henry Brown",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-005",
+      "ideaTitle": "Blockchain-Based Communication Connector",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-50",
+    "username": "Prof. Michael Johnson",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "Agile",
+      "resultsCount": 13,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-51",
+    "username": "Lisa Park",
+    "action": "search",
+    "details": {
+      "query": "Security",
+      "resultsCount": 14,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-52",
+    "username": "Frank Wilson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-014",
+      "ideaTitle": "Community-Driven Security Assistant",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-53",
+    "username": "Prof. Michael Johnson",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-044",
+      "newId": "idea-005",
+      "originalTitle": "AI-Powered Rural Simulator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-54",
+    "username": "Wendy Hall",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-027",
+      "newId": "idea-016",
+      "originalTitle": "Micro-Tracker Tracker",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-55",
+    "username": "Rachel Clark",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Collaboration",
+      "resultsCount": 14,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-56",
+    "username": "Uma Sharma",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-044",
+      "ideaTitle": "Blockchain-Based Communication Tool",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-57",
+    "username": "Tom Anderson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-018",
+      "ideaTitle": "Smart Enterprise Predictor",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-58",
+    "username": "Xavier Lopez",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Security",
+      "resultsCount": 14,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-59",
+    "username": "James Wilson",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "DevOps",
+      "resultsCount": 1,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-60",
+    "username": "Uma Sharma",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-031",
+      "ideaTitle": "Smart Environmental Simulator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-61",
+    "username": "Tom Anderson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-023",
+      "ideaTitle": "IoT-Enabled Retail System",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-62",
+    "username": "Dr. Sarah Williams",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-049",
+      "newId": "idea-001",
+      "originalTitle": "Community-Driven Digital Predictor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-63",
+    "username": "Tom Anderson",
+    "action": "search",
+    "details": {
+      "query": "IoT",
+      "resultsCount": 2,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-64",
+    "username": "Emily Chen",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-020",
+      "ideaTitle": "Automated Enterprise Manager",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-65",
+    "username": "Marcus Chen",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-016",
+      "ideaTitle": "Voice-Controlled Energy Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-66",
+    "username": "Henry Brown",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-006",
+      "ideaTitle": "Virtual Reality Transportation System",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-67",
+    "username": "Prof. Michael Johnson",
+    "action": "search",
+    "details": {
+      "query": "Rust",
+      "resultsCount": 11,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-68",
+    "username": "Grace Lee",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "Education",
+      "resultsCount": 11,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-69",
+    "username": "Henry Brown",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-029",
+      "ideaTitle": "Blockchain-Based Finance System",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-70",
+    "username": "Kate Williams",
+    "action": "search",
+    "details": {
+      "query": "Microservices",
+      "resultsCount": 14,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-71",
+    "username": "Uma Sharma",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Energy",
+      "resultsCount": 7,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-72",
+    "username": "Bob Smith",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-009",
+      "ideaTitle": "Automated Agriculture Tool",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-73",
+    "username": "Marcus Chen",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-005",
+      "newId": "idea-031",
+      "originalTitle": "IoT-Enabled Manufacturing System",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-74",
+    "username": "Wendy Hall",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-012",
+      "ideaTitle": "IoT-Enabled Digital System",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-75",
+    "username": "Grace Lee",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-023",
+      "ideaTitle": "Machine Learning Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-76",
+    "username": "Noah Garcia",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-008",
+      "ideaTitle": "Blockchain-Based Social Processor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-77",
+    "username": "Kate Williams",
+    "action": "search",
+    "details": {
+      "query": "Sustainability",
+      "resultsCount": 7,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-78",
+    "username": "Tina Walker",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-016",
+      "newId": "idea-037",
+      "originalTitle": "Blockchain-Based Agriculture Controller",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-79",
+    "username": "Henry Brown",
+    "action": "search",
+    "details": {
+      "query": "Go",
+      "resultsCount": 6,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-80",
+    "username": "Wendy Hall",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-011",
+      "newId": "idea-004",
+      "originalTitle": "Augmented Reality Development",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-81",
+    "username": "Carol Davis",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Accessibility",
+      "resultsCount": 2,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-82",
+    "username": "Jack Taylor",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-048",
+      "ideaTitle": "Augmented Reality Research",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-83",
+    "username": "Henry Brown",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-013",
+      "ideaTitle": "Smart Digital Analyzer",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-84",
+    "username": "Liam Anderson",
+    "action": "search",
+    "details": {
+      "query": "VR",
+      "resultsCount": 16,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-85",
+    "username": "Kate Williams",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "AI",
+      "resultsCount": 1,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-86",
+    "username": "Carol Davis",
+    "action": "search",
+    "details": {
+      "query": "Automation",
+      "resultsCount": 3,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-87",
+    "username": "Zoe Adams",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-040",
+      "ideaTitle": "Automated Mobile Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-88",
+    "username": "Maya Patel",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-001",
+      "ideaTitle": "Automated Rural Analyzer",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-89",
+    "username": "Olivia Martinez",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-047",
+      "newId": "idea-041",
+      "originalTitle": "Voice-Controlled Transportation Integrator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-90",
+    "username": "James Wilson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Automated Web Integrator",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-91",
+    "username": "Tom Anderson",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "Transportation",
+      "resultsCount": 12,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-92",
+    "username": "Maria Gonzalez",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-032",
+      "newId": "idea-045",
+      "originalTitle": "Decentralized Urban Manager",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-93",
+    "username": "Zoe Adams",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-038",
+      "newId": "idea-041",
+      "originalTitle": "Automated Entertainment Simulator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-94",
+    "username": "Olivia Martinez",
+    "action": "search",
+    "details": {
+      "query": "Go",
+      "resultsCount": 16,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-95",
+    "username": "Alex Thompson",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "Sustainability",
+      "resultsCount": 11,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-96",
+    "username": "Bob Smith",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-030",
+      "ideaTitle": "Smart Healthcare Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-97",
+    "username": "Xavier Lopez",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-012",
+      "ideaTitle": "Voice-Controlled Manufacturing Tool",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-98",
+    "username": "Alex Thompson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-037",
+      "ideaTitle": "Sustainable Security Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-99",
+    "username": "Maya Patel",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-038",
+      "ideaTitle": "Smart Research Integrator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-100",
+    "username": "Noah Garcia",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-031",
+      "ideaTitle": "Augmented Reality Agriculture",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-101",
+    "username": "Wendy Hall",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-008",
+      "ideaTitle": "Augmented Reality Development",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-102",
+    "username": "Isabella Rodriguez",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-004",
+      "ideaTitle": "Blockchain-Based Consumer Monitor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-103",
+    "username": "Victor Kumar",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-007",
+      "ideaTitle": "Virtual Reality Finance Classifier",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-104",
+    "username": "Quinn Robinson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-007",
+      "ideaTitle": "Voice-Controlled Security Analyzer",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-105",
+    "username": "Lisa Park",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-014",
+      "ideaTitle": "Gamified Energy Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-106",
+    "username": "Quinn Robinson",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-026",
+      "ideaTitle": "AI-Powered Communication Detector",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-107",
+    "username": "Frank Wilson",
+    "action": "search",
+    "details": {
+      "query": "WebAssembly",
+      "resultsCount": 5,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-108",
+    "username": "Lisa Park",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-006",
+      "ideaTitle": "Automated Education Assistant",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-109",
+    "username": "Maria Gonzalez",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-036",
+      "ideaTitle": "Sustainable Retail Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-110",
+    "username": "Isabella Rodriguez",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-018",
+      "newId": "idea-036",
+      "originalTitle": "Micro-Controller Controller",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-111",
+    "username": "David Kim",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-007",
+      "ideaTitle": "Community-Driven Rural Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-112",
+    "username": "Quinn Robinson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-032",
+      "ideaTitle": "Cloud-Based Predictor",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-113",
+    "username": "Grace Lee",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "Finance",
+      "resultsCount": 11,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-114",
+    "username": "Dr. Sarah Williams",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Agile",
+      "resultsCount": 2,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-115",
+    "username": "Liam Anderson",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-018",
+      "ideaTitle": "Augmented Reality Manufacturing",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-116",
+    "username": "Tom Anderson",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Energy",
+      "resultsCount": 6,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-117",
+    "username": "Bob Smith",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-019",
+      "ideaTitle": "Blockchain-Based Agriculture Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-118",
+    "username": "Henry Brown",
+    "action": "search",
+    "details": {
+      "query": "Go",
+      "resultsCount": 10,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-119",
+    "username": "Maya Patel",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-002",
+      "ideaTitle": "Automated Manufacturing Detector",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-120",
+    "username": "Bob Smith",
+    "action": "search",
+    "details": {
+      "query": "Go",
+      "resultsCount": 18,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-121",
+    "username": "Rachel Clark",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-034",
+      "newId": "idea-040",
+      "originalTitle": "Virtual Reality Mobile Translator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-122",
+    "username": "Dr. Sarah Williams",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-020",
+      "ideaTitle": "Voice-Controlled Security Detector",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-123",
+    "username": "Zoe Adams",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-029",
+      "newId": "idea-029",
+      "originalTitle": "Smart Research Simulator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-124",
+    "username": "Olivia Martinez",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-012",
+      "newId": "idea-037",
+      "originalTitle": "Sustainable Urban Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-125",
+    "username": "Prof. Michael Johnson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-035",
+      "ideaTitle": "Community-Driven Environmental Tracker",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-126",
+    "username": "Emily Chen",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Retail",
+      "resultsCount": 3,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-127",
+    "username": "Grace Lee",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Collaboration",
+      "resultsCount": 9,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-128",
+    "username": "Tom Anderson",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-024",
+      "ideaTitle": "Blockchain-Based Social Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-129",
+    "username": "Zoe Adams",
+    "action": "search",
+    "details": {
+      "query": "Performance",
+      "resultsCount": 14,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-130",
+    "username": "Carol Davis",
+    "action": "search",
+    "details": {
+      "query": "Agile",
+      "resultsCount": 12,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-131",
+    "username": "Frank Wilson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-004",
+      "ideaTitle": "Micro-Classifier Classifier",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-132",
+    "username": "Liam Anderson",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-045",
+      "newId": "idea-025",
+      "originalTitle": "Augmented Reality Energy",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-133",
+    "username": "Quinn Robinson",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-009",
+      "newId": "idea-049",
+      "originalTitle": "Sustainable Energy Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-134",
+    "username": "Dr. Sarah Williams",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-037",
+      "ideaTitle": "Community-Driven Transportation Controller",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-135",
+    "username": "David Kim",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "Serverless",
+      "resultsCount": 11,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-136",
+    "username": "Emily Chen",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-041",
+      "ideaTitle": "Decentralized Rural Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-137",
+    "username": "Quinn Robinson",
+    "action": "search",
+    "details": {
+      "query": "Automation",
+      "resultsCount": 8,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-138",
+    "username": "Victor Kumar",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Transportation",
+      "resultsCount": 4,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-139",
+    "username": "Maria Gonzalez",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "Quantum Computing",
+      "resultsCount": 12,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-140",
+    "username": "Zoe Adams",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-007",
+      "ideaTitle": "Voice-Controlled Mobile Predictor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-141",
+    "username": "Victor Kumar",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-041",
+      "ideaTitle": "Automated Retail Tool",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-142",
+    "username": "Quinn Robinson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-033",
+      "ideaTitle": "Decentralized Rural Controller",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-143",
+    "username": "Yuki Tanaka",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-031",
+      "newId": "idea-026",
+      "originalTitle": "Decentralized Enterprise Generator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-144",
+    "username": "Lisa Park",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-033",
+      "ideaTitle": "Blockchain-Based Security Integrator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-145",
+    "username": "Jack Taylor",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-001",
+      "ideaTitle": "Automated Manufacturing Monitor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-146",
+    "username": "Bob Smith",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-026",
+      "ideaTitle": "Smart Research Optimizer",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-147",
+    "username": "Emily Chen",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-030",
+      "ideaTitle": "AI-Powered Rural Detector",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-148",
+    "username": "Maya Patel",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-006",
+      "ideaTitle": "Micro-Scheduler Scheduler",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-149",
+    "username": "Dr. Sarah Williams",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-045",
+      "ideaTitle": "Virtual Reality Entertainment Scheduler",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-150",
+    "username": "Isabella Rodriguez",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Decentralized Social Processor",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-151",
+    "username": "Emily Chen",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Blockchain-Based Rural Processor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-152",
+    "username": "David Kim",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-009",
+      "newId": "idea-025",
+      "originalTitle": "Automated Urban Generator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-153",
+    "username": "Wendy Hall",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "Finance",
+      "resultsCount": 2,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-154",
+    "username": "Maria Gonzalez",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-029",
+      "ideaTitle": "Sustainable Research Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-155",
+    "username": "Frank Wilson",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-037",
+      "ideaTitle": "Smart Transportation Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-156",
+    "username": "Quinn Robinson",
+    "action": "search",
+    "details": {
+      "query": "JavaScript",
+      "resultsCount": 12,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-157",
+    "username": "Tom Anderson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-020",
+      "ideaTitle": "AI-Powered Enterprise Recommender",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-158",
+    "username": "David Kim",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "Sustainability",
+      "resultsCount": 12,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-159",
+    "username": "Maya Patel",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-025",
+      "ideaTitle": "Decentralized Manufacturing Classifier",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-160",
+    "username": "Rachel Clark",
+    "action": "search",
+    "details": {
+      "query": "VR",
+      "resultsCount": 16,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653987-161",
+    "username": "Tom Anderson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-008",
+      "ideaTitle": "Community-Driven Consumer Predictor",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-162",
+    "username": "Tom Anderson",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Energy",
+      "resultsCount": 14,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-163",
+    "username": "James Wilson",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-040",
+      "newId": "idea-049",
+      "originalTitle": "Machine Learning Simulator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-164",
+    "username": "David Kim",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-033",
+      "ideaTitle": "Augmented Reality Social",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-165",
+    "username": "Olivia Martinez",
+    "action": "search",
+    "details": {
+      "query": "Machine Learning",
+      "resultsCount": 9,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-166",
+    "username": "Frank Wilson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-023",
+      "ideaTitle": "IoT-Enabled Security System",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-167",
+    "username": "Tina Walker",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "Open Source",
+      "resultsCount": 9,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-168",
+    "username": "Xavier Lopez",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Node.js",
+      "resultsCount": 13,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-169",
+    "username": "Wendy Hall",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "APIs",
+      "resultsCount": 10,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-170",
+    "username": "Emily Chen",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-022",
+      "newId": "idea-020",
+      "originalTitle": "Sustainable Social Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-171",
+    "username": "Maya Patel",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-019",
+      "ideaTitle": "Blockchain-Based Social Assistant",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-172",
+    "username": "Victor Kumar",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Microservices",
+      "resultsCount": 4,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-173",
+    "username": "David Kim",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-021",
+      "ideaTitle": "Sustainable Environmental Platform",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-174",
+    "username": "Carol Davis",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-026",
+      "newId": "idea-036",
+      "originalTitle": "Voice-Controlled Agriculture Processor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-175",
+    "username": "Grace Lee",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-042",
+      "ideaTitle": "Blockchain-Based Communication Simulator",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-176",
+    "username": "Noah Garcia",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-013",
+      "ideaTitle": "Sustainable Mobile Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-177",
+    "username": "Uma Sharma",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-019",
+      "ideaTitle": "Cloud-Based Assistant",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-178",
+    "username": "Alex Thompson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-033",
+      "ideaTitle": "Cloud-Based Validator",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-179",
+    "username": "Marcus Chen",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-041",
+      "ideaTitle": "Cloud-Based Controller",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-180",
+    "username": "Maria Gonzalez",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-033",
+      "ideaTitle": "Augmented Reality Environmental",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-181",
+    "username": "Kate Williams",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-019",
+      "newId": "idea-025",
+      "originalTitle": "Smart Social Manager",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-182",
+    "username": "Dr. Sarah Williams",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-005",
+      "newId": "idea-047",
+      "originalTitle": "Micro-Recommender Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-183",
+    "username": "Henry Brown",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Agriculture",
+      "resultsCount": 13,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-184",
+    "username": "Emily Chen",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-009",
+      "ideaTitle": "Decentralized Development Translator",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-185",
+    "username": "Tina Walker",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-017",
+      "ideaTitle": "Blockchain-Based Environmental Tracker",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-186",
+    "username": "Bob Smith",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-021",
+      "newId": "idea-002",
+      "originalTitle": "Virtual Reality Energy Tool",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-187",
+    "username": "Victor Kumar",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-007",
+      "ideaTitle": "Community-Driven Security Analyzer",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-188",
+    "username": "David Kim",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-049",
+      "ideaTitle": "Community-Driven Social Tracker",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-189",
+    "username": "Liam Anderson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-027",
+      "ideaTitle": "Blockchain-Based Environmental Simulator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-190",
+    "username": "Grace Lee",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-021",
+      "ideaTitle": "Machine Learning Recommender",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-191",
+    "username": "Zoe Adams",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-007",
+      "ideaTitle": "AI-Powered Manufacturing Monitor",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-192",
+    "username": "Isabella Rodriguez",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Automation",
+      "resultsCount": 15,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-193",
+    "username": "Isabella Rodriguez",
+    "action": "search",
+    "details": {
+      "query": "Security",
+      "resultsCount": 7,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-194",
+    "username": "Alex Thompson",
+    "action": "search",
+    "details": {
+      "query": "Rust",
+      "resultsCount": 2,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-195",
+    "username": "Quinn Robinson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-023",
+      "ideaTitle": "Sustainable Digital Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-196",
+    "username": "Jack Taylor",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-027",
+      "newId": "idea-014",
+      "originalTitle": "Blockchain-Based Web Translator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-197",
+    "username": "Marcus Chen",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-022",
+      "ideaTitle": "AI-Powered Healthcare Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-198",
+    "username": "Jack Taylor",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Serverless",
+      "resultsCount": 4,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-199",
+    "username": "Dr. Sarah Williams",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-026",
+      "ideaTitle": "Machine Learning Integrator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-200",
+    "username": "James Wilson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-018",
+      "ideaTitle": "Blockchain-Based Environmental Scheduler",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-201",
+    "username": "Rachel Clark",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Rust",
+      "resultsCount": 3,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-202",
+    "username": "Victor Kumar",
+    "action": "search",
+    "details": {
+      "query": "Rust",
+      "resultsCount": 17,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-203",
+    "username": "Tom Anderson",
+    "action": "search",
+    "details": {
+      "query": "Blockchain",
+      "resultsCount": 12,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-204",
+    "username": "Dr. Sarah Williams",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Serverless",
+      "resultsCount": 14,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-205",
+    "username": "Noah Garcia",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-037",
+      "ideaTitle": "Machine Learning Scheduler",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-206",
+    "username": "Victor Kumar",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-049",
+      "ideaTitle": "IoT-Enabled Development System",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-207",
+    "username": "Marcus Chen",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-011",
+      "ideaTitle": "Micro-Connector Connector",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-208",
+    "username": "Maya Patel",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-024",
+      "ideaTitle": "IoT-Enabled Healthcare System",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-209",
+    "username": "Olivia Martinez",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-023",
+      "ideaTitle": "AI-Powered Web Predictor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-210",
+    "username": "Kate Williams",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-022",
+      "newId": "idea-042",
+      "originalTitle": "Micro-Analyzer Analyzer",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-211",
+    "username": "Kate Williams",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "IoT",
+      "resultsCount": 3,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-212",
+    "username": "Paul Thompson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Virtual Reality Web Assistant",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-213",
+    "username": "Kate Williams",
+    "action": "search",
+    "details": {
+      "query": "Serverless",
+      "resultsCount": 15,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-214",
+    "username": "Xavier Lopez",
+    "action": "search",
+    "details": {
+      "query": "Accessibility",
+      "resultsCount": 8,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-215",
+    "username": "Marcus Chen",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-033",
+      "ideaTitle": "Machine Learning Translator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-216",
+    "username": "Wendy Hall",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Finance",
+      "resultsCount": 12,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-217",
+    "username": "Yuki Tanaka",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-033",
+      "ideaTitle": "Sustainable Entertainment Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-218",
+    "username": "Victor Kumar",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-002",
+      "ideaTitle": "Cloud-Based Optimizer",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-219",
+    "username": "Kate Williams",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-023",
+      "ideaTitle": "Smart Education Integrator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-220",
+    "username": "Prof. Michael Johnson",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-021",
+      "newId": "idea-001",
+      "originalTitle": "IoT-Enabled Rural System",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-221",
+    "username": "Xavier Lopez",
+    "action": "search",
+    "details": {
+      "query": "Energy",
+      "resultsCount": 14,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-222",
+    "username": "Emily Chen",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-034",
+      "ideaTitle": "Community-Driven Energy Generator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-223",
+    "username": "Maya Patel",
+    "action": "search",
+    "details": {
+      "query": "Performance",
+      "resultsCount": 6,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-224",
+    "username": "Henry Brown",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-009",
+      "ideaTitle": "Virtual Reality Enterprise Assistant",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-225",
+    "username": "Wendy Hall",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-005",
+      "ideaTitle": "Smart Entertainment Scheduler",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-226",
+    "username": "James Wilson",
+    "action": "search",
+    "details": {
+      "query": "AI",
+      "resultsCount": 18,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-227",
+    "username": "Tom Anderson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-009",
+      "ideaTitle": "Gamified Manufacturing Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-228",
+    "username": "Xavier Lopez",
+    "action": "search",
+    "details": {
+      "query": "DevOps",
+      "resultsCount": 20,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-229",
+    "username": "Paul Thompson",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-020",
+      "newId": "idea-026",
+      "originalTitle": "Virtual Reality Consumer Classifier",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-230",
+    "username": "Alice Johnson",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Manufacturing",
+      "resultsCount": 5,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-231",
+    "username": "Emily Chen",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-030",
+      "ideaTitle": "Automated Consumer Monitor",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-232",
+    "username": "Uma Sharma",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-024",
+      "newId": "idea-014",
+      "originalTitle": "Cloud-Based Connector",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-233",
+    "username": "Kate Williams",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-037",
+      "ideaTitle": "Community-Driven Agriculture Tool",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-234",
+    "username": "Liam Anderson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-019",
+      "ideaTitle": "Cloud-Based Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-235",
+    "username": "Paul Thompson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-026",
+      "ideaTitle": "Cloud-Based Tool",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-236",
+    "username": "Dr. Sarah Williams",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-042",
+      "ideaTitle": "Cloud-Based Platform",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-237",
+    "username": "Lisa Park",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-015",
+      "ideaTitle": "Augmented Reality Healthcare",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-238",
+    "username": "Grace Lee",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-020",
+      "newId": "idea-037",
+      "originalTitle": "Voice-Controlled Rural Manager",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-239",
+    "username": "Uma Sharma",
+    "action": "search",
+    "details": {
+      "query": "Python",
+      "resultsCount": 6,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-240",
+    "username": "Prof. Michael Johnson",
+    "action": "search",
+    "details": {
+      "query": "Transportation",
+      "resultsCount": 19,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-241",
+    "username": "Lisa Park",
+    "action": "search",
+    "details": {
+      "query": "Edge Computing",
+      "resultsCount": 14,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-242",
+    "username": "Alex Thompson",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Edge Computing",
+      "resultsCount": 7,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653988-243",
+    "username": "Victor Kumar",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-030",
+      "ideaTitle": "Automated Web Integrator",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-244",
+    "username": "Wendy Hall",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-026",
+      "ideaTitle": "Community-Driven Agriculture Analyzer",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-245",
+    "username": "Lisa Park",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Privacy",
+      "resultsCount": 14,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-246",
+    "username": "Rachel Clark",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-040",
+      "ideaTitle": "Cloud-Based Assistant",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-247",
+    "username": "Marcus Chen",
+    "action": "search",
+    "details": {
+      "query": "AI",
+      "resultsCount": 12,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-248",
+    "username": "Carol Davis",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-018",
+      "newId": "idea-024",
+      "originalTitle": "Community-Driven Urban Recommender",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-249",
+    "username": "Emily Chen",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-027",
+      "ideaTitle": "AI-Powered Security Recommender",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-250",
+    "username": "Jack Taylor",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-014",
+      "newId": "idea-044",
+      "originalTitle": "Sustainable Agriculture Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-251",
+    "username": "Jack Taylor",
+    "action": "search",
+    "details": {
+      "query": "Go",
+      "resultsCount": 14,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-252",
+    "username": "Frank Wilson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-024",
+      "ideaTitle": "Smart Security Translator",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-253",
+    "username": "Victor Kumar",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-045",
+      "ideaTitle": "Decentralized Development Optimizer",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-254",
+    "username": "Isabella Rodriguez",
+    "action": "search",
+    "details": {
+      "query": "Education",
+      "resultsCount": 18,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-255",
+    "username": "Noah Garcia",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-012",
+      "ideaTitle": "Sustainable Entertainment Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-256",
+    "username": "Rachel Clark",
+    "action": "search",
+    "details": {
+      "query": "Education",
+      "resultsCount": 5,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-257",
+    "username": "Wendy Hall",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-050",
+      "ideaTitle": "Augmented Reality Healthcare",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-258",
+    "username": "Emily Chen",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-047",
+      "ideaTitle": "Sustainable Energy Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-259",
+    "username": "Maya Patel",
+    "action": "search",
+    "details": {
+      "query": "Education",
+      "resultsCount": 3,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-260",
+    "username": "Jack Taylor",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-006",
+      "ideaTitle": "AI-Powered Environmental Connector",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-261",
+    "username": "Bob Smith",
+    "action": "search",
+    "details": {
+      "query": "Community",
+      "resultsCount": 16,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-262",
+    "username": "Tom Anderson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-037",
+      "ideaTitle": "Augmented Reality Urban",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-263",
+    "username": "Rachel Clark",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-034",
+      "newId": "idea-031",
+      "originalTitle": "Voice-Controlled Social Connector",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-264",
+    "username": "Wendy Hall",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Healthcare",
+      "resultsCount": 7,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-265",
+    "username": "Tina Walker",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-001",
+      "ideaTitle": "Smart Digital Generator",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-266",
+    "username": "Uma Sharma",
+    "action": "search",
+    "details": {
+      "query": "DevOps",
+      "resultsCount": 11,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-267",
+    "username": "David Kim",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-014",
+      "newId": "idea-015",
+      "originalTitle": "Automated Entertainment Controller",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-268",
+    "username": "Tina Walker",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Energy",
+      "resultsCount": 11,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-269",
+    "username": "James Wilson",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Blockchain",
+      "resultsCount": 11,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-270",
+    "username": "Olivia Martinez",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-047",
+      "ideaTitle": "Machine Learning Controller",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-271",
+    "username": "Olivia Martinez",
+    "action": "search",
+    "details": {
+      "query": "Retail",
+      "resultsCount": 8,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-272",
+    "username": "Tom Anderson",
+    "action": "filter",
+    "details": {
+      "filterType": "tags",
+      "filterValue": "GraphQL",
+      "resultsCount": 2,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-273",
+    "username": "Yuki Tanaka",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-023",
+      "newId": "idea-015",
+      "originalTitle": "Community-Driven Agriculture Predictor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-274",
+    "username": "Grace Lee",
+    "action": "search",
+    "details": {
+      "query": "DevOps",
+      "resultsCount": 15,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-275",
+    "username": "Victor Kumar",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Performance",
+      "resultsCount": 1,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-276",
+    "username": "Dr. Sarah Williams",
+    "action": "search",
+    "details": {
+      "query": "IoT",
+      "resultsCount": 19,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-277",
+    "username": "Noah Garcia",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-012",
+      "ideaTitle": "Community-Driven Development Detector",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-278",
+    "username": "Victor Kumar",
+    "action": "search",
+    "details": {
+      "query": "Performance",
+      "resultsCount": 14,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-279",
+    "username": "Henry Brown",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-047",
+      "newId": "idea-025",
+      "originalTitle": "Smart Rural Manager",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-280",
+    "username": "Paul Thompson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-034",
+      "ideaTitle": "Gamified Retail Platform",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-281",
+    "username": "Marcus Chen",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-005",
+      "ideaTitle": "Voice-Controlled Manufacturing Classifier",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-282",
+    "username": "Prof. Michael Johnson",
+    "action": "search",
+    "details": {
+      "query": "AI",
+      "resultsCount": 14,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-283",
+    "username": "Carol Davis",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-032",
+      "ideaTitle": "AI-Powered Research Scheduler",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-284",
+    "username": "Quinn Robinson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-045",
+      "ideaTitle": "Cloud-Based Manager",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-285",
+    "username": "Victor Kumar",
+    "action": "search",
+    "details": {
+      "query": "Security",
+      "resultsCount": 14,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-286",
+    "username": "Tom Anderson",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Serverless",
+      "resultsCount": 4,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-287",
+    "username": "Carol Davis",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Community",
+      "resultsCount": 14,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-288",
+    "username": "Olivia Martinez",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-021",
+      "newId": "idea-045",
+      "originalTitle": "Decentralized Development Optimizer",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-289",
+    "username": "Olivia Martinez",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Sustainability",
+      "resultsCount": 10,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-290",
+    "username": "Bob Smith",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-010",
+      "newId": "idea-027",
+      "originalTitle": "Cloud-Based Scheduler",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-291",
+    "username": "Victor Kumar",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-033",
+      "ideaTitle": "Sustainable Transportation Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-292",
+    "username": "Olivia Martinez",
+    "action": "search",
+    "details": {
+      "query": "Node.js",
+      "resultsCount": 10,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-293",
+    "username": "Lisa Park",
+    "action": "search",
+    "details": {
+      "query": "Open Source",
+      "resultsCount": 11,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-294",
+    "username": "Carol Davis",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-027",
+      "ideaTitle": "Decentralized Entertainment Tool",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-295",
+    "username": "Prof. Michael Johnson",
+    "action": "search",
+    "details": {
+      "query": "Energy",
+      "resultsCount": 17,
+      "type": "search"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-296",
+    "username": "Wendy Hall",
+    "action": "filter",
+    "details": {
+      "filterType": "author",
+      "filterValue": "Innovation",
+      "resultsCount": 11,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-297",
+    "username": "Lisa Park",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-037",
+      "ideaTitle": "Decentralized Transportation Classifier",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653989-298",
+    "username": "Bob Smith",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-012",
+      "ideaTitle": "Sustainable Environmental Platform",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653990-299",
+    "username": "Alex Thompson",
+    "action": "filter",
+    "details": {
+      "filterType": "status",
+      "filterValue": "Finance",
+      "resultsCount": 12,
+      "type": "filter"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "activity-1751638653990-300",
+    "username": "Jack Taylor",
+    "action": "fork",
+    "details": {
+      "originalId": "idea-017",
+      "newId": "idea-037",
+      "originalTitle": "Smart Agriculture Predictor",
+      "type": "idea"
+    },
+    "timestamp": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": "b543c96a-3b5d-4ee6-8733-a01828501276",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:17:43.000Z"
+  },
+  {
+    "id": "e0322485-3940-4431-ad25-cffca634cb94",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:18:13.674Z"
+  },
+  {
+    "id": "a3952e3b-4da6-4a70-8164-3efc3caf6ea3",
+    "username": "Anonymous",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-050",
+      "ideaTitle": "AI-Powered Development Predictor",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T14:18:17.775Z"
+  },
+  {
+    "id": "c81d8e86-f047-428a-8407-18797aae6862",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:18:20.447Z"
+  },
+  {
+    "id": "7e642f5e-f344-44ea-9078-6a425ab7456b",
+    "username": "Anonymous",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-049",
+      "ideaTitle": "Voice-Controlled Consumer Manager",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T14:18:22.613Z"
+  },
+  {
+    "id": "bec7800c-5c6b-4344-b639-797d6a530ce1",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:18:24.071Z"
+  },
+  {
+    "id": "fdfbcd27-f739-4bce-a655-1b26207d0a9e",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:18:45.043Z"
+  },
+  {
+    "id": "fd8d6109-6fbf-4e3f-bba0-afa0488d9451",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:20:35.882Z"
+  },
+  {
+    "id": "f7e1e8a5-e586-4dcf-ad85-002a7b827c20",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:22:03.193Z"
+  },
+  {
+    "id": "0499cfaa-4569-4c6c-9555-0375d1079c5e",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:22:32.442Z"
+  },
+  {
+    "id": "209874f1-fe43-4638-8d4e-06fa119c09e5",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:22:32.457Z"
+  },
+  {
+    "id": "b7b22620-b910-4985-b186-ee1a4030bdc3",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:22:44.230Z"
+  },
+  {
+    "id": "324068b6-a620-4b10-ad4e-1aaaedf32f7f",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:22:44.240Z"
+  },
+  {
+    "id": "467b2707-6732-4eb5-98eb-23827882b4e1",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:24:05.649Z"
+  },
+  {
+    "id": "acc3f48b-dcfc-461e-b2e8-a9b1733612c3",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:51:36.007Z"
+  },
+  {
+    "id": "805cc69b-f33e-4bb1-a35f-08f099605396",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:53:11.743Z"
+  },
+  {
+    "id": "e10c5b1b-5194-4f5d-a547-cd8c38cf975b",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:53:30.191Z"
+  },
+  {
+    "id": "84ca27c5-a236-4c06-aaed-b416ff7f1a2f",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:54:20.019Z"
+  },
+  {
+    "id": "57023dcd-b530-476a-aeef-dcbb6c79fdee",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "tags": "A",
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 50,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:54:47.392Z"
+  },
+  {
+    "id": "4b190413-f2c1-4bc6-8a88-c4521a967165",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "tags": "AP",
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 12,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:54:51.331Z"
+  },
+  {
+    "id": "77e936be-d63f-4ac4-8903-107cab2358f9",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "tags": "API",
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 5,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:54:54.103Z"
+  },
+  {
+    "id": "fda61613-69d4-41e6-a196-5e16fea243b6",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "tags": "Open Source",
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 10,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:55:02.474Z"
+  },
+  {
+    "id": "4c00c083-151b-43d3-9ff9-101e04286163",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "tags": "Performance",
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 9,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T14:55:10.209Z"
+  },
+  {
+    "id": "b169fbf4-10f8-47f7-b575-0f76944ec6f9",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "tags": "Performance",
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 9,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:40.872Z"
+  },
+  {
+    "id": "ad915375-f33c-479e-8b90-cbad5380236b",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "tags": "Performance",
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 9,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:42.702Z"
+  },
+  {
+    "id": "1c23675a-31d7-4bf9-aeab-f396ba5a346b",
+    "username": "Alice Johnson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-001",
+      "ideaTitle": "AI-Powered Code Review Assistant",
+      "tags": [
+        "AI",
+        "Machine Learning",
+        "Development Tools",
+        "Code Quality"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.562Z"
+  },
+  {
+    "id": "eab3f3b9-a94d-44a4-ba68-374f83da0eb7",
+    "username": "Tom Anderson",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-001",
+      "forkedIdeaId": "idea-006",
+      "ideaTitle": "AI-Powered Code Review Assistant",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.583Z"
+  },
+  {
+    "id": "7b8f320e-a704-47ff-9e96-117a97a6cdf1",
+    "username": "Marcus Chen",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-002",
+      "ideaTitle": "Sustainable Urban Farming Platform",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.599Z"
+  },
+  {
+    "id": "29ea383b-bf43-4b91-93d8-1b172231c517",
+    "username": "David Kumar",
+    "action": "search",
+    "details": {
+      "query": "blockchain security",
+      "resultsCount": 3,
+      "filters": {
+        "tags": "blockchain"
+      },
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:58.619Z"
+  },
+  {
+    "id": "b3a53fda-6899-46f9-9eb9-7c02da38a64e",
+    "username": "Emily Rodriguez",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-005",
+      "ideaTitle": "Smart Home Energy Optimization",
+      "updateType": "content",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.633Z"
+  },
+  {
+    "id": "024c6f37-2693-41dd-a9e7-b9f6463c91f8",
+    "username": "Tom Anderson",
+    "action": "search",
+    "details": {
+      "query": "Blockchain",
+      "resultsCount": 18,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:58.643Z"
+  },
+  {
+    "id": "83e6307b-2043-49c5-99c4-42dfca2e4461",
+    "username": "Robert Zhang",
+    "action": "search",
+    "details": {
+      "query": "Education",
+      "resultsCount": 16,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:58.659Z"
+  },
+  {
+    "id": "4a7d4b32-b75c-4ff0-88af-9ea306744ff1",
+    "username": "Jennifer Taylor",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "open"
+      },
+      "resultsCount": 3,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:58.674Z"
+  },
+  {
+    "id": "60011917-1e5c-4da0-a72e-7d07eb072a2a",
+    "username": "Lisa Park",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-005",
+      "ideaTitle": "Smart Home Energy Optimization",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.687Z"
+  },
+  {
+    "id": "7476cc38-98e7-47d7-a0a9-a832c9c438c3",
+    "username": "David Kumar",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "open"
+      },
+      "resultsCount": 4,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:58.700Z"
+  },
+  {
+    "id": "410ee518-748d-4416-9d91-4d950e6739f4",
+    "username": "Jennifer Taylor",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-001",
+      "forkedIdeaId": "fork-5",
+      "ideaTitle": "AI-Powered Code Review Assistant",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.711Z"
+  },
+  {
+    "id": "b8008329-9946-4e17-8258-6b9c6a832abc",
+    "username": "Michael Davis",
+    "action": "search",
+    "details": {
+      "query": "Sustainability",
+      "resultsCount": 1,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:58.723Z"
+  },
+  {
+    "id": "7e626c63-82af-499a-b25a-afe5c967de9e",
+    "username": "Tom Anderson",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-001",
+      "ideaTitle": "AI-Powered Code Review Assistant",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.737Z"
+  },
+  {
+    "id": "fe2848db-0f0e-4c75-9ad5-9625d32201c6",
+    "username": "Chris Lee",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-010",
+      "ideaTitle": "Voice-Controlled Development Environment",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.752Z"
+  },
+  {
+    "id": "c1f2ccff-5d81-400f-a3d4-f3e9abed353a",
+    "username": "Chris Lee",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-008",
+      "ideaTitle": "Micro-Learning Mobile App for Professionals",
+      "tags": [
+        "Mobile",
+        "Education",
+        "Micro-Learning",
+        "Professional Development",
+        "AI"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.764Z"
+  },
+  {
+    "id": "6f787738-d1b7-4f09-8526-2a56857e2c7a",
+    "username": "Lisa Park",
+    "action": "search",
+    "details": {
+      "query": "Healthcare",
+      "resultsCount": 11,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:58.775Z"
+  },
+  {
+    "id": "063f78f0-cbe3-4379-bdbf-48d0158a696b",
+    "username": "Tom Anderson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-001",
+      "ideaTitle": "AI-Powered Code Review Assistant",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.785Z"
+  },
+  {
+    "id": "74239170-b703-40c9-b765-dbe72fae18e1",
+    "username": "Emily Rodriguez",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-008",
+      "ideaTitle": "Micro-Learning Mobile App for Professionals",
+      "tags": [
+        "Mobile",
+        "Education",
+        "Micro-Learning",
+        "Professional Development",
+        "AI"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.795Z"
+  },
+  {
+    "id": "bb4aa282-da10-44b8-8168-73d9a7e01397",
+    "username": "Tom Anderson",
+    "action": "search",
+    "details": {
+      "query": "Education",
+      "resultsCount": 10,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:58.804Z"
+  },
+  {
+    "id": "0fa0a15b-3cdc-4b2e-9a87-b3bfd8714965",
+    "username": "Marcus Chen",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "open"
+      },
+      "resultsCount": 14,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:58.816Z"
+  },
+  {
+    "id": "6c4c6cea-02bc-457f-bef7-f7103c604ba6",
+    "username": "Rachel Brown",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-008",
+      "forkedIdeaId": "fork-15",
+      "ideaTitle": "Micro-Learning Mobile App for Professionals",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.828Z"
+  },
+  {
+    "id": "6ce1f308-4934-4148-8d29-d761fa2bec4a",
+    "username": "Robert Zhang",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-007",
+      "ideaTitle": "Gamified Learning Platform for Programming",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.840Z"
+  },
+  {
+    "id": "9998c6d0-fa95-445d-83ed-46d199320491",
+    "username": "Rachel Brown",
+    "action": "search",
+    "details": {
+      "query": "Development Tools",
+      "resultsCount": 5,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:58.857Z"
+  },
+  {
+    "id": "bd7e5fc5-b066-48b2-ac3a-f6af91222430",
+    "username": "Alex Thompson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-004",
+      "ideaTitle": "Blockchain-Based Digital Identity System",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.873Z"
+  },
+  {
+    "id": "1bed0db8-f688-4441-a900-28fb88d4ce19",
+    "username": "Robert Zhang",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-001",
+      "forkedIdeaId": "fork-19",
+      "ideaTitle": "AI-Powered Code Review Assistant",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.884Z"
+  },
+  {
+    "id": "165d827a-327e-45ab-938f-9df2943381b1",
+    "username": "Alex Thompson",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-002",
+      "forkedIdeaId": "fork-20",
+      "ideaTitle": "Sustainable Urban Farming Platform",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.896Z"
+  },
+  {
+    "id": "f3110b82-d520-45e6-8e9c-60d4378fba0b",
+    "username": "Maria Gonzalez",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-006",
+      "ideaTitle": "Enhanced AI Code Review (Fork)",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.907Z"
+  },
+  {
+    "id": "eb7c1154-e6ad-4cc3-98b3-bfd52f18cedf",
+    "username": "Alice Johnson",
+    "action": "search",
+    "details": {
+      "query": "Wellness",
+      "resultsCount": 9,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:58.918Z"
+  },
+  {
+    "id": "7dd6b55f-2627-4dd3-8611-c98dba615d1f",
+    "username": "Chris Lee",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "in-progress"
+      },
+      "resultsCount": 1,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:58.929Z"
+  },
+  {
+    "id": "67d2d9cf-fc74-49b3-bbae-8bcbd3f4db6c",
+    "username": "Emily Rodriguez",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Virtual Reality Therapy for Anxiety",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:58.960Z"
+  },
+  {
+    "id": "13635742-136c-4855-9a76-4c6db9fcab46",
+    "username": "Chris Lee",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "in-progress"
+      },
+      "resultsCount": 8,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:58.968Z"
+  },
+  {
+    "id": "314d3e35-7a6f-4a49-b767-b8bcd73d1555",
+    "username": "Jennifer Taylor",
+    "action": "search",
+    "details": {
+      "query": "Smart Home",
+      "resultsCount": 8,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:58.980Z"
+  },
+  {
+    "id": "936ac462-042d-4aa1-9e43-20074429da36",
+    "username": "Alex Thompson",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "open"
+      },
+      "resultsCount": 8,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:58.992Z"
+  },
+  {
+    "id": "98776699-5882-4d93-b14d-47d2313347ca",
+    "username": "James Wilson",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Virtual Reality Therapy for Anxiety",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.004Z"
+  },
+  {
+    "id": "f7d7eaa9-ca2d-4dc6-98ed-36ecc6f15779",
+    "username": "Tom Anderson",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "in-progress"
+      },
+      "resultsCount": 1,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:59.017Z"
+  },
+  {
+    "id": "cc095768-96da-4fdc-acdc-01e76286242d",
+    "username": "Lisa Park",
+    "action": "search",
+    "details": {
+      "query": "Environment",
+      "resultsCount": 3,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.026Z"
+  },
+  {
+    "id": "a4188210-3382-4933-a9eb-c648c4704c32",
+    "username": "Tom Anderson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-009",
+      "ideaTitle": "Community-Driven Climate Action Tracker",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.041Z"
+  },
+  {
+    "id": "3edbc2ae-0f86-42f3-b3c2-564cfb76655e",
+    "username": "Marcus Chen",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-001",
+      "ideaTitle": "AI-Powered Code Review Assistant",
+      "tags": [
+        "AI",
+        "Machine Learning",
+        "Development Tools",
+        "Code Quality"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.052Z"
+  },
+  {
+    "id": "cd9c9802-b26c-4767-8c3b-619e25e36215",
+    "username": "Emily Rodriguez",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-003",
+      "forkedIdeaId": "fork-33",
+      "ideaTitle": "Virtual Reality Therapy for Anxiety",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.061Z"
+  },
+  {
+    "id": "23256fe7-c93b-4c93-bca4-fb19dc460381",
+    "username": "David Kumar",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "open"
+      },
+      "resultsCount": 12,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:59.074Z"
+  },
+  {
+    "id": "2c7c5cca-5f1c-451e-a710-7100abe219b7",
+    "username": "Maria Gonzalez",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-005",
+      "ideaTitle": "Smart Home Energy Optimization",
+      "tags": [
+        "Smart Home",
+        "Energy",
+        "IoT",
+        "Sustainability",
+        "AI"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.085Z"
+  },
+  {
+    "id": "02d0ea0d-8c0d-4637-a0e4-3ee7920f43f6",
+    "username": "Emily Rodriguez",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-003",
+      "forkedIdeaId": "fork-36",
+      "ideaTitle": "Virtual Reality Therapy for Anxiety",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.100Z"
+  },
+  {
+    "id": "891c245f-d7fc-4461-bc97-f5e4b72a819a",
+    "username": "Dr. Sarah Williams",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Virtual Reality Therapy for Anxiety",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.113Z"
+  },
+  {
+    "id": "d65f1b3a-0d44-418a-aa66-13611691e666",
+    "username": "Emily Rodriguez",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-009",
+      "ideaTitle": "Community-Driven Climate Action Tracker",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.128Z"
+  },
+  {
+    "id": "baa5242a-8559-48f9-bd13-8b3008d7f89f",
+    "username": "Marcus Chen",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-007",
+      "ideaTitle": "Gamified Learning Platform for Programming",
+      "tags": [
+        "Education",
+        "Gamification",
+        "Programming",
+        "Learning",
+        "Competition"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.141Z"
+  },
+  {
+    "id": "e6a67f89-258a-4767-b17b-966894e1f501",
+    "username": "David Kumar",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-002",
+      "ideaTitle": "Sustainable Urban Farming Platform",
+      "tags": [
+        "Sustainability",
+        "Agriculture",
+        "IoT",
+        "Community",
+        "Environment"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.151Z"
+  },
+  {
+    "id": "37eeaa35-cfc3-401e-aed5-d45c0639deab",
+    "username": "Lisa Park",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-008",
+      "ideaTitle": "Micro-Learning Mobile App for Professionals",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.161Z"
+  },
+  {
+    "id": "a81b3b3e-231c-4843-9ef9-a25ce1aafe65",
+    "username": "Maria Gonzalez",
+    "action": "search",
+    "details": {
+      "query": "Mental Health",
+      "resultsCount": 5,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.173Z"
+  },
+  {
+    "id": "c305521b-459f-4078-a203-1150ca425c7b",
+    "username": "Michael Davis",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Virtual Reality Therapy for Anxiety",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.186Z"
+  },
+  {
+    "id": "2516f37c-9a50-46b4-a9eb-7cc336fb7133",
+    "username": "Michael Davis",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-010",
+      "forkedIdeaId": "fork-44",
+      "ideaTitle": "Voice-Controlled Development Environment",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.199Z"
+  },
+  {
+    "id": "89ef9ded-198f-4da6-90b5-05c7089091f7",
+    "username": "Rachel Brown",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "open"
+      },
+      "resultsCount": 10,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:59.209Z"
+  },
+  {
+    "id": "66450aa7-9ecd-4e39-90f5-adc11e3f8b13",
+    "username": "Michael Davis",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-003",
+      "forkedIdeaId": "fork-46",
+      "ideaTitle": "Virtual Reality Therapy for Anxiety",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.221Z"
+  },
+  {
+    "id": "a810102d-65fc-4460-96bb-b37dbb37e207",
+    "username": "Dr. Sarah Williams",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-002",
+      "forkedIdeaId": "fork-47",
+      "ideaTitle": "Sustainable Urban Farming Platform",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.229Z"
+  },
+  {
+    "id": "86a917de-a6b8-4cdb-99c8-8f90d1086308",
+    "username": "David Kumar",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-010",
+      "ideaTitle": "Voice-Controlled Development Environment",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.241Z"
+  },
+  {
+    "id": "fa0998de-7b0f-4831-a0d1-e58e73fc89ec",
+    "username": "Emily Rodriguez",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-005",
+      "forkedIdeaId": "fork-49",
+      "ideaTitle": "Smart Home Energy Optimization",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.250Z"
+  },
+  {
+    "id": "25e9b2d9-eb1b-4393-b770-5a46546ca977",
+    "username": "Rachel Brown",
+    "action": "search",
+    "details": {
+      "query": "Development Tools",
+      "resultsCount": 9,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.263Z"
+  },
+  {
+    "id": "30c5b6ef-e8a1-4d9a-b6c8-c42272f2163d",
+    "username": "Marcus Chen",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-004",
+      "ideaTitle": "Blockchain-Based Digital Identity System",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.275Z"
+  },
+  {
+    "id": "4c91efa5-f97b-4524-b6f3-eee7be8ea705",
+    "username": "Marcus Chen",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "open"
+      },
+      "resultsCount": 4,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:59.286Z"
+  },
+  {
+    "id": "1e700e52-bcdc-4e92-a999-d74851f60907",
+    "username": "Tom Anderson",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "open"
+      },
+      "resultsCount": 2,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:59.298Z"
+  },
+  {
+    "id": "374ebbb6-3f6d-49b6-8338-501a703a7375",
+    "username": "Rachel Brown",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-001",
+      "ideaTitle": "AI-Powered Code Review Assistant",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.307Z"
+  },
+  {
+    "id": "501c79f3-4e01-4258-8607-ddfa120060de",
+    "username": "Marcus Chen",
+    "action": "search",
+    "details": {
+      "query": "Blockchain",
+      "resultsCount": 4,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.322Z"
+  },
+  {
+    "id": "0b8790c2-93f1-491c-ab07-f9ff030766f0",
+    "username": "Alex Thompson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-006",
+      "ideaTitle": "Enhanced AI Code Review (Fork)",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.334Z"
+  },
+  {
+    "id": "2dcb6883-2f8d-47d3-a531-6eadb97d8fd7",
+    "username": "Michael Davis",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Virtual Reality Therapy for Anxiety",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.343Z"
+  },
+  {
+    "id": "09a30161-301f-44b1-8bfa-8b4a7fcb85e8",
+    "username": "Rachel Brown",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-006",
+      "ideaTitle": "Enhanced AI Code Review (Fork)",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.360Z"
+  },
+  {
+    "id": "3a3a8911-81fd-48a8-8c89-375578b39c42",
+    "username": "Marcus Chen",
+    "action": "search",
+    "details": {
+      "query": "Climate",
+      "resultsCount": 3,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.371Z"
+  },
+  {
+    "id": "179ae5b9-30e8-437d-9580-6f1f6211f23e",
+    "username": "Alice Johnson",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-010",
+      "forkedIdeaId": "fork-60",
+      "ideaTitle": "Voice-Controlled Development Environment",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.382Z"
+  },
+  {
+    "id": "7a742976-e2f3-4b5a-94a3-0eb7936d8394",
+    "username": "David Kumar",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-004",
+      "ideaTitle": "Blockchain-Based Digital Identity System",
+      "tags": [
+        "Blockchain",
+        "Security",
+        "Privacy",
+        "Identity",
+        "Decentralization"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.392Z"
+  },
+  {
+    "id": "093f5174-d094-483f-ae66-0a66b85e33be",
+    "username": "Maria Gonzalez",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-004",
+      "ideaTitle": "Blockchain-Based Digital Identity System",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.404Z"
+  },
+  {
+    "id": "6f5decc4-8682-4051-a0d0-1e68bc2a345d",
+    "username": "Robert Zhang",
+    "action": "search",
+    "details": {
+      "query": "Education",
+      "resultsCount": 5,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.417Z"
+  },
+  {
+    "id": "9d2b40cb-c316-437b-87b7-d1ecd6176feb",
+    "username": "Dr. Sarah Williams",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-004",
+      "ideaTitle": "Blockchain-Based Digital Identity System",
+      "tags": [
+        "Blockchain",
+        "Security",
+        "Privacy",
+        "Identity",
+        "Decentralization"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.427Z"
+  },
+  {
+    "id": "6f943cb7-c083-479a-a066-e994bfb8afd6",
+    "username": "Jennifer Taylor",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Virtual Reality Therapy for Anxiety",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.449Z"
+  },
+  {
+    "id": "8ca58cd8-226f-477d-9c47-e621d78a2084",
+    "username": "Robert Zhang",
+    "action": "search",
+    "details": {
+      "query": "Privacy",
+      "resultsCount": 3,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.462Z"
+  },
+  {
+    "id": "bde848c7-e7c9-4ece-a8d9-eef81258dfb8",
+    "username": "Tom Anderson",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-004",
+      "forkedIdeaId": "fork-67",
+      "ideaTitle": "Blockchain-Based Digital Identity System",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.476Z"
+  },
+  {
+    "id": "78a42b39-a24d-421f-829e-7c1d73b3af54",
+    "username": "Dr. Sarah Williams",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-001",
+      "ideaTitle": "AI-Powered Code Review Assistant",
+      "tags": [
+        "AI",
+        "Machine Learning",
+        "Development Tools",
+        "Code Quality"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.490Z"
+  },
+  {
+    "id": "614da67b-b9d6-4eb0-8b59-970f27daace6",
+    "username": "Emily Rodriguez",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-007",
+      "forkedIdeaId": "fork-69",
+      "ideaTitle": "Gamified Learning Platform for Programming",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.506Z"
+  },
+  {
+    "id": "03526f26-c087-467d-8999-4a2600f7943a",
+    "username": "Tom Anderson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-005",
+      "ideaTitle": "Smart Home Energy Optimization",
+      "tags": [
+        "Smart Home",
+        "Energy",
+        "IoT",
+        "Sustainability",
+        "AI"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.520Z"
+  },
+  {
+    "id": "b767b3c5-e009-4297-b11d-3c6069406090",
+    "username": "Dr. Sarah Williams",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-009",
+      "ideaTitle": "Community-Driven Climate Action Tracker",
+      "tags": [
+        "Climate",
+        "Community",
+        "Environment",
+        "Sustainability",
+        "Social Impact"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.529Z"
+  },
+  {
+    "id": "8f7f72ae-5e9e-4175-9cdc-f8099837a1f5",
+    "username": "James Wilson",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-001",
+      "ideaTitle": "AI-Powered Code Review Assistant",
+      "tags": [
+        "AI",
+        "Machine Learning",
+        "Development Tools",
+        "Code Quality"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.541Z"
+  },
+  {
+    "id": "1f3ee9e5-c67f-4e50-9989-15ba61780873",
+    "username": "James Wilson",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-010",
+      "ideaTitle": "Voice-Controlled Development Environment",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.563Z"
+  },
+  {
+    "id": "ced773a7-6141-41a7-87fd-7a8f55d4b922",
+    "username": "Maria Gonzalez",
+    "action": "search",
+    "details": {
+      "query": "VR",
+      "resultsCount": 7,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.575Z"
+  },
+  {
+    "id": "9b8bece0-f60e-459f-a001-c870dd8d16ab",
+    "username": "Rachel Brown",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-006",
+      "ideaTitle": "Enhanced AI Code Review (Fork)",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.584Z"
+  },
+  {
+    "id": "bcee3ebf-9982-44fe-9181-1a52358616ef",
+    "username": "David Kumar",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-008",
+      "ideaTitle": "Micro-Learning Mobile App for Professionals",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.599Z"
+  },
+  {
+    "id": "307d2366-82fc-4dfe-a697-a6d20cb234c1",
+    "username": "Alex Thompson",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-010",
+      "ideaTitle": "Voice-Controlled Development Environment",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.610Z"
+  },
+  {
+    "id": "bef86c70-51bf-42e0-805a-e1231551ecf7",
+    "username": "Alex Thompson",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-010",
+      "ideaTitle": "Voice-Controlled Development Environment",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.624Z"
+  },
+  {
+    "id": "1decf6e8-d101-46c9-b615-972e9aad58f1",
+    "username": "Lisa Park",
+    "action": "search",
+    "details": {
+      "query": "AI",
+      "resultsCount": 1,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.640Z"
+  },
+  {
+    "id": "731a431a-ef4c-406a-bbbd-135c0c0f09d1",
+    "username": "Alice Johnson",
+    "action": "search",
+    "details": {
+      "query": "Development Tools",
+      "resultsCount": 11,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.649Z"
+  },
+  {
+    "id": "1b6cb360-24dc-4824-968a-7b6483ac72d2",
+    "username": "Maria Gonzalez",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-009",
+      "forkedIdeaId": "fork-81",
+      "ideaTitle": "Community-Driven Climate Action Tracker",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.662Z"
+  },
+  {
+    "id": "feda6e0e-99e7-4c73-b0bc-a3de9038fe4e",
+    "username": "Michael Davis",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-006",
+      "ideaTitle": "Enhanced AI Code Review (Fork)",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.673Z"
+  },
+  {
+    "id": "04b4f024-3367-4856-aa29-6640ff0d95c0",
+    "username": "Maria Gonzalez",
+    "action": "search",
+    "details": {
+      "query": "Energy",
+      "resultsCount": 20,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.694Z"
+  },
+  {
+    "id": "0cc48c87-98f7-4a1d-afa8-05c115e11383",
+    "username": "Emily Rodriguez",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "open"
+      },
+      "resultsCount": 3,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:59.708Z"
+  },
+  {
+    "id": "18317367-a6a1-425c-8c51-d6b2e017be4f",
+    "username": "James Wilson",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-008",
+      "forkedIdeaId": "fork-85",
+      "ideaTitle": "Micro-Learning Mobile App for Professionals",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.725Z"
+  },
+  {
+    "id": "b87eb13e-e9b0-4423-9060-9b3000909c2b",
+    "username": "Marcus Chen",
+    "action": "search",
+    "details": {
+      "query": "IDE Integration",
+      "resultsCount": 14,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.747Z"
+  },
+  {
+    "id": "8b65e828-34e0-4656-b265-f77972c0f749",
+    "username": "Rachel Brown",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-004",
+      "ideaTitle": "Blockchain-Based Digital Identity System",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.766Z"
+  },
+  {
+    "id": "2e2e55ad-0d3d-4495-9dea-e48242d24a4b",
+    "username": "Dr. Sarah Williams",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-004",
+      "ideaTitle": "Blockchain-Based Digital Identity System",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.783Z"
+  },
+  {
+    "id": "a7d0ef61-105a-4a26-9d6d-6727da8eeb38",
+    "username": "Alice Johnson",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-003",
+      "forkedIdeaId": "fork-89",
+      "ideaTitle": "Virtual Reality Therapy for Anxiety",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.803Z"
+  },
+  {
+    "id": "6bef2ea3-d3f1-42eb-ab66-301fa15958f3",
+    "username": "Jennifer Taylor",
+    "action": "create",
+    "details": {
+      "ideaId": "idea-008",
+      "ideaTitle": "Micro-Learning Mobile App for Professionals",
+      "tags": [
+        "Mobile",
+        "Education",
+        "Micro-Learning",
+        "Professional Development",
+        "AI"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.826Z"
+  },
+  {
+    "id": "a6f95207-3d89-44d8-94cf-cb636ce6b15f",
+    "username": "Chris Lee",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-010",
+      "forkedIdeaId": "fork-91",
+      "ideaTitle": "Voice-Controlled Development Environment",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.843Z"
+  },
+  {
+    "id": "e75b51d7-62eb-48e4-8950-217bc92cbc2d",
+    "username": "David Kumar",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "open"
+      },
+      "resultsCount": 6,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:59.864Z"
+  },
+  {
+    "id": "95c475fc-7f0a-48ca-a0ca-ce945fde9f95",
+    "username": "Jennifer Taylor",
+    "action": "view",
+    "details": {
+      "ideaId": "idea-010",
+      "ideaTitle": "Voice-Controlled Development Environment",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.877Z"
+  },
+  {
+    "id": "f387fd30-48ae-46fe-856f-42ac955c4b87",
+    "username": "David Kumar",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-003",
+      "ideaTitle": "Virtual Reality Therapy for Anxiety",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.888Z"
+  },
+  {
+    "id": "cb84d6b7-8c35-4845-993e-6d7567db234c",
+    "username": "Robert Zhang",
+    "action": "update",
+    "details": {
+      "ideaId": "idea-002",
+      "ideaTitle": "Sustainable Urban Farming Platform",
+      "updateType": "status",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.901Z"
+  },
+  {
+    "id": "61db965e-0e77-4442-8fa0-8186c68c8e4d",
+    "username": "Tom Anderson",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "status": "open"
+      },
+      "resultsCount": 7,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:00:59.910Z"
+  },
+  {
+    "id": "3c173831-771f-4877-bbf4-9823b6c502b5",
+    "username": "Maria Gonzalez",
+    "action": "search",
+    "details": {
+      "query": "Community",
+      "resultsCount": 18,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.922Z"
+  },
+  {
+    "id": "c316c716-a61e-45a5-b6d6-0aca36e4a33b",
+    "username": "Alice Johnson",
+    "action": "fork",
+    "details": {
+      "originalIdeaId": "idea-006",
+      "forkedIdeaId": "fork-98",
+      "ideaTitle": "Enhanced AI Code Review (Fork)",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:00:59.933Z"
+  },
+  {
+    "id": "ec4bc60b-f24f-4fe1-a3f3-819089244b76",
+    "username": "Dr. Sarah Williams",
+    "action": "search",
+    "details": {
+      "query": "Learning",
+      "resultsCount": 12,
+      "filters": {},
+      "type": "search"
+    },
+    "timestamp": "2025-07-04T15:00:59.945Z"
+  },
+  {
+    "id": "28042475-06d7-4e49-89a0-325310e03366",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 60,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:01:05.978Z"
+  },
+  {
+    "id": "7f9a53ba-d4f9-4c0b-8ef8-22a29c35ca24",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 60,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:01:12.734Z"
+  },
+  {
+    "id": "b1337253-cb11-4f78-ac61-581ab9aecaaa",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 60,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:01:55.809Z"
+  },
+  {
+    "id": "efa20bca-7634-439c-b9a2-118965a07095",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 60,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:01:56.498Z"
+  },
+  {
+    "id": "3b8ef90a-ace8-4136-b395-9762ff1c056f",
+    "username": "Anonymous",
+    "action": "view",
+    "details": {
+      "ideaId": "db54e92f-85fa-4178-a2c9-86969d8ea3ed",
+      "ideaTitle": "Virtual Reality Therapy for Anxiety",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:02:09.605Z"
+  },
+  {
+    "id": "c4dae522-70ae-4f61-890e-2b892b72e429",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 60,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:02:13.952Z"
+  },
+  {
+    "id": "01b37472-718a-4c5e-9265-67b90b0fd666",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 60,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:03:15.746Z"
+  },
+  {
+    "id": "04917aaa-d0e4-4cad-9c7b-0e1484c80c6a",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 60,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:03:22.994Z"
+  },
+  {
+    "id": "94712f4b-2f82-40c6-b8bf-1ae4b8e7f252",
+    "username": "Anonymous",
+    "action": "view",
+    "details": {
+      "ideaId": "ce5ff372-25cf-433e-85a0-73e0d934d47c",
+      "ideaTitle": "Voice-Controlled Development Environment",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:03:36.276Z"
+  },
+  {
+    "id": "207d558a-e9a7-47e4-a3e7-a31cf62f39c3",
+    "username": "Anonymous",
+    "action": "view",
+    "details": {
+      "ideaId": "ce5ff372-25cf-433e-85a0-73e0d934d47c",
+      "ideaTitle": "Voice-Controlled Development Environment",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:04:07.952Z"
+  },
+  {
+    "id": "3c7f6df6-b0b5-4518-9fb8-350ba1b17f11",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 60,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:05:36.955Z"
+  },
+  {
+    "id": "d7f911c7-562d-416d-bcfd-8f8994594fa5",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 60,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:11:52.231Z"
+  },
+  {
+    "id": "3bd3114d-a4f5-461b-a79a-676d5f0d8a3d",
+    "username": "test",
+    "action": "create",
+    "details": {
+      "ideaId": "981428bc-d863-44c7-8028-9099b544678d",
+      "ideaTitle": "TEst",
+      "tags": [
+        "test"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:20:26.638Z"
+  },
+  {
+    "id": "9c4e2b7b-094b-4eb1-bc7b-d19ed5e3fa89",
+    "username": "test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 61,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:20:29.476Z"
+  },
+  {
+    "id": "42a37e07-2658-40fd-94a9-28574118e393",
+    "username": "test",
+    "action": "view",
+    "details": {
+      "ideaId": "981428bc-d863-44c7-8028-9099b544678d",
+      "ideaTitle": "TEst",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:20:35.960Z"
+  },
+  {
+    "id": "aff14287-0d1a-468c-9b34-b8fbc69f27e7",
+    "username": "test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 61,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:20:48.314Z"
+  },
+  {
+    "id": "e08d1906-c3e8-498d-90a3-a05289aa7829",
+    "username": "Test",
+    "action": "create",
+    "details": {
+      "ideaId": "223a223d-2cde-4404-8fe5-f0e5c4eb44dd",
+      "ideaTitle": "Image Upload test",
+      "tags": [
+        "AI",
+        "Image"
+      ],
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:29:17.409Z"
+  },
+  {
+    "id": "317bc42e-48ff-4f57-a72d-6359927692f0",
+    "username": "Test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:29:21.798Z"
+  },
+  {
+    "id": "e3024cda-771b-4e43-9dca-dcbc47ef50d2",
+    "username": "Test",
+    "action": "view",
+    "details": {
+      "ideaId": "223a223d-2cde-4404-8fe5-f0e5c4eb44dd",
+      "ideaTitle": "Image Upload test",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:29:23.344Z"
+  },
+  {
+    "id": "3d2c7fa1-49be-4978-bbcd-370aa1f211e1",
+    "username": "Test",
+    "action": "view",
+    "details": {
+      "ideaId": "223a223d-2cde-4404-8fe5-f0e5c4eb44dd",
+      "ideaTitle": "Image Upload test",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:29:33.392Z"
+  },
+  {
+    "id": "eb4f8751-6b5c-4004-9b02-2eab165d8fdf",
+    "username": "Test",
+    "action": "view",
+    "details": {
+      "ideaId": "223a223d-2cde-4404-8fe5-f0e5c4eb44dd",
+      "ideaTitle": "Image Upload test",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:30:12.576Z"
+  },
+  {
+    "id": "14de61b9-cc86-4bbc-a5cb-0f23cd6d091a",
+    "username": "Test",
+    "action": "view",
+    "details": {
+      "ideaId": "223a223d-2cde-4404-8fe5-f0e5c4eb44dd",
+      "ideaTitle": "Image Upload test",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:31:59.189Z"
+  },
+  {
+    "id": "916faae6-405d-491a-ac0f-a01d76bcfc98",
+    "username": "Test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:35:55.684Z"
+  },
+  {
+    "id": "5821a8e0-b6f3-429e-860a-98e7127e2e9e",
+    "username": "Test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:39:00.793Z"
+  },
+  {
+    "id": "b29339c8-0f0d-4965-861b-19b065eab214",
+    "username": "Test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:39:45.272Z"
+  },
+  {
+    "id": "631553db-284e-4af2-b41b-117c4c0e5b58",
+    "username": "Test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:39:46.234Z"
+  },
+  {
+    "id": "98ae51ee-5ab2-46dc-95f6-eb5c634106c3",
+    "username": "Test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:40:05.393Z"
+  },
+  {
+    "id": "f4c1ce6f-129e-49b5-a990-996051e3d6da",
+    "username": "Test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:40:06.498Z"
+  },
+  {
+    "id": "984b68c0-08ec-4a5b-995b-16812db998d0",
+    "username": "Test",
+    "action": "view",
+    "details": {
+      "ideaId": "223a223d-2cde-4404-8fe5-f0e5c4eb44dd",
+      "ideaTitle": "Image Upload test",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:40:42.453Z"
+  },
+  {
+    "id": "249bfaef-eb88-4aaa-add4-63aa500714c9",
+    "username": "Test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:44:04.360Z"
+  },
+  {
+    "id": "2b3f4bf2-ea8c-4f15-8b66-aa5acaab3615",
+    "username": "Test",
+    "action": "view",
+    "details": {
+      "ideaId": "223a223d-2cde-4404-8fe5-f0e5c4eb44dd",
+      "ideaTitle": "Image Upload test",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:45:43.285Z"
+  },
+  {
+    "id": "9ff0a2b1-590d-4492-812a-65d03ee1bd94",
+    "username": "Test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:49:26.522Z"
+  },
+  {
+    "id": "9c14a483-5773-4d46-96a9-ff4ff22d4ba3",
+    "username": "Test",
+    "action": "view",
+    "details": {
+      "ideaId": "223a223d-2cde-4404-8fe5-f0e5c4eb44dd",
+      "ideaTitle": "Image Upload test",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:49:57.902Z"
+  },
+  {
+    "id": "3b3e05c7-cd19-4d72-95ed-9c84e075ad5c",
+    "username": "Test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:52:21.545Z"
+  },
+  {
+    "id": "2736e41e-c088-45ab-a69b-67bd1e2c3d25",
+    "username": "Test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T15:55:26.598Z"
+  },
+  {
+    "id": "95f9c75f-6235-4e73-af8b-7eb6b8aec766",
+    "username": "Test",
+    "action": "view",
+    "details": {
+      "ideaId": "223a223d-2cde-4404-8fe5-f0e5c4eb44dd",
+      "ideaTitle": "Image Upload test",
+      "type": "idea"
+    },
+    "timestamp": "2025-07-04T15:55:34.874Z"
+  },
+  {
+    "id": "70f38f1f-3e6e-4ded-a29c-e7378e95c0f4",
+    "username": "Test",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-07-04T16:59:54.418Z"
+  }
+]
