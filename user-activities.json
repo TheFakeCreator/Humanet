@@ -5622,5 +5622,19 @@
       "type": "filter"
     },
     "timestamp": "2025-07-04T16:59:54.418Z"
+  },
+  {
+    "id": "d5b95972-2ca3-49f0-9d27-ff277113cc1f",
+    "username": "Anonymous",
+    "action": "filter",
+    "details": {
+      "filters": {
+        "sortBy": "createdAt",
+        "sortOrder": "desc"
+      },
+      "resultsCount": 62,
+      "type": "filter"
+    },
+    "timestamp": "2025-08-30T12:43:41.846Z"
   }
 ]
