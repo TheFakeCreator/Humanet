@@ -1,5 +1,3 @@
-<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
-
 ## 🏗️ General Project Structure
 
 - This is a **monorepo** with two main folders:
@@ -180,25 +178,16 @@
 1. When creating a new API route:
     
     - First create a **TypeScript interface** in `types/`.
-        
     - Add a **Mongoose model** in `models/`.
-        
     - Add a **service function** in `services/`.
-        
     - Add a **controller** that uses the service.
-        
     - Register it in `routes/`.
-        
     - Write a **test** for it.
         
 2. For new frontend features:
     
     - Create a `feature/` folder with related components.
-        
     - Add TypeScript types in `types/`.
-        
     - Connect API via React Query hook in `hooks/`.
-        
     - Build components with Tailwind + shadcn/ui.
-        
     - Ensure accessibility (a11y).

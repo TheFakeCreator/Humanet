@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7-jammy
+    container_name: humanet-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: humanet
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - humanet-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: humanet-backend
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: production
+      MONGO_URL: mongodb://mongodb:27017/humanet
+      JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
+      FRONTEND_URL: http://localhost:3000
+      PORT: 4000
+    depends_on:
+      - mongodb
+    networks:
+      - humanet-network
+    volumes:
+      - ./backend/.env:/app/backend/.env
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: humanet-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000/api
+    depends_on:
+      - backend
+    networks:
+      - humanet-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  humanet-network:
+    driver: bridge

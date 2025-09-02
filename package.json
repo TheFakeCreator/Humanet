@@ -1,33 +1,27 @@
 {
   "name": "humanet",
-  "version": "1.0.0",
-  "description": "HumaNet - Open Innovation Platform",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": ["frontend", "backend", "shared"],
   "scripts": {
-    "dev": "turbo run dev",
-    "build": "turbo run build",
-    "lint": "turbo run lint",
-    "format": "turbo run format",
-    "clean": "turbo run clean",
-    "inject-data": "node scripts/inject-dummy-data.js",
-    "inject-enhanced": "node scripts/inject-dummy-data-enhanced.js",
-    "clear-data": "node scripts/clear-data.js",
-    "reset-data": "npm run clear-data && npm run inject-data",
-    "data-manager": "node scripts/data-manager.js",
-    "data-status": "node scripts/data-manager.js status",
-    "data-analyze": "node scripts/data-manager.js analyze",
-    "data-backup": "node scripts/data-manager.js backup",
-    "data-cleanup": "node scripts/data-manager.js cleanup"
+    "dev": "concurrently \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
+    "lint": "pnpm -w lint",
+    "test": "pnpm -w test",
+    "build": "pnpm --filter backend build && pnpm --filter frontend build",
+    "lint-staged": "lint-staged"
   },
   "devDependencies": {
-    "turbo": "latest"
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "prettier": "^3.2.5",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2"
   },
-  "packageManager": "npm@10.0.0",
-  "engines": {
-    "node": ">=18.0.0"
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

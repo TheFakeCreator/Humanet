@@ -1,0 +1,10 @@
+packages:
+  - frontend
+  - backend
+  - shared
+
+ignoredBuiltDependencies:
+  - bcrypt
+  - esbuild
+  - mongodb-memory-server
+  - unrs-resolver

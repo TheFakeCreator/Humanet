@@ -1,75 +1,124 @@
-# HumaNet
+# Humanet MVP
 
-HumaNet is an open innovation platform where users can post ideas, fork them, collaborate, and track progress.
+A TypeScript monorepo for a collaborative idea sharing and development platform.
 
 ## Project Structure
 
-This is a Turborepo workspace containing the following applications and packages:
+```
+humanet/
+├── frontend/     # Next.js (TypeScript, App Router), TailwindCSS, React Query
+├── backend/      # Node.js + Express (TypeScript, ES Modules), MongoDB with Mongoose
+├── shared/       # Shared TypeScript types/interfaces
+└── docs/         # Documentation
+```
 
-### Apps
+## Features
 
-- **`web`** - Frontend application (http://localhost:3000)
-- **`api`** - Backend API using Node.js + Express (http://localhost:3001)
-- **`license-site`** - Static site for Open Idea Commons License (http://localhost:3002)
+- **Authentication**: Signup/login/logout with JWT and HttpOnly cookies
+- **Ideas**: Create, read, list, search, fork, and upvote ideas
+- **Family Trees**: Track idea genealogy with nested tree views
+- **Comments**: Comment on ideas
+- **Karma System**: Upvotes and forks contribute to user karma
 
-### Packages
-
-- **`@humanet/config`** - Shared ESLint and Prettier configuration
-
-## Getting Started
+## Local Development
 
 ### Prerequisites
 
-- Node.js >= 18.0.0
-- npm
+- Node.js 18+
+- pnpm
+- MongoDB (or Docker)
 
-### Installation
+### Setup
 
+1. Clone the repository:
 ```bash
-npm install
+git clone <repository-url>
+cd humanet
 ```
 
-### Development
-
-Run all apps in development mode:
-
+2. Install dependencies:
 ```bash
-npm run dev
+pnpm install
+```
+
+3. Set up environment variables:
+```bash
+# Copy environment templates
+cp backend/.env.example backend/.env
+cp frontend/.env.local.example frontend/.env.local
+```
+
+4. Start MongoDB (if not using Docker):
+```bash
+# Using Docker
+docker run --name humanet-mongo -p 27017:27017 -d mongo
+
+# Or start your local MongoDB instance
+```
+
+5. Start development servers:
+```bash
+pnpm dev
 ```
 
 This will start:
+- Backend API server on http://localhost:4000
+- Frontend Next.js server on http://localhost:3000
 
-- Web app on http://localhost:3000
-- API on http://localhost:3001
-- License site on http://localhost:3002
+### Environment Variables
 
-### Build
-
-Build all apps:
-
-```bash
-npm run build
+#### Backend (.env)
+```
+MONGO_URL=mongodb://localhost:27017/humanet
+JWT_SECRET=your-super-secret-jwt-key
+FRONTEND_URL=http://localhost:3000
+PORT=4000
+NODE_ENV=development
 ```
 
-### Other Commands
+#### Frontend (.env.local)
+```
+NEXT_PUBLIC_API_URL=http://localhost:4000/api
+```
 
-- `npm run lint` - Lint all apps and packages
-- `npm run format` - Format code with Prettier
-- `npm run clean` - Clean build artifacts
+## Scripts
 
-## Turborepo
+- `pnpm dev` - Start both frontend and backend in development mode
+- `pnpm build` - Build both applications for production
+- `pnpm lint` - Lint all workspaces
+- `pnpm test` - Run tests in all workspaces
 
-This project uses [Turborepo](https://turbo.build) for:
+## Technology Stack
 
-- Fast, incremental builds
-- Smart caching
-- Parallel execution
-- Task pipelines
+### Frontend
+- Next.js 14+ (App Router)
+- TypeScript
+- TailwindCSS
+- React Query (TanStack)
+- Axios
+
+### Backend
+- Node.js
+- Express
+- TypeScript (ES Modules)
+- MongoDB with Mongoose
+- JWT Authentication
+- Zod Validation
+
+### Development Tools
+- ESLint + Prettier
+- Husky (Git hooks)
+- Jest (Testing)
+- Docker
 
 ## Contributing
 
-This is the initial workspace setup. Business logic and UI components will be added in future iterations.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests and linting
+5. Submit a pull request
 
 ## License
 
-Open Idea Commons License (see license-site for details)
+MIT

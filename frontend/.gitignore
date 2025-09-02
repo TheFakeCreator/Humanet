@@ -1,0 +1,121 @@
+# =======================
+# FRONTEND GITIGNORE
+# =======================
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Production builds
+.next/
+out/
+dist/
+build/
+
+# Development
+.next
+.swc/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+.nyc_output/
+
+# TypeScript build info
+*.tsbuildinfo
+next-env.d.ts
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Storybook build outputs
+storybook-static/
+
+# Temporary folders
+tmp/
+temp/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# PWA files
+**/public/sw.js
+**/public/workbox-*.js
+**/public/worker-*.js
+**/public/sw.js.map
+**/public/workbox-*.js.map
+**/public/worker-*.js.map
+
+# Sentry
+.sentryclirc
+
+# Bundle analyzer
+.bundle-analyzer/
+
+# Webpack
+.webpack/
+
+# Turbo
+.turbo/
+
+# Local env files
+.env*.local
+
+# Testing
+__tests__/coverage/
+.jest/
+cypress/videos/
+cypress/screenshots/
+
+# Static files (generated)
+public/sitemap.xml
+public/robots.txt
+
+# Image optimization cache
+**/.next/cache/
+
+# Misc
+*.tgz
+*.tar.gz
