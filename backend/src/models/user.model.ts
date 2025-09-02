@@ -66,9 +66,7 @@ const UserSchema = new Schema<IUser>({
   }
 });
 
-// Indexes
-UserSchema.index({ email: 1 });
-UserSchema.index({ username: 1 });
+// Additional indexes (email and username already have unique indexes from schema)
 UserSchema.index({ karma: -1 });
 
 export const UserModel = model<IUser>('User', UserSchema);

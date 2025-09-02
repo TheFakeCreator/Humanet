@@ -5,9 +5,13 @@ import { validateBody, validateParams } from '../middlewares/validation.middlewa
 import { createCommentSchema, updateCommentSchema } from '../validation/comment.schema.js';
 import { mongoIdSchema } from '../validation/idea.schema.js';
 import { commentLimiter } from '../middlewares/rate-limit.middleware.js';
+import config from '../config/index.js';
 import { z } from 'zod';
 
 const router = Router();
+
+// Use rate limiting conditionally
+const useRateLimit = config.NODE_ENV === 'production' || config.ENABLE_RATE_LIMITING;
 
 const commentIdSchema = z.object({
   commentId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid comment ID format')
@@ -16,9 +20,9 @@ const commentIdSchema = z.object({
 // Public routes (with optional auth)
 router.get('/:id/comments', validateParams(mongoIdSchema), optionalAuth, CommentController.getComments);
 
-// Protected routes with rate limiting
+// Protected routes with conditional rate limiting
 router.post('/:id/comments', 
-  commentLimiter,
+  ...(useRateLimit ? [commentLimiter] : []),
   validateParams(mongoIdSchema), 
   validateBody(createCommentSchema), 
   authenticateToken, 
@@ -26,7 +30,7 @@ router.post('/:id/comments',
 );
 
 router.put('/comments/:commentId', 
-  commentLimiter,
+  ...(useRateLimit ? [commentLimiter] : []),
   validateParams(commentIdSchema), 
   validateBody(updateCommentSchema), 
   authenticateToken, 

@@ -7,7 +7,20 @@
     "lint": "pnpm -w lint",
     "test": "pnpm -w test",
     "build": "pnpm --filter backend build && pnpm --filter frontend build",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "seed": "pnpm --filter backend seed",
+    "seed:clear": "pnpm --filter backend seed:clear",
+    "seed:small": "pnpm --filter backend seed:small",
+    "seed:medium": "pnpm --filter backend seed:medium",
+    "seed:large": "pnpm --filter backend seed:large",
+    "seed:production": "pnpm --filter backend seed:production",
+    "db:backup": "pnpm --filter backend db:backup",
+    "db:restore": "pnpm --filter backend db:restore",
+    "db:analyze": "pnpm --filter backend db:analyze",
+    "db:cleanup": "pnpm --filter backend db:cleanup",
+    "db:cleanup:dry": "pnpm --filter backend db:cleanup:dry",
+    "db:migrate": "pnpm --filter backend db:migrate",
+    "db:export-stats": "pnpm --filter backend db:export-stats"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

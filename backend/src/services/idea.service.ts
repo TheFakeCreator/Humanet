@@ -28,7 +28,7 @@ export class IdeaService {
   static async getIdeaById(ideaId: string): Promise<IdeaDTO> {
     const idea = await IdeaModel.findById(ideaId)
       .populate('author', 'username karma')
-      .populate('parent', 'title author');
+      .populate('parentId', 'title author');
 
     if (!idea) {
       throw new AppError('Idea not found', 404);
@@ -76,7 +76,7 @@ export class IdeaService {
         .skip(skip)
         .limit(limit)
         .populate('author', 'username karma')
-        .populate('parent', 'title author'),
+        .populate('parentId', 'title author'),
       IdeaModel.countDocuments(query)
     ]);
 
@@ -258,11 +258,11 @@ export class IdeaService {
         karma: idea.author.karma
       },
       parentId: idea.parentId?.toString() || null,
-      parent: idea.parent ? {
-        _id: idea.parent._id.toString(),
-        title: idea.parent.title,
+      parent: idea.parentId && typeof idea.parentId === 'object' ? {
+        _id: idea.parentId._id.toString(),
+        title: idea.parentId.title,
         author: {
-          username: idea.parent.author.username
+          username: idea.parentId.author.username
         }
       } : undefined,
       upvotes: idea.upvotes,

@@ -1,6 +1,7 @@
 import rateLimit from 'express-rate-limit';
 import slowDown from 'express-slow-down';
 import { Request, Response, NextFunction } from 'express';
+import config from '../config/index.js';
 
 // Extend Request interface to include user property
 declare global {
@@ -16,10 +17,13 @@ declare global {
   }
 }
 
+// Development vs Production settings
+const isDevelopment = config.NODE_ENV === 'development';
+
 // General rate limiting
 export const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per windowMs
+  max: isDevelopment ? 1000 : 100, // Higher limit in development
   message: {
     success: false,
     error: {
@@ -32,13 +36,17 @@ export const generalLimiter = rateLimit({
   skip: (req: Request) => {
     // Skip rate limiting for health checks
     return req.path === '/health';
+  },
+  // Validate trust proxy setting
+  validate: {
+    trustProxy: false, // Disable trust proxy validation for development
   }
 });
 
 // Strict rate limiting for authentication endpoints
 export const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Limit each IP to 5 requests per windowMs for auth endpoints
+  max: isDevelopment ? 50 : 5, // Higher limit in development
   message: {
     success: false,
     error: {
@@ -49,7 +57,10 @@ export const authLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   // Increase attempts for successful authentications
-  skipSuccessfulRequests: true
+  skipSuccessfulRequests: true,
+  validate: {
+    trustProxy: false,
+  }
 });
 
 // Password reset rate limiting
@@ -62,6 +73,9 @@ export const passwordResetLimiter = rateLimit({
       message: 'Too many password reset attempts, please try again later.',
       code: 'PASSWORD_RESET_RATE_LIMIT_EXCEEDED'
     }
+  },
+  validate: {
+    trustProxy: false,
   }
 });
 
@@ -78,7 +92,13 @@ export const createIdeaLimiter = rateLimit({
   },
   keyGenerator: (req: Request) => {
     // Rate limit by user ID if authenticated, otherwise by IP
-    return req.user?._id || req.ip || 'unknown';
+    if (req.user?._id) {
+      return `user:${req.user._id}`;
+    }
+    return `ip:${req.ip || req.socket.remoteAddress || 'unknown'}`;
+  },
+  validate: {
+    trustProxy: false,
   }
 });
 
@@ -94,7 +114,13 @@ export const commentLimiter = rateLimit({
     }
   },
   keyGenerator: (req: Request) => {
-    return req.user?._id || req.ip || 'unknown';
+    if (req.user?._id) {
+      return `user:${req.user._id}`;
+    }
+    return `ip:${req.ip || req.socket.remoteAddress || 'unknown'}`;
+  },
+  validate: {
+    trustProxy: false,
   }
 });
 
@@ -110,7 +136,13 @@ export const upvoteLimiter = rateLimit({
     }
   },
   keyGenerator: (req: Request) => {
-    return req.user?._id || req.ip || 'unknown';
+    if (req.user?._id) {
+      return `user:${req.user._id}`;
+    }
+    return `ip:${req.ip || req.socket.remoteAddress || 'unknown'}`;
+  },
+  validate: {
+    trustProxy: false,
   }
 });
 
@@ -118,10 +150,13 @@ export const upvoteLimiter = rateLimit({
 export const speedLimiter = slowDown({
   windowMs: 15 * 60 * 1000, // 15 minutes
   delayAfter: 50, // Allow 50 requests per 15 minutes at full speed
-  delayMs: 100, // Add 100ms of delay per request after delayAfter
+  delayMs: () => 100, // Add 100ms of delay per request after delayAfter
   maxDelayMs: 2000, // Maximum delay of 2 seconds
   skip: (req: Request) => {
     return req.path === '/health';
+  },
+  validate: {
+    delayMs: false, // Disable delayMs validation warning
   }
 });
 

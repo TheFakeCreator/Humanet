@@ -30,7 +30,12 @@ import {
 export function createApp() {
   const app = express();
   
-  app.set('trust proxy', true);
+  // Configure trust proxy based on environment
+  if (config.NODE_ENV === 'production') {
+    app.set('trust proxy', 1); // Trust first proxy in production
+  } else {
+    app.set('trust proxy', true); // Allow all in development
+  }
   
   // Security logging (should be first)
   app.use(securityLogging);
@@ -44,9 +49,11 @@ export function createApp() {
   // CORS with enhanced configuration
   app.use(cors(corsOptions));
   
-  // Rate limiting
-  app.use(generalLimiter);
-  app.use(speedLimiter);
+  // Rate limiting (only in production or when enabled)
+  if (config.NODE_ENV === 'production' || config.ENABLE_RATE_LIMITING) {
+    app.use(generalLimiter);
+    app.use(speedLimiter);
+  }
   app.use(rateLimitHeaders);
   
   // Request size limiting
@@ -59,7 +66,7 @@ export function createApp() {
   // API key validation (future-proofing)
   app.use(validateApiKey);
   
-  // Track failed auth attempts
+  // Track failed auth attempts (only for auth routes)
   app.use('/api/auth', trackFailedAuthAttempts);
   
   // Logging

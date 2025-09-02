@@ -4,11 +4,14 @@ import { authenticateToken } from '../middlewares/auth.middleware.js';
 import { validateBody } from '../middlewares/validation.middleware.js';
 import { signupSchema, loginSchema } from '../validation/auth.schema.js';
 import { authLimiter } from '../middlewares/rate-limit.middleware.js';
+import config from '../config/index.js';
 
 const router = Router();
 
-// Apply auth rate limiting to all auth routes
-router.use(authLimiter);
+// Apply auth rate limiting conditionally
+if (config.NODE_ENV === 'production' || config.ENABLE_RATE_LIMITING) {
+  router.use(authLimiter);
+}
 
 // Public routes
 router.post('/signup', validateBody(signupSchema), AuthController.signup);
