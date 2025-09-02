@@ -50,6 +50,15 @@ importers:
       express:
         specifier: ^4.18.2
         version: 4.21.2
+      express-mongo-sanitize:
+        specifier: ^2.2.0
+        version: 2.2.0
+      express-rate-limit:
+        specifier: ^8.0.1
+        version: 8.0.1(express@4.21.2)
+      express-slow-down:
+        specifier: ^3.0.0
+        version: 3.0.0(express@4.21.2)
       helmet:
         specifier: ^7.1.0
         version: 7.2.0
@@ -81,6 +90,9 @@ importers:
       '@types/express':
         specifier: ^4.17.21
         version: 4.17.23
+      '@types/express-rate-limit':
+        specifier: ^6.0.2
+        version: 6.0.2(express@4.21.2)
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.14
@@ -796,6 +808,10 @@ packages:
 
   '@types/cors@2.8.19':
     resolution: {integrity: sha512-mFNylyeyqN93lfe/9CSxOGREz8cpzAhH+E93xJ4xWQf62V8sQ/24reV2nyzUWM6H6Xji+GGHpkbLe7pVoUEskg==}
+
+  '@types/express-rate-limit@6.0.2':
+    resolution: {integrity: sha512-e1xZLOOlxCDvplAGq7rDcXtbdBu2CWRsMjaIu1LVqGxWtKvwr884YE5mPs3IvHeG/OMDhf24oTaqG5T1bV3rBQ==}
+    deprecated: This is a stub types definition. express-rate-limit provides its own type definitions, so you do not need this installed.
 
   '@types/express-serve-static-core@4.19.6':
     resolution: {integrity: sha512-N4LZ2xG7DatVqhCZzOGb1Yi5lMbXSZcmdLDe9EzSndPV2HpWYWzRbaerl2n27irrm94EPpprqa8KpskPT085+A==}
@@ -1799,6 +1815,22 @@ packages:
   expect@29.7.0:
     resolution: {integrity: sha512-2Zks0hf1VLFYI1kbh0I5jP3KHHyCHpkfyHBzsSXRFgl/Bg9mWYfMW8oD+PdMPlEwy5HNsR9JutYy6pMeOh61nw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+
+  express-mongo-sanitize@2.2.0:
+    resolution: {integrity: sha512-PZBs5nwhD6ek9ZuP+W2xmpvcrHwXZxD5GdieX2dsjPbAbH4azOkrHbycBud2QRU+YQF1CT+pki/lZGedHgo/dQ==}
+    engines: {node: '>=10'}
+
+  express-rate-limit@8.0.1:
+    resolution: {integrity: sha512-aZVCnybn7TVmxO4BtlmnvX+nuz8qHW124KKJ8dumsBsmv5ZLxE0pYu7S2nwyRBGHHCAzdmnGyrc5U/rksSPO7Q==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      express: '>= 4.11'
+
+  express-slow-down@3.0.0:
+    resolution: {integrity: sha512-G/EQSH3IV2zukLwQnsCKEveswk8L31vDqiPS6eNkXYeSRhjHB3YSuKNoVSGjOVSqPGW1p6Oeq+b8l1PyWeVEmw==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      express: 4 || 5 || ^5.0.0-beta.1
 
   express@4.21.2:
     resolution: {integrity: sha512-28HqgMZAmih1Czt9ny7qr6ek2qddF4FclbMzwhCREB6OFfH+rXAnuNCwo1/wFvrtbgsQDb4kSbX9de9lFbrXnA==}
@@ -4378,6 +4410,12 @@ snapshots:
     dependencies:
       '@types/node': 20.19.11
 
+  '@types/express-rate-limit@6.0.2(express@4.21.2)':
+    dependencies:
+      express-rate-limit: 8.0.1(express@4.21.2)
+    transitivePeerDependencies:
+      - express
+
   '@types/express-serve-static-core@4.19.6':
     dependencies:
       '@types/node': 20.19.11
@@ -5591,6 +5629,18 @@ snapshots:
       jest-matcher-utils: 29.7.0
       jest-message-util: 29.7.0
       jest-util: 29.7.0
+
+  express-mongo-sanitize@2.2.0: {}
+
+  express-rate-limit@8.0.1(express@4.21.2):
+    dependencies:
+      express: 4.21.2
+      ip-address: 10.0.1
+
+  express-slow-down@3.0.0(express@4.21.2):
+    dependencies:
+      express: 4.21.2
+      express-rate-limit: 8.0.1(express@4.21.2)
 
   express@4.21.2:
     dependencies:

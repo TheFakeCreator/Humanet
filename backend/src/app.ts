@@ -7,26 +7,79 @@ import routes from './routes/index.js';
 import { errorHandler } from './middlewares/error.middleware.js';
 import config from './config/index.js';
 
+// Import security middleware
+import {
+  corsOptions,
+  helmetConfig,
+  sanitizeInput,
+  requestSizeLimit,
+  securityHeaders,
+  inputValidation,
+  securityLogging,
+  validateApiKey,
+  rateLimitHeaders
+} from './middlewares/security.middleware.js';
+
+// Import rate limiting middleware
+import {
+  generalLimiter,
+  speedLimiter,
+  trackFailedAuthAttempts
+} from './middlewares/rate-limit.middleware.js';
+
 export function createApp() {
   const app = express();
   
   app.set('trust proxy', true);
   
-  // Security middleware
-  app.use(helmet());
+  // Security logging (should be first)
+  app.use(securityLogging);
   
-  // CORS configuration
-  app.use(cors({ 
-    origin: config.FRONTEND_URL, 
-    credentials: true 
-  }));
+  // Security headers
+  app.use(securityHeaders);
+  
+  // Helmet security middleware with custom config
+  app.use(helmetConfig);
+  
+  // CORS with enhanced configuration
+  app.use(cors(corsOptions));
+  
+  // Rate limiting
+  app.use(generalLimiter);
+  app.use(speedLimiter);
+  app.use(rateLimitHeaders);
+  
+  // Request size limiting
+  app.use(requestSizeLimit);
+  
+  // Input sanitization and validation
+  app.use(sanitizeInput);
+  app.use(inputValidation);
+  
+  // API key validation (future-proofing)
+  app.use(validateApiKey);
+  
+  // Track failed auth attempts
+  app.use('/api/auth', trackFailedAuthAttempts);
   
   // Logging
-  app.use(morgan('dev'));
+  app.use(morgan('combined', {
+    skip: (req, res) => req.path === '/health'
+  }));
   
-  // Body parsing
-  app.use(express.json({ limit: '10mb' }));
-  app.use(express.urlencoded({ extended: true }));
+  // Body parsing with security considerations
+  app.use(express.json({ 
+    limit: '10mb',
+    verify: (req, res, buf) => {
+      // Store raw body for webhook verification if needed
+      (req as any).rawBody = buf;
+    }
+  }));
+  app.use(express.urlencoded({ 
+    extended: true, 
+    limit: '10mb',
+    parameterLimit: 100 // Limit number of parameters
+  }));
   app.use(cookieParser());
   
   // Health check

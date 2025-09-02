@@ -4,6 +4,7 @@ import { authenticateToken, optionalAuth } from '../middlewares/auth.middleware.
 import { validateBody, validateParams } from '../middlewares/validation.middleware.js';
 import { createCommentSchema, updateCommentSchema } from '../validation/comment.schema.js';
 import { mongoIdSchema } from '../validation/idea.schema.js';
+import { commentLimiter } from '../middlewares/rate-limit.middleware.js';
 import { z } from 'zod';
 
 const router = Router();
@@ -15,8 +16,9 @@ const commentIdSchema = z.object({
 // Public routes (with optional auth)
 router.get('/:id/comments', validateParams(mongoIdSchema), optionalAuth, CommentController.getComments);
 
-// Protected routes
+// Protected routes with rate limiting
 router.post('/:id/comments', 
+  commentLimiter,
   validateParams(mongoIdSchema), 
   validateBody(createCommentSchema), 
   authenticateToken, 
@@ -24,6 +26,7 @@ router.post('/:id/comments',
 );
 
 router.put('/comments/:commentId', 
+  commentLimiter,
   validateParams(commentIdSchema), 
   validateBody(updateCommentSchema), 
   authenticateToken, 

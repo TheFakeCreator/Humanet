@@ -3,8 +3,12 @@ import { AuthController } from '../controllers/auth.controller.js';
 import { authenticateToken } from '../middlewares/auth.middleware.js';
 import { validateBody } from '../middlewares/validation.middleware.js';
 import { signupSchema, loginSchema } from '../validation/auth.schema.js';
+import { authLimiter } from '../middlewares/rate-limit.middleware.js';
 
 const router = Router();
+
+// Apply auth rate limiting to all auth routes
+router.use(authLimiter);
 
 // Public routes
 router.post('/signup', validateBody(signupSchema), AuthController.signup);
