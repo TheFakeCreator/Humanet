@@ -1,4 +1,4 @@
-import rateLimit from 'express-rate-limit';
+import rateLimit, { ipKeyGenerator } from 'express-rate-limit';
 import slowDown from 'express-slow-down';
 import { Request, Response, NextFunction } from 'express';
 import config from '../config/index.js';
@@ -95,7 +95,7 @@ export const createIdeaLimiter = rateLimit({
     if (req.user?._id) {
       return `user:${req.user._id}`;
     }
-    return `ip:${req.ip || req.socket.remoteAddress || 'unknown'}`;
+    return ipKeyGenerator(req.ip || req.socket.remoteAddress || '');
   },
   validate: {
     trustProxy: false,
@@ -117,7 +117,7 @@ export const commentLimiter = rateLimit({
     if (req.user?._id) {
       return `user:${req.user._id}`;
     }
-    return `ip:${req.ip || req.socket.remoteAddress || 'unknown'}`;
+    return ipKeyGenerator(req.ip || req.socket.remoteAddress || '');
   },
   validate: {
     trustProxy: false,
@@ -139,7 +139,7 @@ export const upvoteLimiter = rateLimit({
     if (req.user?._id) {
       return `user:${req.user._id}`;
     }
-    return `ip:${req.ip || req.socket.remoteAddress || 'unknown'}`;
+    return ipKeyGenerator(req.ip || req.socket.remoteAddress || '');
   },
   validate: {
     trustProxy: false,

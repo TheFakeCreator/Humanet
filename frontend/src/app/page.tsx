@@ -1,20 +1,11 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import React from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 
 export default function HomePage() {
-  const router = useRouter();
   const { data: user, isLoading } = useAuth();
-
-  // Auto-redirect authenticated users to ideas
-  useEffect(() => {
-    if (!isLoading && user) {
-      router.push('/ideas');
-    }
-  }, [user, isLoading, router]);
 
   if (isLoading) {
     return (
@@ -47,12 +38,21 @@ export default function HomePage() {
             >
               Explore Ideas
             </Link>
-            <Link
-              href="/auth/register"
-              className="btn-outline px-8 py-3 text-lg rounded-lg"
-            >
-              Join Community
-            </Link>
+            {user ? (
+              <Link
+                href="/ideas/new"
+                className="btn-outline px-8 py-3 text-lg rounded-lg"
+              >
+                Create New Idea
+              </Link>
+            ) : (
+              <Link
+                href="/auth/register"
+                className="btn-outline px-8 py-3 text-lg rounded-lg"
+              >
+                Join Community
+              </Link>
+            )}
           </div>
         </div>
 

@@ -1,7 +1,11 @@
 {
   "name": "humanet",
   "private": true,
-  "workspaces": ["frontend", "backend", "shared"],
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
   "scripts": {
     "dev": "concurrently \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
     "lint": "pnpm -w lint",
@@ -23,18 +27,22 @@
     "db:export-stats": "pnpm --filter backend db:export-stats"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "eslint": "^8.57.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "prettier": "^3.2.5",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
     "husky": "^9.0.11",
-    "lint-staged": "^15.2.2"
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
       "eslint --fix",
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "lucide-react": "^0.542.0"
   }
 }
