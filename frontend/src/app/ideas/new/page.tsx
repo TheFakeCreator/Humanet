@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { IdeaForm } from '@/components/ui/IdeaForm';
 import { useAuth } from '@/hooks/useAuth';
+import { Lightbulb } from 'lucide-react';
 
 export default function NewIdeaPage() {
   const router = useRouter();
@@ -66,7 +67,10 @@ export default function NewIdeaPage() {
 
         {/* Tips Sidebar */}
         <div className="mt-8 bg-blue-50 rounded-lg border border-blue-200 p-6">
-          <h3 className="text-lg font-semibold text-blue-900 mb-4">💡 Tips for Great Ideas</h3>
+          <h3 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
+            <Lightbulb className="w-5 h-5 mr-2" />
+            Tips for Great Ideas
+          </h3>
           <ul className="space-y-2 text-blue-800 text-sm">
             <li className="flex items-start">
               <span className="font-medium mr-2">•</span>

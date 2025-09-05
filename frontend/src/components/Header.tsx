@@ -53,6 +53,9 @@ export default function Header() {
             <Button variant="ghost" asChild>
               <a href="/ideas">Ideas</a>
             </Button>
+            <Button variant="ghost" asChild>
+              <a href="/docs">Docs</a>
+            </Button>
             {user && (
               <Button variant="ghost" asChild>
                 <a href="/ideas/new">Create Idea</a>
