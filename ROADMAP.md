@@ -1,0 +1,1 @@
+- [ ] Add trending topics implementation to the application

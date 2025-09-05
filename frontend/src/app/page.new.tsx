@@ -3,13 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
-import { useIdeas } from '@/hooks/useIdeas';
-import { useStats } from '@/hooks/useStats';
-import { IdeaCard } from '@/components/ui/IdeaCard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import type { IdeaDTO } from '@humanet/shared';
 import { 
   Lightbulb, 
   GitFork, 
@@ -31,15 +27,7 @@ import {
 export default function HomePage() {
   const { data: user, isLoading } = useAuth();
   const [currentStep, setCurrentStep] = useState(0);
-
-  // Fetch real ideas data with trending/popular sort
-  const { data: ideasData } = useIdeas({ 
-    sortBy: 'upvotes', 
-    limit: 6 // Get 6 ideas to showcase
-  });
-
-  // Fetch real platform statistics
-  const { data: stats, isLoading: statsLoading } = useStats();
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const steps = [
     {
@@ -89,21 +77,43 @@ export default function HomePage() {
     }
   ];
 
-  // Extract real ideas from API response
-  const featuredIdeas = ideasData?.data?.slice(0, 3) || [];
-
-  // Format numbers for display (e.g., 1234 -> "1.2K+")
-  const formatNumber = (num: number): string => {
-    if (num === 0) return '0';
-    if (num < 1000) return num.toString();
-    if (num < 10000) return `${(num / 1000).toFixed(1)}K+`;
-    if (num < 1000000) return `${Math.floor(num / 1000)}K+`;
-    return `${(num / 1000000).toFixed(1)}M+`;
-  };
+  const demoIdeas = [
+    {
+      id: 1,
+      title: "Solar-Powered Water Purification System",
+      author: "EcoInnovator",
+      upvotes: 247,
+      forks: 12,
+      domain: "Sustainability",
+      trending: true
+    },
+    {
+      id: 2,
+      title: "AI-Assisted Code Review Platform",
+      author: "DevMaster",
+      upvotes: 189,
+      forks: 8,
+      domain: "Technology",
+      trending: false
+    },
+    {
+      id: 3,
+      title: "Community Garden Network App",
+      author: "GreenThumb",
+      upvotes: 156,
+      forks: 15,
+      domain: "Social",
+      trending: true
+    }
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentStep((prev) => (prev + 1) % steps.length);
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentStep((prev) => (prev + 1) % steps.length);
+        setIsAnimating(false);
+      }, 300);
     }, 3000);
 
     return () => clearInterval(interval);
@@ -180,64 +190,42 @@ export default function HomePage() {
             )}
           </div>
 
-          {/* Featured Ideas Preview */}
+          {/* Demo Ideas Preview */}
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {featuredIdeas.length > 0 ? (
-              featuredIdeas.map((idea: IdeaDTO) => (
-                <Link key={idea._id} href={`/ideas/${idea._id}`}>
-                  <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full">
-                    <CardContent className="p-6">
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="flex flex-wrap gap-1">
-                          {idea.domain?.slice(0, 2).map((d: string, i: number) => (
-                            <Badge key={i} variant="secondary" className="text-xs">
-                              {d}
-                            </Badge>
-                          ))}
-                        </div>
-                        <div className="animate-pulse">
-                          <TrendingUp className="w-4 h-4 text-blue-500" />
-                        </div>
+            {demoIdeas.map((idea) => (
+              <Card key={idea.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-3">
+                    <Badge variant={idea.trending ? "default" : "secondary"} className="text-xs">
+                      {idea.trending && <TrendingUp className="w-3 h-3 mr-1" />}
+                      {idea.domain}
+                    </Badge>
+                    {idea.trending && (
+                      <div className="animate-pulse">
+                        <Zap className="w-4 h-4 text-yellow-500" />
                       </div>
-                      <h3 className="font-semibold text-sm mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors text-left">
-                        {idea.title}
-                      </h3>
-                      <div className="text-xs text-gray-500 mb-3 text-left">by {idea.author?.username || 'Anonymous'}</div>
-                      <div className="flex items-center justify-between text-xs text-gray-600">
-                        <div className="flex items-center gap-3">
-                          <span className="flex items-center gap-1">
-                            <ArrowUp className="w-3 h-3" />
-                            {idea.upvotes || 0}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <GitFork className="w-3 h-3" />
-                            {idea.forkCount || 0}
-                          </span>
-                        </div>
-                        <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))
-            ) : (
-              // Loading skeleton or fallback
-              Array.from({ length: 3 }).map((_, i) => (
-                <Card key={i} className="h-full">
-                  <CardContent className="p-6">
-                    <div className="animate-pulse space-y-3">
-                      <div className="h-4 bg-gray-200 rounded w-20"></div>
-                      <div className="h-4 bg-gray-200 rounded"></div>
-                      <div className="h-3 bg-gray-200 rounded w-24"></div>
-                      <div className="flex justify-between">
-                        <div className="h-3 bg-gray-200 rounded w-16"></div>
-                        <div className="h-3 bg-gray-200 rounded w-16"></div>
-                      </div>
+                    )}
+                  </div>
+                  <h3 className="font-semibold text-sm mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                    {idea.title}
+                  </h3>
+                  <div className="text-xs text-gray-500 mb-3">by {idea.author}</div>
+                  <div className="flex items-center justify-between text-xs text-gray-600">
+                    <div className="flex items-center gap-3">
+                      <span className="flex items-center gap-1">
+                        <ArrowUp className="w-3 h-3" />
+                        {idea.upvotes}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <GitFork className="w-3 h-3" />
+                        {idea.forks}
+                      </span>
                     </div>
-                  </CardContent>
-                </Card>
-              ))
-            )}
+                    <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -257,86 +245,42 @@ export default function HomePage() {
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Interactive Animation */}
-              <div className="relative order-2 lg:order-1">
-                <div className="bg-gray-50 rounded-2xl p-4 sm:p-8 relative overflow-hidden" style={{ minHeight: '450px', height: '450px' }}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="relative w-96 h-96 sm:w-[28rem] sm:h-[28rem]">
+              <div className="relative">
+                <div className="bg-gray-50 rounded-2xl p-8 h-96 flex items-center justify-center">
+                  <div className={`transition-all duration-500 ${isAnimating ? 'scale-95 opacity-50' : 'scale-100 opacity-100'}`}>
                     {steps.map((step, index) => {
                       const Icon = step.icon;
                       const isActive = index === currentStep;
-                      
-                      // Calculate position in a circle around the center with more spacing
-                      const angle = (index * Math.PI * 2) / steps.length - Math.PI / 2; // Start from top
-                      const radius = 140; // Increased radius to ensure all icons are fully visible
-                      const x = Math.cos(angle) * radius;
-                      const y = Math.sin(angle) * radius;
+                      const isPast = index < currentStep;
                       
                       return (
                         <div
                           key={index}
                           className={`absolute transition-all duration-700 ${
-                            isActive ? 'opacity-100 z-10' : 'opacity-60'
+                            isActive ? 'scale-110 opacity-100' : isPast ? 'scale-75 opacity-30' : 'scale-75 opacity-30'
                           }`}
                           style={{
-                            left: '50%',
-                            top: '50%',
-                            transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                            transform: `translate(${Math.cos(index * Math.PI / 2) * 120}px, ${Math.sin(index * Math.PI / 2) * 120}px) ${isActive ? 'scale(1.1)' : 'scale(0.75)'}`
                           }}
                         >
-                          <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center bg-gradient-to-r ${step.color} shadow-lg transition-all duration-300 ${
-                            isActive ? 'ring-4 ring-white ring-opacity-50' : ''
-                          }`}>
-                            <Icon className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+                          <div className={`w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-r ${step.color} shadow-lg`}>
+                            <Icon className="w-10 h-10 text-white" />
                           </div>
                         </div>
                       );
                     })}
                     
                     {/* Center Info */}
-                    <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-lg border w-48 h-32 sm:w-56 sm:h-36 z-20 flex flex-col">
-                      <div className="p-3 sm:p-4 flex flex-col justify-between h-full text-center">
-                        <h3 className="font-bold text-sm sm:text-base leading-tight">{steps[currentStep].title}</h3>
-                        <p className="text-xs sm:text-sm text-gray-600 leading-tight mt-1 sm:mt-2">{steps[currentStep].description}</p>
-                      </div>
-                    </div>
-                    
-                    {/* Connecting Lines - Hidden on mobile for cleaner look */}
-                    <svg className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none hidden sm:block">
-                      {steps.map((_, index) => {
-                        const angle1 = (index * Math.PI * 2) / steps.length - Math.PI / 2;
-                        const angle2 = ((index + 1) * Math.PI * 2) / steps.length - Math.PI / 2;
-                        const radius = 140; // Match the icon positioning radius
-                        
-                        const centerX = 224; // Half of w-[28rem] (448px / 2)
-                        const centerY = 224; // Half of h-[28rem] (448px / 2)
-                        
-                        const x1 = Math.cos(angle1) * radius + centerX;
-                        const y1 = Math.sin(angle1) * radius + centerY;
-                        const x2 = Math.cos(angle2) * radius + centerX;
-                        const y2 = Math.sin(angle2) * radius + centerY;
-                        
-                        return (
-                          <line
-                            key={index}
-                            x1={x1}
-                            y1={y1}
-                            x2={x2}
-                            y2={y2}
-                            stroke="#e2e8f0"
-                            strokeWidth="2"
-                            strokeDasharray="4 4"
-                            className="opacity-40"
-                          />
-                        );
-                      })}
-                    </svg>
+                    <div className="text-center bg-white rounded-xl p-6 shadow-lg border max-w-xs">
+                      <h3 className="font-bold text-lg mb-2">{steps[currentStep].title}</h3>
+                      <p className="text-sm text-gray-600">{steps[currentStep].description}</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Steps List */}
-              <div className="space-y-6 order-1 lg:order-2">
+              <div className="space-y-6">
                 {steps.map((step, index) => {
                   const Icon = step.icon;
                   const isActive = index === currentStep;
@@ -417,26 +361,10 @@ export default function HomePage() {
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
-                { 
-                  number: stats ? formatNumber(stats.totalIdeas) : (statsLoading ? "..." : "0"), 
-                  label: "Ideas Shared", 
-                  icon: Lightbulb 
-                },
-                { 
-                  number: stats ? formatNumber(stats.totalUsers) : (statsLoading ? "..." : "0"), 
-                  label: "Active Innovators", 
-                  icon: Users 
-                },
-                { 
-                  number: stats ? formatNumber(stats.totalForks) : (statsLoading ? "..." : "0"), 
-                  label: "Idea Forks", 
-                  icon: GitFork 
-                },
-                { 
-                  number: stats ? formatNumber(stats.totalCollaborations) : (statsLoading ? "..." : "0"), 
-                  label: "Collaborations", 
-                  icon: Network 
-                }
+                { number: "10K+", label: "Ideas Shared", icon: Lightbulb },
+                { number: "2.5K+", label: "Active Innovators", icon: Users },
+                { number: "8K+", label: "Idea Forks", icon: GitFork },
+                { number: "50K+", label: "Collaborations", icon: Network }
               ].map((stat, index) => {
                 const Icon = stat.icon;
                 return (
@@ -444,13 +372,7 @@ export default function HomePage() {
                     <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Icon className="w-8 h-8 text-blue-600" />
                     </div>
-                    <div className="text-3xl font-bold text-gray-900 mb-2">
-                      {statsLoading ? (
-                        <div className="animate-pulse bg-gray-200 h-8 w-16 rounded mx-auto"></div>
-                      ) : (
-                        stat.number
-                      )}
-                    </div>
+                    <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
                     <div className="text-gray-600">{stat.label}</div>
                   </div>
                 );

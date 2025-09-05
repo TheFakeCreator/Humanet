@@ -47,6 +47,8 @@
 - Framework: **Next.js (with App Router)** for scalability.
     
 - Styling: **TailwindCSS** + shadcn/ui for components.
+
+- **NEVER use mock/dummy data** - Always fetch real data from API endpoints using React Query hooks.
     
 - State Management: **React Query (TanStack)** for server data + Context API/Zustand for global UI state.
     
