@@ -4,9 +4,14 @@ export interface IUser extends Document {
   username: string;
   email: string;
   passwordHash: string;
+  firstName?: string;
+  lastName?: string;
   bio?: string;
   karma: number;
   skills: string[];
+  emailVerified: boolean;
+  emailVerificationToken?: string;
+  emailVerificationExpires?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -34,6 +39,16 @@ const UserSchema = new Schema<IUser>({
     required: true,
     minlength: 6
   },
+  firstName: {
+    type: String,
+    trim: true,
+    maxlength: 50
+  },
+  lastName: {
+    type: String,
+    trim: true,
+    maxlength: 50
+  },
   bio: {
     type: String,
     maxlength: 500,
@@ -53,6 +68,18 @@ const UserSchema = new Schema<IUser>({
       },
       message: 'Cannot have more than 20 skills'
     }
+  },
+  emailVerified: {
+    type: Boolean,
+    default: false
+  },
+  emailVerificationToken: {
+    type: String,
+    sparse: true
+  },
+  emailVerificationExpires: {
+    type: Date,
+    sparse: true
   }
 }, {
   timestamps: true,

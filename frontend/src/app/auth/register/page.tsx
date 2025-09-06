@@ -13,15 +13,21 @@ export default function RegisterPage() {
     email: '',
     password: '',
     confirmPassword: '',
+    firstName: '',
+    lastName: '',
     bio: '',
-    skills: [] as string[]
+    skills: [] as string[],
+    acceptTerms: false
   });
   const [skillInput, setSkillInput] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, type, value } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+    
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
 
@@ -57,8 +63,13 @@ export default function RegisterPage() {
       return;
     }
 
+    if (!formData.acceptTerms) {
+      alert('Please accept the Terms of Service and Privacy Policy');
+      return;
+    }
+
     try {
-      const { confirmPassword, ...registerData } = formData;
+      const { confirmPassword, acceptTerms, ...registerData } = formData;
       await signupMutation.mutateAsync(registerData);
       router.push('/ideas');
     } catch (error) {
@@ -82,6 +93,37 @@ export default function RegisterPage() {
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                  First Name
+                </label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  placeholder="First name"
+                />
+              </div>
+              <div>
+                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                  Last Name
+                </label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  placeholder="Last name"
+                />
+              </div>
+            </div>
+
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                 Username
@@ -201,6 +243,33 @@ export default function RegisterPage() {
                   ))}
                 </div>
               )}
+            </div>
+          </div>
+
+          {/* Terms and Privacy */}
+          <div className="flex items-start">
+            <div className="flex items-center h-5">
+              <input
+                id="acceptTerms"
+                name="acceptTerms"
+                type="checkbox"
+                required
+                checked={formData.acceptTerms}
+                onChange={handleChange}
+                className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+              />
+            </div>
+            <div className="ml-3 text-sm">
+              <label htmlFor="acceptTerms" className="text-gray-700">
+                I agree to the{' '}
+                <Link href="/legal/terms" className="text-primary-600 hover:text-primary-500 underline">
+                  Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link href="/legal/privacy" className="text-primary-600 hover:text-primary-500 underline">
+                  Privacy Policy
+                </Link>
+              </label>
             </div>
           </div>
 

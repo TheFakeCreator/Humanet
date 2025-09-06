@@ -43,19 +43,36 @@ export default function RoadmapPage() {
       phase: "Phase 2: Evolution Engine",
       status: "planned", 
       timeframe: "Q3-Q4 2025",
-      description: "Implementing the core idea evolution and forking system",
+      description: "Implementing the core idea evolution and forking system with advanced file management",
       features: [
+        { name: "Git-Inspired File System", status: "planned", icon: GitBranch },
         { name: "Idea Forking System", status: "planned", icon: GitBranch },
+        { name: "Version Control for Ideas", status: "planned", icon: Clock },
         { name: "Family Tree Visualization", status: "planned", icon: Network },
+        { name: "Multi-tier Storage (DB/FS/Cloud)", status: "planned", icon: Shield },
         { name: "Advanced Search & Filtering", status: "planned", icon: Brain },
         { name: "Real-time Notifications", status: "planned", icon: Zap },
         { name: "Mobile App (React Native)", status: "planned", icon: Globe }
       ]
     },
     {
+      phase: "Phase 2.5: File System & Storage",
+      status: "planned",
+      timeframe: "Q1 2026", 
+      description: "Advanced file management and content-addressed storage system",
+      features: [
+        { name: "Content-Addressed Storage", status: "planned", icon: Shield },
+        { name: "File Deduplication", status: "planned", icon: Target },
+        { name: "Branch & Merge System", status: "planned", icon: GitBranch },
+        { name: "Incremental Loading", status: "planned", icon: Zap },
+        { name: "Multi-level Caching", status: "planned", icon: Brain },
+        { name: "CDN Integration", status: "planned", icon: Globe }
+      ]
+    },
+    {
       phase: "Phase 3: Intelligence Layer",
       status: "planned",
-      timeframe: "Q1-Q2 2026",
+      timeframe: "Q2-Q3 2026",
       description: "AI-powered features for better idea discovery and matching",
       features: [
         { name: "AI Idea Matching", status: "planned", icon: Brain },
@@ -68,7 +85,7 @@ export default function RoadmapPage() {
     {
       phase: "Phase 4: Ecosystem",
       status: "planned",
-      timeframe: "Q3-Q4 2026",
+      timeframe: "Q4 2026 - Q1 2027",
       description: "Building partnerships and expanding the innovation ecosystem",
       features: [
         { name: "Company/Organization Accounts", status: "planned", icon: Users },
@@ -126,11 +143,11 @@ export default function RoadmapPage() {
           <div className="flex justify-center gap-4 flex-wrap">
             <Badge variant="secondary" className="px-4 py-2">
               <Rocket className="w-4 h-4 mr-2" />
-              5 Major Phases
+              6 Major Phases
             </Badge>
             <Badge variant="secondary" className="px-4 py-2">
               <Target className="w-4 h-4 mr-2" />
-              25+ Features
+              30+ Features
             </Badge>
             <Badge variant="secondary" className="px-4 py-2">
               <Globe className="w-4 h-4 mr-2" />

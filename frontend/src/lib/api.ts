@@ -25,10 +25,22 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response?.status === 401) {
-      // Handle unauthorized access
-      if (typeof window !== 'undefined') {
-        window.location.href = '/auth/login';
+    // Only handle 401s for protected routes, let public pages work normally
+    if (error.response?.status === 401 && typeof window !== 'undefined') {
+      const currentPath = window.location.pathname;
+      const isPublicPage = currentPath.startsWith('/auth') || 
+                          currentPath.startsWith('/legal') || 
+                          currentPath.startsWith('/about') ||
+                          currentPath.startsWith('/docs') ||
+                          currentPath.startsWith('/roadmap') ||
+                          currentPath.startsWith('/blog') ||
+                          currentPath.startsWith('/contact') ||
+                          currentPath === '/';
+      
+      // Only redirect if we're on a protected page
+      if (!isPublicPage) {
+        console.warn('401 Unauthorized on protected route, redirecting to login');
+        // Use the hook's redirect logic instead of redirecting here
       }
     }
     return Promise.reject(error);

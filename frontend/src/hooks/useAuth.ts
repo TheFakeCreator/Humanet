@@ -1,4 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useRouter, usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 import api from '@/lib/api';
 import type { UserDTO, LoginDTO, CreateUserDTO, ApiResponse } from '@shared/index';
 
@@ -68,12 +70,55 @@ export const useLogout = () => {
 };
 
 export const useAuth = () => {
-  return useQuery({
+  const pathname = usePathname();
+  const queryClient = useQueryClient();
+  
+  // Check if we're on pages that don't require auth
+  const isPublicPage = pathname?.startsWith('/auth') || 
+                      pathname?.startsWith('/legal') || 
+                      pathname?.startsWith('/about') ||
+                      pathname?.startsWith('/docs') ||
+                      pathname?.startsWith('/roadmap') ||
+                      pathname?.startsWith('/blog') ||
+                      pathname?.startsWith('/contact') ||
+                      pathname === '/' || false;
+
+  const query = useQuery({
     queryKey: ['auth', 'me'],
     queryFn: authApi.getMe,
-    retry: false,
-    staleTime: 10 * 60 * 1000, // 10 minutes
+    retry: (failureCount, error: any) => {
+      // Don't retry on 401 (unauthorized) or 403 (forbidden)
+      if (error?.response?.status === 401 || error?.response?.status === 403) {
+        return false;
+      }
+      // Only retry up to 1 time for other errors
+      return failureCount < 1;
+    },
+    retryDelay: 2000,
+    staleTime: 15 * 60 * 1000, // 15 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchInterval: false,
+    enabled: !isPublicPage, // Don't run on public pages
   });
+
+  // Handle 401 errors by redirecting to login (but not from public pages)
+  useEffect(() => {
+    if (query.error?.response?.status === 401 && !isPublicPage) {
+      // Clear any cached user data
+      queryClient.removeQueries({ queryKey: ['auth'] });
+      
+      // Small delay to avoid redirect loops
+      setTimeout(() => {
+        if (typeof window !== 'undefined' && !window.location.pathname.startsWith('/auth')) {
+          window.location.href = '/auth/login';
+        }
+      }, 500);
+    }
+  }, [query.error, isPublicPage, queryClient]);
+
+  return query;
 };
 
 export const useUserProfile = (username: string) => {

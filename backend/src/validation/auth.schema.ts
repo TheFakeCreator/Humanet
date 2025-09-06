@@ -14,6 +14,14 @@ export const signupSchema = z.object({
     .string()
     .min(6, 'Password must be at least 6 characters')
     .max(128, 'Password must be at most 128 characters'),
+  firstName: z
+    .string()
+    .max(50, 'First name must be at most 50 characters')
+    .optional(),
+  lastName: z
+    .string()
+    .max(50, 'Last name must be at most 50 characters')
+    .optional(),
   bio: z
     .string()
     .max(500, 'Bio must be at most 500 characters')
