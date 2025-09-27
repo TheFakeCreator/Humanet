@@ -327,7 +327,7 @@ export function IdeaCard({ idea, showActions = true, compact = false }: IdeaCard
                   variant="ghost"
                   size="sm"
                   onClick={handleUpvote}
-                  disabled={upvoteMutation.isPending}
+                  loading={upvoteMutation.isPending}
                   className="rounded-l-full px-3 py-1.5 h-auto"
                   title="Upvote this idea"
                 >
@@ -368,7 +368,8 @@ export function IdeaCard({ idea, showActions = true, compact = false }: IdeaCard
                 variant="ghost"
                 size="sm"
                 onClick={handleFork}
-                disabled={forkMutation.isPending}
+                loading={forkMutation.isPending}
+                loadingText="Forking..."
                 className="px-2 sm:px-3"
                 title={`Fork this idea (${idea.forkCount || 0} forks)`}
               >

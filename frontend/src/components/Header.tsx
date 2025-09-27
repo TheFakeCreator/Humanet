@@ -3,6 +3,7 @@
 import { useAuth, useLogout } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { Skeleton, Spinner } from '@/components/ui/loading';
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -65,7 +66,10 @@ export default function Header() {
 
           <div className="flex items-center space-x-3">
             {isLoading ? (
-              <div className="w-16 h-8 bg-muted animate-pulse rounded"></div>
+              <div className="flex items-center space-x-3">
+                <Skeleton className="h-4 w-20 hidden sm:inline-block" />
+                <Skeleton className="h-10 w-10 rounded-full" />
+              </div>
             ) : user ? (
               // Authenticated user
               <div className="flex items-center space-x-3">
@@ -102,9 +106,22 @@ export default function Header() {
                       </a>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={handleLogout} disabled={logout.isPending}>
-                      <LogOut className="mr-2 h-4 w-4" />
-                      {logout.isPending ? 'Logging out...' : 'Logout'}
+                    <DropdownMenuItem 
+                      onClick={handleLogout}
+                      disabled={logout.isPending}
+                      className="cursor-pointer"
+                    >
+                      {logout.isPending ? (
+                        <div className="flex items-center">
+                          <Spinner size="sm" className="mr-2 h-4 w-4" />
+                          Logging out...
+                        </div>
+                      ) : (
+                        <div className="flex items-center">
+                          <LogOut className="mr-2 h-4 w-4" />
+                          Logout
+                        </div>
+                      )}
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>

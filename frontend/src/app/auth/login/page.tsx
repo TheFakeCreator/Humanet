@@ -4,10 +4,13 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useLogin } from '@/hooks/useAuth';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 export default function LoginPage() {
   const router = useRouter();
   const loginMutation = useLogin();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -25,9 +28,17 @@ export default function LoginPage() {
     
     try {
       await loginMutation.mutateAsync(formData);
-      router.push('/ideas');
-    } catch (error) {
-      console.error('Login failed:', error);
+      toast({
+        title: "Success!",
+        description: "You've been signed in successfully. Redirecting...",
+      });
+      // Navigation is handled in the mutation's onSuccess
+    } catch (error: any) {
+      toast({
+        title: "Login Failed",
+        description: error?.response?.data?.message || "Invalid email or password",
+        variant: "destructive",
+      });
     }
   };
 
@@ -86,13 +97,15 @@ export default function LoginPage() {
           )}
 
           <div>
-            <button
+            <Button
               type="submit"
-              disabled={loginMutation.isPending}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50"
+              loading={loginMutation.isPending}
+              loadingText="Signing in..."
+              className="w-full"
+              size="lg"
             >
-              {loginMutation.isPending ? 'Signing in...' : 'Sign in'}
-            </button>
+              Sign in
+            </Button>
           </div>
         </form>
       </div>

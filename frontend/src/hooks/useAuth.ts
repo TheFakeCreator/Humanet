@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter, usePathname } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import api from '@/lib/api';
 import type { UserDTO, LoginDTO, CreateUserDTO, ApiResponse } from '@shared/index';
 
@@ -34,30 +34,54 @@ const authApi = {
 // Hooks
 export const useLogin = () => {
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   return useMutation({
     mutationFn: authApi.login,
     onSuccess: (data) => {
       // Set user data in cache
       queryClient.setQueryData(['auth', 'me'], data.user);
+      
+      // Set redirecting state and navigate
+      setIsRedirecting(true);
+      setTimeout(() => {
+        router.push('/ideas');
+      }, 500);
+    },
+    meta: {
+      isRedirecting,
     },
   });
 };
 
 export const useSignup = () => {
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   return useMutation({
     mutationFn: authApi.signup,
     onSuccess: (data) => {
       // Set user data in cache
       queryClient.setQueryData(['auth', 'me'], data.user);
+      
+      // Set redirecting state and navigate
+      setIsRedirecting(true);
+      setTimeout(() => {
+        router.push('/ideas');
+      }, 500);
+    },
+    meta: {
+      isRedirecting,
     },
   });
 };
 
 export const useLogout = () => {
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   return useMutation({
     mutationFn: authApi.logout,
@@ -65,6 +89,15 @@ export const useLogout = () => {
       // Clear user data from cache
       queryClient.removeQueries({ queryKey: ['auth'] });
       queryClient.clear();
+      
+      // Set redirecting state and navigate
+      setIsRedirecting(true);
+      setTimeout(() => {
+        router.push('/');
+      }, 500);
+    },
+    meta: {
+      isRedirecting,
     },
   });
 };

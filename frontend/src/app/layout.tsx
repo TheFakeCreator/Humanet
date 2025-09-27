@@ -5,6 +5,7 @@ import { queryClient } from '@/lib/query-client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Toaster } from '@/components/ui/toaster';
+import { LoadingProvider } from '@/contexts/LoadingContext';
 import './globals.css';
 
 export default function RootLayout({
@@ -16,15 +17,17 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-screen bg-gray-50" suppressHydrationWarning={true}>
         <QueryClientProvider client={queryClient}>
-          <div className="min-h-screen flex flex-col">
-            <Header />
+          <LoadingProvider>
+            <div className="min-h-screen flex flex-col">
+              <Header />
 
-            <main className="flex-1">
-              {children}
-            </main>
+              <main className="flex-1">
+                {children}
+              </main>
 
-            <Footer />
-          </div>
+              <Footer />
+            </div>
+          </LoadingProvider>
         </QueryClientProvider>
         <Toaster />
       </body>

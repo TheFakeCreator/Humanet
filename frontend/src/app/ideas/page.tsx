@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
+import { CardLoader, ListLoader } from '@/components/ui/loading';
 import { 
   Plus, 
   Clock, 
@@ -45,18 +46,23 @@ export default function IdeasPage() {
     return (
       <div className="min-h-screen bg-background">
         <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="animate-pulse space-y-4">
-            <div className="h-8 bg-muted rounded w-48"></div>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h1 className="text-2xl font-bold">Ideas</h1>
+              <Button disabled>
+                <Plus className="w-4 h-4 mr-2" />
+                Post Idea
+              </Button>
+            </div>
+            
             <div className="flex gap-6">
-              <div className="flex-1 max-w-3xl space-y-3">
-                {[...Array(5)].map((_, i) => (
-                  <Card key={i} className="h-64"></Card>
-                ))}
+              <div className="flex-1 max-w-3xl">
+                <ListLoader count={5} />
               </div>
+              
               <div className="w-80 space-y-4">
-                {[...Array(3)].map((_, i) => (
-                  <Card key={i} className="h-32"></Card>
-                ))}
+                <CardLoader />
+                <CardLoader />
               </div>
             </div>
           </div>

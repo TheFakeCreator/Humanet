@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useCreateIdea } from '@/hooks/useIdeas';
 import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 interface CreateIdeaData {
   title: string;
@@ -17,6 +19,7 @@ interface IdeaFormProps {
 export function IdeaForm({ onSuccess, onCancel }: IdeaFormProps) {
   const router = useRouter();
   const createMutation = useCreateIdea();
+  const { toast } = useToast();
   
   const [formData, setFormData] = useState<CreateIdeaData>({
     title: '',
@@ -32,15 +35,56 @@ export function IdeaForm({ onSuccess, onCancel }: IdeaFormProps) {
     e.preventDefault();
     
     if (!formData.title.trim() || !formData.description.trim()) {
+      toast({
+        title: "Validation Error",
+        description: "Please fill in both title and description",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate title and description length
+    if (formData.title.trim().length < 5) {
+      toast({
+        title: "Title too short",
+        description: "Title must be at least 5 characters long",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (formData.description.trim().length < 20) {
+      toast({
+        title: "Description too short", 
+        description: "Description must be at least 20 characters long",
+        variant: "destructive",
+      });
       return;
     }
 
     try {
-      const idea = await createMutation.mutateAsync(formData);
+      // Clean up the data before sending
+      const cleanData = {
+        title: formData.title.trim(),
+        description: formData.description.trim(),
+        tags: formData.tags && formData.tags.length > 0 ? formData.tags : undefined,
+        domain: formData.domain && formData.domain.length > 0 ? formData.domain : undefined,
+      };
+      
+      const idea = await createMutation.mutateAsync(cleanData);
+      toast({
+        title: "Success!",
+        description: "Your idea has been created successfully",
+      });
       onSuccess?.();
       router.push(`/ideas/${idea._id}`);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to create idea:', error);
+      toast({
+        title: "Error creating idea",
+        description: error?.response?.data?.message || error?.message || "Please try again",
+        variant: "destructive",
+      });
     }
   };
 
@@ -82,31 +126,53 @@ export function IdeaForm({ onSuccess, onCancel }: IdeaFormProps) {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
-          Idea Title *
+          Idea Title * 
+          <span className="text-sm text-gray-500 ml-2">
+            ({formData.title.length}/200)
+          </span>
         </label>
         <input
           id="title"
           type="text"
           value={formData.title}
           onChange={(e) => setFormData((prev: CreateIdeaData) => ({ ...prev, title: e.target.value }))}
-          className="input w-full"
+          className={`input w-full ${
+            formData.title.length > 0 && formData.title.length < 5 
+              ? 'border-red-300 focus:border-red-500' 
+              : ''
+          }`}
           placeholder="What's your big idea?"
+          maxLength={200}
           required
         />
+        {formData.title.length > 0 && formData.title.length < 5 && (
+          <p className="text-red-600 text-sm mt-1">Title must be at least 5 characters</p>
+        )}
       </div>
 
       <div>
         <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
           Description *
+          <span className="text-sm text-gray-500 ml-2">
+            ({formData.description.length}/5000)
+          </span>
         </label>
         <textarea
           id="description"
           value={formData.description}
           onChange={(e) => setFormData((prev: CreateIdeaData) => ({ ...prev, description: e.target.value }))}
-          className="textarea w-full h-32"
+          className={`textarea w-full h-32 ${
+            formData.description.length > 0 && formData.description.length < 20 
+              ? 'border-red-300 focus:border-red-500' 
+              : ''
+          }`}
           placeholder="Describe your idea in detail..."
+          maxLength={5000}
           required
         />
+        {formData.description.length > 0 && formData.description.length < 20 && (
+          <p className="text-red-600 text-sm mt-1">Description must be at least 20 characters</p>
+        )}
       </div>
 
       <div>
@@ -195,21 +261,24 @@ export function IdeaForm({ onSuccess, onCancel }: IdeaFormProps) {
 
       <div className="flex justify-end space-x-4">
         {onCancel && (
-          <button
+          <Button
             type="button"
             onClick={onCancel}
-            className="btn-outline px-6"
+            variant="outline"
+            size="lg"
           >
             Cancel
-          </button>
+          </Button>
         )}
-        <button
+        <Button
           type="submit"
-          disabled={createMutation.isPending || !formData.title.trim() || !formData.description.trim()}
-          className="btn-primary px-6 disabled:opacity-50"
+          loading={createMutation.isPending}
+          loadingText="Creating Idea..."
+          disabled={!formData.title.trim() || !formData.description.trim()}
+          size="lg"
         >
-          {createMutation.isPending ? 'Creating...' : 'Create Idea'}
-        </button>
+          Create Idea
+        </Button>
       </div>
     </form>
   );
