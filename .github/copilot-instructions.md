@@ -38,6 +38,12 @@
     - `fix: resolve MongoDB connection issue`
         
     - `refactor: split routes into separate files`
+
+10. **Always implement loading states** for user interactions (buttons, forms, page transitions).
+
+11. **Use comprehensive error handling** with user-friendly error messages and toast notifications.
+
+12. **Implement proper validation** on both client and server sides with clear error messages.
         
 
 ---
@@ -46,13 +52,28 @@
 
 - Framework: **Next.js (with App Router)** for scalability.
     
-- Styling: **TailwindCSS** + shadcn/ui for components.
+- Styling: **TailwindCSS** + **shadcn/ui** for components.
+
+- **shadcn/ui Standards:**
+    - Use "new-york" style with CSS variables
+    - **Lucide icons** for all iconography
+    - Components in `@/components/ui/` directory
+    - Always use provided variants and sizes
+    - Extend components by composition, not modification
+    - Use `cn()` utility for conditional classes
 
 - **NEVER use mock/dummy data** - Always fetch real data from API endpoints using React Query hooks.
     
 - State Management: **React Query (TanStack)** for server data + Context API/Zustand for global UI state.
     
 - API requests via a **typed Axios client** with interceptors.
+
+- **UI/UX Standards:**
+    - Always implement loading states using our enhanced Button component with `loading` prop
+    - Use toast notifications for user feedback (success/error messages)
+    - Implement proper form validation with real-time feedback
+    - Use skeleton loaders while content is loading
+    - Ensure all interactive elements provide immediate visual feedback
     
 - Directory structure:
     
@@ -71,6 +92,25 @@
     - Favor **composition over inheritance**.
         
     - Use **lazy loading / code splitting** for heavy components.
+
+    - **Loading States**: Always use the enhanced Button component for forms:
+        ```tsx
+        <Button
+          loading={mutation.isPending}
+          loadingText="Processing..."
+          disabled={!isValid}
+        >
+          Submit
+        </Button>
+        ```
+    
+    - **Error Handling**: Use toast notifications for all user feedback:
+        ```tsx
+        toast({
+          title: "Success!",
+          description: "Operation completed successfully",
+        });
+        ```
         
 
 ---
@@ -89,21 +129,35 @@
     
     - Use **DTOs (Data Transfer Objects)** for request/response typing.
         
-    - Always validate input with **Zod** or **Joi**.
+    - Always validate input with **Zod** schemas - follow existing patterns in `validation/` folder.
         
     - Use **async error handling middleware** (no `try/catch` in every controller).
         
+    - **Error handling**: Use AppError class for operational errors:
+        ```typescript
+        throw new AppError('Resource not found', 404);
+        ```
+        
     - Separate:
         
-        - **Controller** → Handles req/res
+        - **Controller** → Handles req/res, delegates to services
             
-        - **Service** → Business logic
+        - **Service** → Business logic, data processing
             
-        - **Model** → Database schema
+        - **Model** → Database schema and validations
             
     - Use **index.ts barrels** in folders for cleaner imports.
         
     - Never mix DB queries directly in controllers.
+
+    - **Validation patterns**: Always clean and validate data:
+        ```typescript
+        // Clean undefined arrays before sending
+        const cleanData = {
+          title: data.title.trim(),
+          tags: data.tags?.length > 0 ? data.tags : undefined,
+        };
+        ```
         
 
 ---
@@ -154,11 +208,37 @@
 - Add **GitHub Actions CI/CD** with lint + test on every PR.
     
 - Add **commit hooks** (Husky + lint-staged).
+
+- **Development Scripts**:
+  - `pnpm dev` - Start both frontend and backend in development
+  - `pnpm build` - Build both packages for production
+  - `pnpm seed` - Seed database with sample data
+  - `pnpm db:migrate` - Run database migrations
+  - `pnpm lint` - Run ESLint across all packages
+  - `pnpm test` - Run all tests
+
+- **Workspace Structure**:
+  - Root level scripts handle cross-package commands
+  - Use `--filter` flag to target specific packages
+  - Shared dependencies managed at workspace root
     
 
 ---
 
-## 📏 Code Style
+## 🎨 Code Style & Formatting
+
+- **Prettier Configuration**: 
+  - Semi-colons: `true`
+  - Single quotes: `true`
+  - Print width: `100`
+  - Tab width: `2` spaces
+  - Trailing commas: `es5`
+
+- **ESLint Rules**:
+  - Unused vars: `error` (except args starting with `_`)
+  - `any` type: `warn` (minimize usage)
+  - No explicit return types required for functions
+  - Non-null assertions: `warn`
 
 - **Naming conventions**:
     
@@ -171,7 +251,136 @@
 - **File naming**: `kebab-case.ts` for files.
     
 - **Folder naming**: lowercase (e.g., `controllers`, `models`).
+
+---
+
+## 🔄 Shared Package Patterns
+
+- **Shared types** in `shared/src/types/` with `.js` extension imports for compatibility
+- **Barrel exports** in `shared/src/index.ts` for clean imports
+- **Consistent DTOs** across frontend and backend
+- **API response types** standardized with `ApiResponse<T>` and `PaginatedResponse<T>`
+
+---
+
+## 🚨 Error Handling Standards
+
+- **Backend**: Use `AppError` class for operational errors with appropriate status codes
+- **Frontend**: Always use toast notifications for user feedback
+- **Validation**: Client-side validation + server-side Zod schemas
+- **Loading states**: Never leave users without feedback during async operations
+- **Form handling**: Validate, show loading, handle errors, show success
+
+---
+
+## 📏 Code Style
     
+
+---
+
+## 🌐 API Design Patterns
+
+- **Consistent Response Format**:
+  ```typescript
+  // Success responses
+  {
+    "success": true,
+    "data": { /* response data */ },
+    "message": "Operation successful"
+  }
+  
+  // Error responses  
+  {
+    "success": false,
+    "error": "Error message",
+    "message": "User-friendly message",
+    "statusCode": 400
+  }
+  ```
+
+- **Pagination Standard**:
+  ```typescript
+  {
+    "success": true,
+    "data": [...],
+    "pagination": {
+      "page": 1,
+      "limit": 10,
+      "total": 100,
+      "pages": 10,
+      "hasNext": true,
+      "hasPrev": false
+    }
+  }
+  ```
+
+- **API Client Configuration**:
+  - Use axios with interceptors for auth and error handling
+  - Base URL from environment variables
+  - Credentials included for cookie-based auth
+  - Consistent error response handling
+
+---
+
+## 🚀 Long-term Scalability & Consistency Guidelines
+
+### **🏗️ Architecture Principles**
+- **Modular Monolith**: Keep related features together, clear module boundaries
+- **Domain-Driven Design**: Organize code by business domains (users, ideas, comments)
+- **API-First**: Design APIs before implementation, maintain OpenAPI specs
+- **Database-First**: Plan schema changes, use migrations, maintain data integrity
+
+### **📦 Component Architecture**
+- **Atomic Design**: Atoms (Button) → Molecules (SearchForm) → Organisms (Header) → Templates → Pages
+- **Composition over Inheritance**: Build complex components from simpler ones
+- **Props Interface Standards**: Always define and export prop types
+- **Consistent Naming**: `<FeatureName><ComponentType>` (e.g., `IdeaCard`, `UserProfile`)
+
+### **🎯 Feature Development Standards**
+- **Feature Flags**: Use environment-based feature toggles for gradual rollouts
+- **Progressive Enhancement**: Core functionality first, enhancements second
+- **Mobile-First**: Design for mobile, enhance for desktop
+- **Accessibility-First**: WCAG 2.1 AA compliance from day one
+
+### **⚡ Performance & Optimization**
+- **Code Splitting**: Lazy load routes and heavy components
+- **Image Optimization**: Use Next.js Image component, WebP format
+- **Bundle Analysis**: Regular bundle size monitoring and optimization
+- **Database Indexing**: Index frequently queried fields
+- **Caching Strategy**: Redis for sessions, API response caching
+
+### **🔒 Security Standards**
+- **Input Validation**: Client + Server validation on ALL inputs
+- **Rate Limiting**: API endpoint protection against abuse
+- **CSRF Protection**: Token-based protection for state-changing operations
+- **SQL/NoSQL Injection Prevention**: Parameterized queries, input sanitization
+- **Dependency Updates**: Regular security audit and updates
+
+### **📊 Monitoring & Observability**
+- **Error Tracking**: Structured error logging with context
+- **Performance Monitoring**: API response times, database query performance
+- **User Analytics**: Track feature usage for data-driven decisions
+- **Health Checks**: Automated monitoring of critical services
+
+### **🔄 Development Workflow Standards**
+- **Branch Strategy**: `feature/*`, `fix/*`, `release/*` naming
+- **PR Requirements**: Tests passing, code review, documentation updates
+- **Deployment Pipeline**: Staging → Production with automated testing
+- **Database Migrations**: Reversible, tested migrations only
+
+### **📚 Documentation Standards**
+- **API Documentation**: Auto-generated from code (OpenAPI/Swagger)
+- **Component Documentation**: Storybook for UI components
+- **Architecture Decision Records**: Document major technical decisions
+- **Changelog**: Semantic versioning with detailed change logs
+
+### **🎨 Design System Standards**
+- **Design Tokens**: Centralized colors, typography, spacing
+- **Component Library**: Maintain shadcn/ui customizations in dedicated files
+- **Responsive Breakpoints**: Consistent across all components
+- **Dark/Light Mode**: Built-in theme switching capability
+- **Internationalization**: i18n ready architecture from start
+
 
 ---
 
