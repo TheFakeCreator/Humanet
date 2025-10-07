@@ -16,6 +16,12 @@ export class IdeaController {
       // Extract repository options from request body
       const { autoCreateRepository, repositoryTemplate, ...ideaData } = req.body;
 
+      console.log('🔧 Idea creation request:', {
+        autoCreateRepository,
+        repositoryTemplate,
+        ideaData: { title: ideaData.title, hasDescription: !!ideaData.description },
+      });
+
       const idea = await IdeaService.createIdea(ideaData, req.user._id, {
         autoCreateRepository: autoCreateRepository === true,
         repositoryTemplate: repositoryTemplate || 'basic',

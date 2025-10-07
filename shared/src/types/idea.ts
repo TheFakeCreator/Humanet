@@ -33,6 +33,8 @@ export interface CreateIdeaDTO {
   tags?: string[];
   domain?: string[];
   parentId?: string | null;
+  autoCreateRepository?: boolean;
+  repositoryTemplate?: 'basic' | 'research' | 'technical';
 }
 
 export interface UpdateIdeaDTO {

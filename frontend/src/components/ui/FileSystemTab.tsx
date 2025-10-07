@@ -14,6 +14,7 @@ import { VersionHistoryDialog } from '@/components/ui/VersionHistoryDialog';
 
 import {
   useFileList,
+  useFileTree,
   useFileContent,
   useCreateFile,
   useUpdateFile,
@@ -35,15 +36,23 @@ export const FileSystemTab: React.FC<FileSystemTabProps> = ({ ideaId }) => {
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date>();
 
-  // React Query hooks
+  // React Query hooks - Use tree endpoint for complete file structure
   const {
     data: files = [],
     isLoading: filesLoading,
     error: filesError,
     refetch: refetchFiles,
-  } = useFileList(ideaId);
+  } = useFileTree(ideaId);
+
+  console.log('🔧 FileSystemTab - tree files:', files);
+  console.log('🔧 FileSystemTab - filesLoading:', filesLoading);
+  console.log('🔧 FileSystemTab - filesError:', filesError);
+  console.log('🔧 FileSystemTab - selectedFile:', selectedFile);
 
   const { data: fileContent, isLoading: contentLoading } = useFileContent(ideaId, selectedFile);
+
+  console.log('🔧 FileSystemTab - fileContent:', fileContent);
+  console.log('🔧 FileSystemTab - contentLoading:', contentLoading);
 
   const createFileMutation = useCreateFile(ideaId);
   const updateFileMutation = useUpdateFile(ideaId);
@@ -52,52 +61,24 @@ export const FileSystemTab: React.FC<FileSystemTabProps> = ({ ideaId }) => {
   const renameFileMutation = useRenameFile(ideaId);
   const createDirectoryMutation = useCreateDirectory(ideaId);
 
-  // Convert flat file list to tree structure for FileExplorer
-  const buildFileTree = (files: FileItem[]): FileItem[] => {
-    const tree: FileItem[] = [];
-    const pathMap = new Map<string, FileItem>();
+  // Early error handling
+  if (filesError) {
+    return (
+      <Card>
+        <CardContent className="p-8 text-center">
+          <AlertCircle className="h-12 w-12 mx-auto mb-4 text-red-500" />
+          <p className="text-gray-700 mb-4">Failed to load repository files</p>
+          <Button onClick={() => refetchFiles()}>
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Try Again
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
 
-    // Sort files by path to ensure parents come before children
-    const sortedFiles = [...files].sort((a, b) => a.path.localeCompare(b.path));
-
-    for (const file of sortedFiles) {
-      const pathParts = file.path.split('/').filter((part) => part);
-      let currentPath = '';
-
-      for (let i = 0; i < pathParts.length; i++) {
-        const part = pathParts[i];
-        const parentPath = currentPath;
-        currentPath = currentPath ? `${currentPath}/${part}` : part;
-
-        if (!pathMap.has(currentPath)) {
-          const isFile = i === pathParts.length - 1;
-          const item: FileItem = isFile
-            ? file
-            : {
-                name: part,
-                path: currentPath,
-                type: 'directory',
-                children: [],
-              };
-
-          pathMap.set(currentPath, item);
-
-          if (parentPath) {
-            const parent = pathMap.get(parentPath);
-            if (parent && parent.children) {
-              parent.children.push(item);
-            }
-          } else {
-            tree.push(item);
-          }
-        }
-      }
-    }
-
-    return tree;
-  };
-
-  const fileTree = buildFileTree(files);
+  // Ensure files is always an array (files now contains tree structure)
+  const safeFiles = Array.isArray(files) ? files : [];
 
   // Event handlers
   const handleFileSelect = (filePath: string) => {
@@ -170,21 +151,6 @@ export const FileSystemTab: React.FC<FileSystemTabProps> = ({ ideaId }) => {
     });
   };
 
-  if (filesError) {
-    return (
-      <Card>
-        <CardContent className="p-8 text-center">
-          <AlertCircle className="h-12 w-12 mx-auto mb-4 text-red-500" />
-          <p className="text-gray-700 mb-4">Failed to load repository files</p>
-          <Button onClick={() => refetchFiles()}>
-            <RefreshCw className="h-4 w-4 mr-2" />
-            Try Again
-          </Button>
-        </CardContent>
-      </Card>
-    );
-  }
-
   return (
     <div className="space-y-6">
       {/* Repository Statistics */}
@@ -196,7 +162,7 @@ export const FileSystemTab: React.FC<FileSystemTabProps> = ({ ideaId }) => {
           </h3>
           <div className="flex items-center space-x-2">
             <Badge variant="outline" className="text-sm">
-              {files.length} files
+              {safeFiles.length} files
             </Badge>
             {selectedFile && (
               <Badge variant="secondary" className="text-sm">
@@ -235,7 +201,7 @@ export const FileSystemTab: React.FC<FileSystemTabProps> = ({ ideaId }) => {
 
             <FileExplorer
               ideaId={ideaId}
-              files={fileTree}
+              files={safeFiles}
               onFileSelect={handleFileSelect}
               onFileEdit={handleFileEdit}
               onFileDelete={handleFileDelete}

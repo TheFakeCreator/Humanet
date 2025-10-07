@@ -93,17 +93,40 @@ export class IdeaFilesController {
   }
 
   /**
+   * Get recursive file tree for an idea
+   */
+  static async getFileTree(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { ideaId } = req.params;
+      const { maxDepth = 5 } = req.query;
+
+      const fileTree = await filesystemService.getFileTree(ideaId, Number(maxDepth));
+
+      res.json({
+        success: true,
+        data: {
+          ideaId,
+          tree: fileTree,
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
    * Get content of a specific file
    */
   static async getFile(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const { ideaId } = req.params;
-      const { '*': filePath } = req.params;
+      // Get file path from query parameter
+      const filePath = req.query.path as string;
 
       if (!filePath) {
         res.status(400).json({
           success: false,
-          error: 'File path is required',
+          error: 'File path is required as query parameter',
         });
         return;
       }
@@ -137,7 +160,8 @@ export class IdeaFilesController {
       }
 
       const { ideaId } = req.params;
-      const { '*': filePath } = req.params;
+      // Get file path from query parameter
+      const filePath = req.query.path as string;
       const { content } = updateFileSchema.parse(req.body);
 
       if (!filePath) {

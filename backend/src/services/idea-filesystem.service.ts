@@ -369,6 +369,73 @@ export class IdeaFilesystemService {
   }
 
   /**
+   * Get recursive file tree with all files and directories
+   */
+  async getFileTree(ideaId: string, maxDepth: number = 5): Promise<FileTreeNode[]> {
+    const repositoryPath = this.getRepositoryPath(ideaId);
+
+    try {
+      // Check if repository exists
+      if (!(await fs.pathExists(repositoryPath))) {
+        throw new AppError('Repository not found', 404);
+      }
+
+      return await this.buildFileTree(repositoryPath, repositoryPath, maxDepth, 0);
+    } catch (error) {
+      if (error instanceof AppError) throw error;
+      throw new AppError('Failed to get file tree', 500);
+    }
+  }
+
+  /**
+   * Recursively build file tree
+   */
+  private async buildFileTree(
+    basePath: string,
+    currentPath: string,
+    maxDepth: number,
+    currentDepth: number
+  ): Promise<FileTreeNode[]> {
+    if (currentDepth >= maxDepth) {
+      return [];
+    }
+
+    const items = await fs.readdir(currentPath);
+    const fileNodes: FileTreeNode[] = [];
+
+    for (const item of items) {
+      const itemPath = path.join(currentPath, item);
+      const stats = await fs.stat(itemPath);
+      const relativePath = path.relative(basePath, itemPath);
+
+      const node: FileTreeNode = {
+        name: item,
+        path: relativePath.replace(/\\/g, '/'), // Normalize path separators
+        type: stats.isDirectory() ? 'directory' : 'file',
+        lastModified: stats.mtime,
+      };
+
+      if (stats.isFile()) {
+        node.size = stats.size;
+        node.mimeType = this.getMimeType(item);
+      } else if (stats.isDirectory()) {
+        // Recursively get children for directories
+        node.children = await this.buildFileTree(basePath, itemPath, maxDepth, currentDepth + 1);
+      }
+
+      fileNodes.push(node);
+    }
+
+    // Sort: directories first, then files alphabetically
+    return fileNodes.sort((a, b) => {
+      if (a.type !== b.type) {
+        return a.type === 'directory' ? -1 : 1;
+      }
+      return a.name.localeCompare(b.name);
+    });
+  }
+
+  /**
    * Delete entire repository
    */
   async deleteRepository(ideaId: string): Promise<void> {

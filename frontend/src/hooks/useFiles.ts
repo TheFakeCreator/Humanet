@@ -37,6 +37,7 @@ const fileKeys = {
     [...fileKeys.idea(ideaId), 'content', filePath] as const,
   versions: (ideaId: string, filePath: string) =>
     [...fileKeys.idea(ideaId), 'versions', filePath] as const,
+  tree: (ideaId: string) => [...fileKeys.idea(ideaId), 'tree'] as const,
 };
 
 // Hook to get file list for an idea
@@ -44,27 +45,65 @@ export const useFileList = (ideaId: string) => {
   return useQuery({
     queryKey: fileKeys.list(ideaId),
     queryFn: async (): Promise<FileItem[]> => {
-      const response = await api.get(`/api/ideas/${ideaId}/files`);
-      return response.data.data;
+      console.log('🔧 Fetching files for idea:', ideaId);
+      const response = await api.get(`/ideas/${ideaId}/files`);
+      console.log('🔧 API response:', response.data);
+      console.log('🔧 Files data:', response.data.data);
+
+      // Extract the files array from the nested structure
+      const filesData = response.data.data;
+      if (filesData && Array.isArray(filesData.files)) {
+        console.log('🔧 Extracted files array:', filesData.files);
+        return filesData.files;
+      }
+
+      // Fallback: if data is already an array
+      if (Array.isArray(filesData)) {
+        return filesData;
+      }
+
+      console.warn('🔧 Unexpected API response structure:', filesData);
+      return [];
     },
     enabled: !!ideaId,
     staleTime: 30 * 1000, // 30 seconds
   });
 };
 
-// Hook to get file content
-export const useFileContent = (ideaId: string, filePath?: string) => {
+// Hook to get recursive file tree
+export const useFileTree = (ideaId: string) => {
   return useQuery({
-    queryKey: fileKeys.content(ideaId, filePath || ''),
-    queryFn: async (): Promise<FileContent> => {
-      if (!filePath) throw new Error('File path is required');
-      const response = await api.get(`/api/ideas/${ideaId}/files/content`, {
-        params: { path: filePath },
-      });
-      return response.data.data;
+    queryKey: fileKeys.tree(ideaId),
+    queryFn: async (): Promise<FileItem[]> => {
+      console.log('🔧 Fetching file tree for idea:', ideaId);
+      const response = await api.get(`/ideas/${ideaId}/files/tree`);
+      console.log('🔧 Tree API response:', response.data);
+      console.log('🔧 Tree data:', response.data.data);
+
+      // Extract the tree array from the response
+      const treeData = response.data.data;
+      if (treeData && Array.isArray(treeData.tree)) {
+        console.log('🔧 Extracted tree array:', treeData.tree);
+        return treeData.tree;
+      }
+
+      console.warn('🔧 Unexpected tree API response structure:', treeData);
+      return [];
     },
+    enabled: !!ideaId,
+    staleTime: 60 * 1000, // 1 minute (trees change less frequently)
+  });
+};
+
+// Hook to get file content
+export const useFileContent = (ideaId: string, filePath: string | null) => {
+  return useQuery<FileContent>({
+    queryKey: ['file-content', ideaId, filePath],
+    queryFn: () =>
+      api
+        .get(`/ideas/${ideaId}/file?path=${encodeURIComponent(filePath || '')}`)
+        .then((res) => res.data.data),
     enabled: !!ideaId && !!filePath,
-    staleTime: 10 * 1000, // 10 seconds
   });
 };
 
@@ -74,7 +113,7 @@ export const useFileVersions = (ideaId: string, filePath?: string) => {
     queryKey: fileKeys.versions(ideaId, filePath || ''),
     queryFn: async (): Promise<FileVersion[]> => {
       if (!filePath) throw new Error('File path is required');
-      const response = await api.get(`/api/ideas/${ideaId}/files/versions`, {
+      const response = await api.get(`/ideas/${ideaId}/files/versions`, {
         params: { path: filePath },
       });
       return response.data.data;
@@ -99,7 +138,7 @@ export const useCreateFile = (ideaId: string) => {
       content?: string;
       parentPath?: string;
     }) => {
-      const response = await api.post(`/api/ideas/${ideaId}/files`, {
+      const response = await api.post(`/ideas/${ideaId}/files`, {
         fileName,
         content,
         parentPath,
@@ -130,7 +169,7 @@ export const useUpdateFile = (ideaId: string) => {
 
   return useMutation({
     mutationFn: async ({ filePath, content }: { filePath: string; content: string }) => {
-      const response = await api.put(`/api/ideas/${ideaId}/files/content`, {
+      const response = await api.put(`/ideas/${ideaId}/files/content`, {
         path: filePath,
         content,
       });
@@ -165,7 +204,7 @@ export const useUploadFile = (ideaId: string) => {
       formData.append('file', file);
       formData.append('parentPath', parentPath);
 
-      const response = await api.post(`/api/ideas/${ideaId}/files/upload`, formData, {
+      const response = await api.post(`/ideas/${ideaId}/files/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -196,7 +235,7 @@ export const useDeleteFile = (ideaId: string) => {
 
   return useMutation({
     mutationFn: async (filePath: string) => {
-      const response = await api.delete(`/api/ideas/${ideaId}/files`, {
+      const response = await api.delete(`/ideas/${ideaId}/files`, {
         data: { path: filePath },
       });
       return response.data;
@@ -259,7 +298,7 @@ export const useRestoreFileVersion = (ideaId: string) => {
 
   return useMutation({
     mutationFn: async ({ filePath, version }: { filePath: string; version: number }) => {
-      const response = await api.post(`/api/ideas/${ideaId}/files/restore`, {
+      const response = await api.post(`/ideas/${ideaId}/files/restore`, {
         path: filePath,
         version,
       });
@@ -290,7 +329,7 @@ export const useCreateDirectory = (ideaId: string) => {
 
   return useMutation({
     mutationFn: async ({ dirName, parentPath = '' }: { dirName: string; parentPath?: string }) => {
-      const response = await api.post(`/api/ideas/${ideaId}/files/directory`, {
+      const response = await api.post(`/ideas/${ideaId}/files/directory`, {
         dirName,
         parentPath,
       });

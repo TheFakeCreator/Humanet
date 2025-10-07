@@ -145,17 +145,24 @@ export class IdeaRepositoryService {
     }
   ): Promise<void> {
     try {
+      console.log('🔧 Auto-create repository request:', { ideaId, authorPreferences });
+
       if (!authorPreferences?.autoCreateRepository) {
+        console.log('🔧 Auto-creation disabled, skipping repository creation');
         return; // Auto-creation disabled
       }
 
       const template = authorPreferences.preferredTemplate || 'basic';
+      console.log('🔧 Creating repository with template:', template);
+
       await this.createIdeaRepository(ideaId, template);
 
       // Sync initial content
       await this.syncIdeaWithRepository(ideaId);
+
+      console.log('✅ Repository auto-creation completed for idea:', ideaId);
     } catch (error) {
-      console.warn(`Failed to auto-create repository for idea ${ideaId}:`, error);
+      console.warn(`❌ Failed to auto-create repository for idea ${ideaId}:`, error);
       // Non-critical error for auto-creation
     }
   }

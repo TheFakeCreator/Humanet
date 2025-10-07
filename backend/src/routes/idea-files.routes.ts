@@ -34,12 +34,13 @@ router.delete(
 
 // File listing routes
 router.get('/:ideaId/files', validateParams(ideaIdSchema), IdeaFilesController.listFiles);
+router.get('/:ideaId/files/tree', validateParams(ideaIdSchema), IdeaFilesController.getFileTree);
 
-// File operations routes
-router.get('/:ideaId/files/*', validateParams(ideaIdSchema), IdeaFilesController.getFile);
+// File operations routes - using query parameter instead of path parameter
+router.get('/:ideaId/file', validateParams(ideaIdSchema), IdeaFilesController.getFile);
 
 router.put(
-  '/:ideaId/files/*',
+  '/:ideaId/file',
   authenticateToken,
   validateParams(ideaIdSchema),
   IdeaFilesController.updateFile
@@ -53,7 +54,7 @@ router.post(
 );
 
 router.delete(
-  '/:ideaId/files/*',
+  '/:ideaId/file',
   authenticateToken,
   validateParams(ideaIdSchema),
   IdeaFilesController.deleteFile
