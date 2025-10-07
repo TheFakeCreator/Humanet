@@ -86,6 +86,14 @@ Dockerfile.prod
 uploads/
 public/uploads/
 
+# File System Storage (idea repositories)
+storage/
+.humanet/
+
+# Test data and fixtures
+test-repos/
+*.test-repo/
+
 # SSL certificates
 *.crt
 *.csr

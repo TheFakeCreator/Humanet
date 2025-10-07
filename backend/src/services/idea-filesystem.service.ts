@@ -12,6 +12,14 @@ export interface FileTreeNode {
   lastModified?: Date;
 }
 
+export interface FileVersion {
+  id: string;
+  timestamp: Date;
+  size: number;
+  operation: 'created' | 'updated' | 'deleted';
+  backupPath?: string;
+}
+
 export interface RepositoryTemplate {
   name: string;
   description: string;
@@ -223,7 +231,7 @@ export class IdeaFilesystemService {
   }
 
   /**
-   * Update file content
+   * Update file content with version history
    */
   async updateFile(ideaId: string, filePath: string, content: string): Promise<void> {
     const fullPath = this.getFilePath(ideaId, filePath);
@@ -234,11 +242,39 @@ export class IdeaFilesystemService {
         throw new AppError('File size exceeds limit', 413);
       }
 
+      // Validate file type
+      this.validateFileType(filePath);
+
+      const fileExists = await fs.pathExists(fullPath);
+      let backupName: string | undefined;
+      let originalSize = 0;
+
+      // Create backup if file exists (only for updates, not initial creation)
+      if (fileExists) {
+        const originalContent = await fs.readFile(fullPath, 'utf8');
+        originalSize = Buffer.byteLength(originalContent, 'utf8');
+        backupName = await this.createFileBackup(ideaId, filePath);
+      }
+
       // Ensure directory exists
       await fs.ensureDir(path.dirname(fullPath));
 
       // Write file
       await fs.writeFile(fullPath, content, 'utf8');
+
+      // Record version history only if this was an update (file existed before)
+      if (fileExists && backupName) {
+        await this.recordFileVersion(ideaId, filePath, {
+          id: new Date().toISOString(),
+          timestamp: new Date(),
+          size: originalSize, // Size of the backed up content
+          operation: 'updated',
+          backupPath: backupName,
+        });
+
+        // Cleanup old versions
+        await this.cleanupOldVersions(ideaId, filePath, 5);
+      }
 
       // Update meta.json if this is in .humanet folder
       if (filePath.startsWith('.humanet/')) {
@@ -631,5 +667,196 @@ How the system should perform.
 - Resource constraints
 - Compatibility requirements
 `;
+  }
+
+  /**
+   * Get file version history
+   */
+  async getFileHistory(ideaId: string, filePath: string): Promise<FileVersion[]> {
+    try {
+      // Check if the file exists first
+      const fullPath = this.getFilePath(ideaId, filePath);
+      if (!(await fs.pathExists(fullPath))) {
+        throw new AppError('File not found', 404);
+      }
+
+      const versionsPath = path.join(this.getRepositoryPath(ideaId), '.versions', 'versions.json');
+
+      if (!(await fs.pathExists(versionsPath))) {
+        return [];
+      }
+
+      const versionsData = JSON.parse(await fs.readFile(versionsPath, 'utf8'));
+      const versions = versionsData.files?.[filePath]?.versions || [];
+
+      // Parse timestamp strings back to Date objects and sort by timestamp (newest first)
+      return versions
+        .map((v: any) => ({
+          ...v,
+          timestamp: new Date(v.timestamp),
+        }))
+        .sort((a: FileVersion, b: FileVersion) => b.timestamp.getTime() - a.timestamp.getTime());
+    } catch (error) {
+      if (error instanceof AppError) throw error;
+      console.warn(`Failed to get file history for ${filePath}:`, error);
+      return [];
+    }
+  }
+
+  /**
+   * Get specific version content
+   */
+  async getFileVersionContent(
+    ideaId: string,
+    filePath: string,
+    versionId: string
+  ): Promise<string> {
+    try {
+      const versions = await this.getFileHistory(ideaId, filePath);
+      const version = versions.find((v) => v.id === versionId);
+
+      if (!version?.backupPath) {
+        throw new AppError('Version not found', 404);
+      }
+
+      const backupPath = path.join(this.getRepositoryPath(ideaId), '.versions', version.backupPath);
+      return await fs.readFile(backupPath, 'utf8');
+    } catch (error) {
+      if (error instanceof AppError) throw error;
+      throw new AppError('Failed to get version content', 500);
+    }
+  }
+
+  /**
+   * Restore file to specific version
+   */
+  async restoreFileVersion(ideaId: string, filePath: string, versionId: string): Promise<void> {
+    try {
+      const versionContent = await this.getFileVersionContent(ideaId, filePath, versionId);
+      await this.updateFile(ideaId, filePath, versionContent);
+    } catch (error) {
+      if (error instanceof AppError) throw error;
+      throw new AppError('Failed to restore file version', 500);
+    }
+  }
+
+  /**
+   * Validate file type against allowed extensions
+   */
+  private validateFileType(filePath: string): void {
+    const ext = path.extname(filePath).toLowerCase();
+    if (ext && !this.allowedExtensions.includes(ext)) {
+      throw new AppError(`File type ${ext} not allowed`, 400);
+    }
+  }
+
+  /**
+   * Create backup of current file before update
+   */
+  private async createFileBackup(ideaId: string, filePath: string): Promise<string> {
+    try {
+      const originalPath = this.getFilePath(ideaId, filePath);
+      const versionsDir = path.join(this.getRepositoryPath(ideaId), '.versions');
+
+      // Ensure versions directory exists
+      await fs.ensureDir(versionsDir);
+
+      // Create backup filename with timestamp
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const ext = path.extname(filePath);
+      const basename = path.basename(filePath, ext);
+      const backupName = `${basename}_${timestamp}${ext}`;
+      const backupPath = path.join(versionsDir, backupName);
+
+      // Copy file to versions directory
+      await fs.copy(originalPath, backupPath);
+
+      return backupName;
+    } catch (error) {
+      console.warn(`Failed to create backup for ${filePath}:`, error);
+      throw new AppError('Failed to create file backup', 500);
+    }
+  }
+
+  /**
+   * Record file version in metadata
+   */
+  private async recordFileVersion(
+    ideaId: string,
+    filePath: string,
+    version: FileVersion
+  ): Promise<void> {
+    try {
+      const versionsPath = path.join(this.getRepositoryPath(ideaId), '.versions', 'versions.json');
+
+      let versionsData: any = { files: {} };
+      if (await fs.pathExists(versionsPath)) {
+        versionsData = JSON.parse(await fs.readFile(versionsPath, 'utf8'));
+      }
+
+      // Initialize file versions if not exists
+      if (!versionsData.files[filePath]) {
+        versionsData.files[filePath] = { versions: [] };
+      }
+
+      // Add new version (backupPath is already provided if this was an update)
+      versionsData.files[filePath].versions.push(version);
+      versionsData.lastUpdated = new Date().toISOString();
+
+      // Write updated metadata
+      await fs.writeFile(versionsPath, JSON.stringify(versionsData, null, 2), 'utf8');
+    } catch (error) {
+      console.warn(`Failed to record file version:`, error);
+      // Don't throw - version recording failure shouldn't prevent file updates
+    }
+  }
+
+  /**
+   * Cleanup old versions to prevent excessive storage
+   */
+  private async cleanupOldVersions(
+    ideaId: string,
+    filePath: string,
+    maxVersions: number = 10
+  ): Promise<void> {
+    try {
+      const versionsPath = path.join(this.getRepositoryPath(ideaId), '.versions', 'versions.json');
+
+      if (!(await fs.pathExists(versionsPath))) {
+        return;
+      }
+
+      const versionsData = JSON.parse(await fs.readFile(versionsPath, 'utf8'));
+      const fileVersions = versionsData.files?.[filePath]?.versions;
+
+      if (!fileVersions || fileVersions.length <= maxVersions) {
+        return;
+      }
+
+      // Remove oldest versions
+      const versionsToRemove = fileVersions.splice(0, fileVersions.length - maxVersions);
+
+      // Delete backup files
+      for (const version of versionsToRemove) {
+        if (version.backupPath) {
+          const backupPath = path.join(
+            this.getRepositoryPath(ideaId),
+            '.versions',
+            version.backupPath
+          );
+          try {
+            await fs.remove(backupPath);
+          } catch (error) {
+            console.warn(`Failed to remove old backup ${version.backupPath}:`, error);
+          }
+        }
+      }
+
+      // Update metadata
+      await fs.writeFile(versionsPath, JSON.stringify(versionsData, null, 2), 'utf8');
+    } catch (error) {
+      console.warn(`Failed to cleanup old versions:`, error);
+      // Don't throw - cleanup failure shouldn't prevent file operations
+    }
   }
 }

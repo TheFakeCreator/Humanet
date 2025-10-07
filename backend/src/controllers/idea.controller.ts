@@ -8,17 +8,23 @@ export class IdeaController {
       if (!req.user) {
         res.status(401).json({
           success: false,
-          error: 'Authentication required'
+          error: 'Authentication required',
         });
         return;
       }
 
-      const idea = await IdeaService.createIdea(req.body, req.user._id);
-      
+      // Extract repository options from request body
+      const { autoCreateRepository, repositoryTemplate, ...ideaData } = req.body;
+
+      const idea = await IdeaService.createIdea(ideaData, req.user._id, {
+        autoCreateRepository: autoCreateRepository === true,
+        repositoryTemplate: repositoryTemplate || 'basic',
+      });
+
       res.status(201).json({
         success: true,
         data: { idea },
-        message: 'Idea created successfully'
+        message: 'Idea created successfully',
       });
     } catch (error) {
       next(error);
@@ -28,11 +34,11 @@ export class IdeaController {
   static async getIdeas(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const result = await IdeaService.getIdeas(req.query as any, req.user?._id);
-      
+
       res.json({
         success: true,
         data: result.data,
-        pagination: result.pagination
+        pagination: result.pagination,
       });
     } catch (error) {
       next(error);
@@ -43,10 +49,10 @@ export class IdeaController {
     try {
       const { id } = req.params;
       const idea = await IdeaService.getIdeaById(id, req.user?._id);
-      
+
       res.json({
         success: true,
-        data: { idea }
+        data: { idea },
       });
     } catch (error) {
       next(error);
@@ -58,18 +64,18 @@ export class IdeaController {
       if (!req.user) {
         res.status(401).json({
           success: false,
-          error: 'Authentication required'
+          error: 'Authentication required',
         });
         return;
       }
 
       const { id } = req.params;
       const fork = await IdeaService.forkIdea(id, req.user._id, req.body);
-      
+
       res.status(201).json({
         success: true,
         data: { idea: fork },
-        message: 'Idea forked successfully'
+        message: 'Idea forked successfully',
       });
     } catch (error) {
       next(error);
@@ -81,18 +87,18 @@ export class IdeaController {
       if (!req.user) {
         res.status(401).json({
           success: false,
-          error: 'Authentication required'
+          error: 'Authentication required',
         });
         return;
       }
 
       const { id } = req.params;
       const result = await IdeaService.upvoteIdea(id, req.user._id);
-      
+
       res.json({
         success: true,
         data: result,
-        message: result.upvoted ? 'Idea upvoted' : 'Upvote removed'
+        message: result.upvoted ? 'Idea upvoted' : 'Upvote removed',
       });
     } catch (error) {
       next(error);
@@ -103,15 +109,12 @@ export class IdeaController {
     try {
       const { id } = req.params;
       const { maxDepth } = req.query;
-      
-      const tree = await IdeaService.getIdeaTree(
-        id, 
-        maxDepth ? parseInt(maxDepth as string) : 3
-      );
-      
+
+      const tree = await IdeaService.getIdeaTree(id, maxDepth ? parseInt(maxDepth as string) : 3);
+
       res.json({
         success: true,
-        data: { tree }
+        data: { tree },
       });
     } catch (error) {
       next(error);

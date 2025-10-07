@@ -150,6 +150,10 @@ build/
 *.sqlite
 *.sqlite3
 
+# File System Storage (idea repositories)
+storage/
+.humanet/
+
 # Docker
 .dockerignore
 Dockerfile.prod
