@@ -93,6 +93,7 @@ export const useUpvoteIdea = () => {
         return {
           ...oldData,
           upvotes: data.upvotes,
+          hasUpvoted: data.upvoted,
         };
       });
       // Invalidate ideas list to update counts

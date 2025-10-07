@@ -22,10 +22,10 @@ export class IdeaService {
 
     await idea.populate('author', 'username karma');
     
-    return this.mapToDTO(idea);
+    return this.mapToDTO(idea, authorId);
   }
 
-  static async getIdeaById(ideaId: string): Promise<IdeaDTO> {
+  static async getIdeaById(ideaId: string, userId?: string): Promise<IdeaDTO> {
     const idea = await IdeaModel.findById(ideaId)
       .populate('author', 'username karma')
       .populate('parentId', 'title author');
@@ -34,10 +34,10 @@ export class IdeaService {
       throw new AppError('Idea not found', 404);
     }
 
-    return this.mapToDTO(idea);
+    return this.mapToDTO(idea, userId);
   }
 
-  static async getIdeas(params: IdeaSearchInput): Promise<PaginatedResponse<IdeaDTO>> {
+  static async getIdeas(params: IdeaSearchInput, userId?: string): Promise<PaginatedResponse<IdeaDTO>> {
     const { search, domain, tags, authorId, page, limit, sortBy, sortOrder } = params;
     
     // Build query
@@ -80,7 +80,7 @@ export class IdeaService {
       IdeaModel.countDocuments(query)
     ]);
 
-    const data = ideas.map(idea => this.mapToDTO(idea));
+    const data = ideas.map(idea => this.mapToDTO(idea, userId));
     
     return {
       data,
@@ -96,103 +96,83 @@ export class IdeaService {
   }
 
   static async forkIdea(ideaId: string, userId: string, data?: { title?: string; description?: string }): Promise<IdeaDTO> {
-    const session = await mongoose.startSession();
-    
-    try {
-      return await session.withTransaction(async () => {
-        // Get original idea
-        const originalIdea = await IdeaModel.findById(ideaId).session(session);
-        if (!originalIdea) {
-          throw new AppError('Idea not found', 404);
-        }
-
-        // Create fork
-        const fork = await IdeaModel.create([{
-          title: data?.title || `Fork of: ${originalIdea.title}`,
-          description: data?.description || originalIdea.description,
-          tags: originalIdea.tags,
-          domain: originalIdea.domain,
-          author: userId,
-          parentId: ideaId
-        }], { session });
-
-        // Update original idea fork count
-        await IdeaModel.findByIdAndUpdate(
-          ideaId,
-          { $inc: { forkCount: 1 } },
-          { session }
-        );
-
-        // Update original author karma (+2 for fork)
-        await UserModel.findByIdAndUpdate(
-          originalIdea.author,
-          { $inc: { karma: 2 } },
-          { session }
-        );
-
-        await fork[0].populate('author', 'username karma');
-        return this.mapToDTO(fork[0]);
-      });
-    } finally {
-      await session.endSession();
+    // Get original idea
+    const originalIdea = await IdeaModel.findById(ideaId);
+    if (!originalIdea) {
+      throw new AppError('Idea not found', 404);
     }
+
+    // Create fork
+    const fork = await IdeaModel.create({
+      title: data?.title || `Fork of: ${originalIdea.title}`,
+      description: data?.description || originalIdea.description,
+      tags: originalIdea.tags,
+      domain: originalIdea.domain,
+      author: userId,
+      parentId: ideaId
+    });
+
+    // Update original idea fork count
+    await IdeaModel.findByIdAndUpdate(
+      ideaId,
+      { $inc: { forkCount: 1 } }
+    );
+
+    // Update original author karma (+2 for fork)
+    await UserModel.findByIdAndUpdate(
+      originalIdea.author,
+      { $inc: { karma: 2 } }
+    );
+
+    await fork.populate('author', 'username karma');
+    return this.mapToDTO(fork, userId);
   }
 
   static async upvoteIdea(ideaId: string, userId: string): Promise<{ upvoted: boolean; upvotes: number }> {
-    const session = await mongoose.startSession();
-    
-    try {
-      return await session.withTransaction(async () => {
-        const idea = await IdeaModel.findById(ideaId).session(session);
-        if (!idea) {
-          throw new AppError('Idea not found', 404);
-        }
+    const idea = await IdeaModel.findById(ideaId);
+    if (!idea) {
+      throw new AppError('Idea not found', 404);
+    }
 
-        const userObjectId = new mongoose.Types.ObjectId(userId);
-        const hasUpvoted = idea.upvoters.includes(userObjectId);
+    const userObjectId = new mongoose.Types.ObjectId(userId);
+    const hasUpvoted = idea.upvoters.includes(userObjectId);
 
-        if (hasUpvoted) {
-          // Remove upvote
-          await IdeaModel.findByIdAndUpdate(
-            ideaId,
-            {
-              $pull: { upvoters: userObjectId },
-              $inc: { upvotes: -1 }
-            },
-            { session }
-          );
+    if (hasUpvoted) {
+      // Remove upvote
+      const updatedIdea = await IdeaModel.findByIdAndUpdate(
+        ideaId,
+        {
+          $pull: { upvoters: userObjectId },
+          $inc: { upvotes: -1 }
+        },
+        { new: true }
+      );
 
-          // Decrease author karma (-1)
-          await UserModel.findByIdAndUpdate(
-            idea.author,
-            { $inc: { karma: -1 } },
-            { session }
-          );
+      // Decrease author karma (-1)
+      await UserModel.findByIdAndUpdate(
+        idea.author,
+        { $inc: { karma: -1 } }
+      );
 
-          return { upvoted: false, upvotes: idea.upvotes - 1 };
-        } else {
-          // Add upvote
-          await IdeaModel.findByIdAndUpdate(
-            ideaId,
-            {
-              $addToSet: { upvoters: userObjectId },
-              $inc: { upvotes: 1 }
-            },
-            { session }
-          );
+      return { upvoted: false, upvotes: updatedIdea?.upvotes || 0 };
+    } else {
+      // Add upvote
+      const updatedIdea = await IdeaModel.findByIdAndUpdate(
+        ideaId,
+        {
+          $addToSet: { upvoters: userObjectId },
+          $inc: { upvotes: 1 }
+        },
+        { new: true }
+      );
 
-          // Increase author karma (+1)
-          await UserModel.findByIdAndUpdate(
-            idea.author,
-            { $inc: { karma: 1 } },
-            { session }
-          );
+      // Increase author karma (+1)
+      await UserModel.findByIdAndUpdate(
+        idea.author,
+        { $inc: { karma: 1 } }
+      );
 
-          return { upvoted: true, upvotes: idea.upvotes + 1 };
-        }
-      });
-    } finally {
-      await session.endSession();
+      return { upvoted: true, upvotes: updatedIdea?.upvotes || 0 };
     }
   }
 
@@ -244,7 +224,7 @@ export class IdeaService {
     return buildTree(ideaId, 0);
   }
 
-  private static mapToDTO(idea: any): IdeaDTO {
+  private static mapToDTO(idea: any, userId?: string): IdeaDTO {
     return {
       _id: idea._id.toString(),
       title: idea.title,
@@ -267,6 +247,7 @@ export class IdeaService {
       } : undefined,
       upvotes: idea.upvotes,
       upvoters: idea.upvoters?.map((id: any) => id.toString()),
+      hasUpvoted: userId ? idea.upvoters?.some((id: any) => id.toString() === userId) : undefined,
       forkCount: idea.forkCount,
       createdAt: idea.createdAt.toISOString(),
       updatedAt: idea.updatedAt.toISOString()

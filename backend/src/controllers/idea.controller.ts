@@ -27,7 +27,7 @@ export class IdeaController {
 
   static async getIdeas(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      const result = await IdeaService.getIdeas(req.query as any);
+      const result = await IdeaService.getIdeas(req.query as any, req.user?._id);
       
       res.json({
         success: true,
@@ -42,7 +42,7 @@ export class IdeaController {
   static async getIdeaById(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
-      const idea = await IdeaService.getIdeaById(id);
+      const idea = await IdeaService.getIdeaById(id, req.user?._id);
       
       res.json({
         success: true,

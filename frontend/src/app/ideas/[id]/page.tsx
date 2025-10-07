@@ -3,16 +3,43 @@
 import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useIdea } from '@/hooks/useIdeas';
+import { useIdea, useUpvoteIdea } from '@/hooks/useIdeas';
 import { CommentList } from '@/components/ui/CommentList';
 import { FamilyTreePreview } from '@/components/ui/FamilyTreePreview';
 import { useAuth } from '@/hooks/useAuth';
+import { toast } from '@/hooks/use-toast';
 
 export default function IdeaDetailPage() {
   const params = useParams();
   const ideaId = params?.id as string;
   const { data: user } = useAuth();
   const { data: idea, isLoading, error } = useIdea(ideaId);
+  const upvoteMutation = useUpvoteIdea();
+
+  const handleUpvote = async () => {
+    if (!user) {
+      toast({
+        title: "Authentication required",
+        description: "Please sign in to upvote ideas",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const result = await upvoteMutation.mutateAsync(ideaId);
+      toast({
+        title: "Success",
+        description: result.upvoted ? "Idea upvoted!" : "Upvote removed",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to upvote idea",
+        variant: "destructive",
+      });
+    }
+  };
 
   if (isLoading) {
     return (
@@ -160,8 +187,32 @@ export default function IdeaDetailPage() {
                   >
                     Fork This Idea
                   </Link>
-                  <button className="w-full btn-secondary px-4 py-2 rounded-md">
-                    Upvote ({idea.upvotes || 0})
+                  <button 
+                    onClick={handleUpvote}
+                    disabled={upvoteMutation.isPending}
+                    className={`w-full px-4 py-2 rounded-md transition-all duration-200 font-medium ${
+                      idea.hasUpvoted 
+                        ? 'bg-green-500 text-white border border-green-600 hover:bg-green-600 shadow-md' 
+                        : 'bg-gray-100 text-gray-700 border border-gray-300 hover:bg-gray-200 hover:border-gray-400'
+                    }`}
+                  >
+                    <span className="flex items-center justify-center space-x-2">
+                      {idea.hasUpvoted ? (
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                        </svg>
+                      ) : (
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                        </svg>
+                      )}
+                      <span>
+                        {upvoteMutation.isPending 
+                          ? 'Processing...' 
+                          : `${idea.hasUpvoted ? 'Upvoted' : 'Upvote'} (${idea.upvotes || 0})`
+                        }
+                      </span>
+                    </span>
                   </button>
                 </>
               )}

@@ -20,6 +20,7 @@ export interface IdeaDTO {
   };
   upvotes?: number;
   upvoters?: string[];
+  hasUpvoted?: boolean; // Whether current user has upvoted
   forkCount?: number;
   children?: IdeaDTO[];
   createdAt?: string;
