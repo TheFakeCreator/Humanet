@@ -8,8 +8,14 @@
   ],
   "scripts": {
     "dev": "concurrently \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
+    "dev:full": "concurrently \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\" \"pnpm storybook\"",
+    "storybook": "pnpm --filter frontend storybook",
+    "storybook:build": "pnpm --filter frontend build-storybook",
     "lint": "pnpm -w lint",
+    "lint:fix": "pnpm --filter frontend lint:fix && pnpm --filter backend lint:fix",
+    "type-check": "pnpm --filter frontend type-check && pnpm --filter backend type-check",
     "test": "pnpm -w test",
+    "test:watch": "pnpm --filter frontend test:watch",
     "build": "pnpm --filter backend build && pnpm --filter frontend build",
     "lint-staged": "lint-staged",
     "seed": "pnpm --filter backend seed",
@@ -24,20 +30,24 @@
     "db:cleanup": "pnpm --filter backend db:cleanup",
     "db:cleanup:dry": "pnpm --filter backend db:cleanup:dry",
     "db:migrate": "pnpm --filter backend db:migrate",
-    "db:export-stats": "pnpm --filter backend db:export-stats"
+    "db:export-stats": "pnpm --filter backend db:export-stats",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
     "prettier": "^3.2.5"
   },
   "lint-staged": {
+    "frontend/**/*.{ts,tsx,js,jsx}": [
+      "pnpm --filter frontend lint --fix",
+      "prettier --write"
+    ],
     "*.{ts,tsx,js,jsx}": [
-      "eslint --fix",
       "prettier --write"
     ]
   },

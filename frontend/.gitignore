@@ -119,3 +119,5 @@ public/robots.txt
 # Misc
 *.tgz
 *.tar.gz
+
+*storybook.log

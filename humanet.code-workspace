@@ -1,0 +1,93 @@
+{
+  "folders": [
+    {
+      "name": "🏠 Root",
+      "path": "."
+    },
+    {
+      "name": "🎨 Frontend",
+      "path": "./frontend"
+    },
+    {
+      "name": "⚙️ Backend", 
+      "path": "./backend"
+    },
+    {
+      "name": "📦 Shared",
+      "path": "./shared"
+    }
+  ],
+  "settings": {
+    "typescript.preferences.includePackageJsonAutoImports": "on",
+    "typescript.suggest.autoImports": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit",
+      "source.organizeImports": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "tailwindCSS.includeLanguages": {
+      "typescript": "javascript",
+      "typescriptreact": "javascript"
+    },
+    "files.associations": {
+      "*.css": "tailwindcss"
+    },
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact",
+      "typescript": "typescriptreact"
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "bradlc.vscode-tailwindcss",
+      "ms-vscode.vscode-typescript-next",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "rangav.vscode-thunder-client",
+      "mongodb.mongodb-vscode",
+      "ms-vscode.vscode-json",
+      "usernamehw.errorlens",
+      "streetsidesoftware.code-spell-checker",
+      "ms-vscode.vscode-node-azure-pack"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "🚀 Start Development",
+        "type": "shell",
+        "command": "pnpm dev",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "📚 Start Storybook",
+        "type": "shell",
+        "command": "pnpm --filter frontend storybook",
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new"
+        }
+      },
+      {
+        "label": "🌱 Seed Database",
+        "type": "shell",
+        "command": "pnpm seed",
+        "group": "build"
+      }
+    ]
+  }
+}
