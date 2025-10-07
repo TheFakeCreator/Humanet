@@ -6,8 +6,11 @@ import { useParams } from 'next/navigation';
 import { useIdea, useUpvoteIdea } from '@/hooks/useIdeas';
 import { CommentList } from '@/components/ui/CommentList';
 import { FamilyTreePreview } from '@/components/ui/FamilyTreePreview';
+import { FileSystemTab } from '@/components/ui/FileSystemTab';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from '@/hooks/use-toast';
+import { MessageSquare, GitBranch, FolderOpen, FileText } from 'lucide-react';
 
 export default function IdeaDetailPage() {
   const params = useParams();
@@ -19,9 +22,9 @@ export default function IdeaDetailPage() {
   const handleUpvote = async () => {
     if (!user) {
       toast({
-        title: "Authentication required",
-        description: "Please sign in to upvote ideas",
-        variant: "destructive",
+        title: 'Authentication required',
+        description: 'Please sign in to upvote ideas',
+        variant: 'destructive',
       });
       return;
     }
@@ -29,14 +32,14 @@ export default function IdeaDetailPage() {
     try {
       const result = await upvoteMutation.mutateAsync(ideaId);
       toast({
-        title: "Success",
-        description: result.upvoted ? "Idea upvoted!" : "Upvote removed",
+        title: 'Success',
+        description: result.upvoted ? 'Idea upvoted!' : 'Upvote removed',
       });
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to upvote idea",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Failed to upvote idea',
+        variant: 'destructive',
       });
     }
   };
@@ -62,10 +65,7 @@ export default function IdeaDetailPage() {
           <p className="text-gray-600 mb-4">
             The idea you're looking for doesn't exist or has been removed.
           </p>
-          <Link
-            href="/ideas"
-            className="btn-primary px-4 py-2 rounded-md"
-          >
+          <Link href="/ideas" className="btn-primary px-4 py-2 rounded-md">
             Back to Ideas
           </Link>
         </div>
@@ -77,10 +77,7 @@ export default function IdeaDetailPage() {
     <div className="container mx-auto px-4 py-8">
       {/* Navigation */}
       <nav className="mb-6">
-        <Link
-          href="/ideas"
-          className="text-primary-600 hover:text-primary-700 text-sm font-medium"
-        >
+        <Link href="/ideas" className="text-primary-600 hover:text-primary-700 text-sm font-medium">
           ← Back to Ideas
         </Link>
       </nav>
@@ -92,9 +89,7 @@ export default function IdeaDetailPage() {
           <div className="bg-white rounded-lg border p-6">
             <div className="flex items-start justify-between mb-4">
               <div className="flex-1">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                  {idea.title}
-                </h1>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">{idea.title}</h1>
                 <div className="flex items-center space-x-4 text-sm text-gray-500">
                   <span>
                     by{' '}
@@ -137,11 +132,18 @@ export default function IdeaDetailPage() {
               ))}
             </div>
 
-            {/* Description */}
+            {/* Description - moved to overview tab */}
             <div className="prose max-w-none">
-              <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">
-                {idea.description}
+              <p className="text-gray-700 whitespace-pre-wrap leading-relaxed mb-4">
+                {idea.description.length > 200
+                  ? `${idea.description.substring(0, 200)}...`
+                  : idea.description}
               </p>
+              {idea.description.length > 200 && (
+                <p className="text-primary-600 text-sm font-medium">
+                  View full description in Overview tab
+                </p>
+              )}
             </div>
 
             {/* Stats */}
@@ -154,13 +156,21 @@ export default function IdeaDetailPage() {
               </div>
               <div className="flex items-center space-x-2">
                 <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M7.707 3.293a1 1 0 010 1.414L5.414 7H11a7 7 0 017 7v2a1 1 0 11-2 0v-2a5 5 0 00-5-5H5.414l2.293 2.293a1 1 0 11-1.414 1.414L2.586 7a2 2 0 010-2.828l3.707-3.707a1 1 0 011.414 0z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M7.707 3.293a1 1 0 010 1.414L5.414 7H11a7 7 0 017 7v2a1 1 0 11-2 0v-2a5 5 0 00-5-5H5.414l2.293 2.293a1 1 0 11-1.414 1.414L2.586 7a2 2 0 010-2.828l3.707-3.707a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span className="text-gray-600">{idea.forkCount || 0} forks</span>
               </div>
               <div className="flex items-center space-x-2">
                 <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span className="text-gray-600">Comments</span>
               </div>
@@ -168,9 +178,69 @@ export default function IdeaDetailPage() {
           </div>
 
           {/* Comments */}
-          <div className="bg-white rounded-lg border p-6">
-            <CommentList ideaId={ideaId} />
-          </div>
+          <Tabs defaultValue="overview" className="bg-white rounded-lg border">
+            <TabsList className="grid w-full grid-cols-4 rounded-none border-b bg-transparent p-0">
+              <TabsTrigger
+                value="overview"
+                className="flex items-center space-x-2 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent"
+              >
+                <FileText className="h-4 w-4" />
+                <span>Overview</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="repository"
+                className="flex items-center space-x-2 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent"
+              >
+                <FolderOpen className="h-4 w-4" />
+                <span>Repository</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="comments"
+                className="flex items-center space-x-2 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent"
+              >
+                <MessageSquare className="h-4 w-4" />
+                <span>Comments</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="tree"
+                className="flex items-center space-x-2 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent"
+              >
+                <GitBranch className="h-4 w-4" />
+                <span>Family Tree</span>
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="overview" className="p-6 mt-0">
+              <div className="prose max-w-none">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">About This Idea</h3>
+                <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">
+                  {idea.description}
+                </p>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="repository" className="p-6 mt-0">
+              <FileSystemTab ideaId={ideaId} />
+            </TabsContent>
+
+            <TabsContent value="comments" className="p-6 mt-0">
+              <CommentList ideaId={ideaId} />
+            </TabsContent>
+
+            <TabsContent value="tree" className="p-6 mt-0">
+              <div className="space-y-4">
+                <FamilyTreePreview ideaId={ideaId} />
+                <div className="text-center">
+                  <Link
+                    href={`/ideas/${ideaId}/tree`}
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-primary-600 hover:text-primary-700 border border-primary-200 rounded-md hover:bg-primary-50"
+                  >
+                    View Full Tree →
+                  </Link>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
 
         {/* Sidebar */}
@@ -187,30 +257,43 @@ export default function IdeaDetailPage() {
                   >
                     Fork This Idea
                   </Link>
-                  <button 
+                  <button
                     onClick={handleUpvote}
                     disabled={upvoteMutation.isPending}
                     className={`w-full px-4 py-2 rounded-md transition-all duration-200 font-medium ${
-                      idea.hasUpvoted 
-                        ? 'bg-green-500 text-white border border-green-600 hover:bg-green-600 shadow-md' 
+                      idea.hasUpvoted
+                        ? 'bg-green-500 text-white border border-green-600 hover:bg-green-600 shadow-md'
                         : 'bg-gray-100 text-gray-700 border border-gray-300 hover:bg-gray-200 hover:border-gray-400'
                     }`}
                   >
                     <span className="flex items-center justify-center space-x-2">
                       {idea.hasUpvoted ? (
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                          <path
+                            fillRule="evenodd"
+                            d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                       ) : (
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 15l7-7 7 7"
+                          />
                         </svg>
                       )}
                       <span>
-                        {upvoteMutation.isPending 
-                          ? 'Processing...' 
-                          : `${idea.hasUpvoted ? 'Upvoted' : 'Upvote'} (${idea.upvotes || 0})`
-                        }
+                        {upvoteMutation.isPending
+                          ? 'Processing...'
+                          : `${idea.hasUpvoted ? 'Upvoted' : 'Upvote'} (${idea.upvotes || 0})`}
                       </span>
                     </span>
                   </button>
@@ -224,9 +307,7 @@ export default function IdeaDetailPage() {
                   Edit Idea
                 </Link>
               )}
-              <button className="w-full btn-outline px-4 py-2 rounded-md">
-                Share Idea
-              </button>
+              <button className="w-full btn-outline px-4 py-2 rounded-md">Share Idea</button>
             </div>
           </div>
 
