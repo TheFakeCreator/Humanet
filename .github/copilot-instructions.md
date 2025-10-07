@@ -44,6 +44,39 @@
 11. **Use comprehensive error handling** with user-friendly error messages and toast notifications.
 
 12. **Implement proper validation** on both client and server sides with clear error messages.
+
+13. **🗺️ CRITICAL: Always maintain the ROADMAP.md file** - When implementing features, completing tasks, or making significant changes, update the roadmap to reflect current progress and adjust priorities as needed.
+
+---
+
+## 📋 Roadmap Management Guidelines
+
+### **When to Update ROADMAP.md:**
+1. **Feature Completion**: Mark items as completed with ✅ and brief description
+2. **New Feature Implementation**: Add new features to appropriate phases
+3. **Priority Changes**: Adjust immediate/medium/long-term priorities based on development needs
+4. **Status Updates**: Update "Current Development Status" section regularly
+5. **Timeline Adjustments**: Modify phase timelines when scope or complexity changes
+
+### **Roadmap Update Pattern:**
+```markdown
+- [x] **Feature Name** (Brief implementation details) ✅
+- [ ] **In Progress Feature** (Current status/blockers) 🚧
+- [ ] **Planned Feature** (Dependencies/requirements)
+```
+
+### **Required Roadmap Sections to Maintain:**
+- **Current Development Status**: Update monthly or after major milestones
+- **Implementation Timeline & Priorities**: Adjust based on completed work
+- **Phase Progress**: Mark completed items and update phase status
+- **Next Priority Items**: Keep this aligned with current development focus
+
+### **Roadmap Review Triggers:**
+- After completing any major feature
+- When starting a new development sprint/phase
+- When dependencies or technical requirements change
+- When adjusting project scope or timeline
+- During monthly project reviews
         
 
 ---
@@ -367,12 +400,14 @@
 - **PR Requirements**: Tests passing, code review, documentation updates
 - **Deployment Pipeline**: Staging → Production with automated testing
 - **Database Migrations**: Reversible, tested migrations only
+- **Roadmap Maintenance**: Update ROADMAP.md after every significant milestone
 
 ### **📚 Documentation Standards**
 - **API Documentation**: Auto-generated from code (OpenAPI/Swagger)
 - **Component Documentation**: Storybook for UI components
 - **Architecture Decision Records**: Document major technical decisions
 - **Changelog**: Semantic versioning with detailed change logs
+- **Roadmap Updates**: Keep ROADMAP.md current with development progress
 
 ### **🎨 Design System Standards**
 - **Design Tokens**: Centralized colors, typography, spacing
@@ -394,6 +429,7 @@
     - Add a **controller** that uses the service.
     - Register it in `routes/`.
     - Write a **test** for it.
+    - **Update ROADMAP.md** if this completes a planned feature.
         
 2. For new frontend features:
     
@@ -402,3 +438,12 @@
     - Connect API via React Query hook in `hooks/`.
     - Build components with Tailwind + shadcn/ui.
     - Ensure accessibility (a11y).
+    - **Update ROADMAP.md** to reflect feature completion and adjust priorities.
+
+3. When completing major milestones:
+    
+    - Mark completed features in ROADMAP.md with ✅
+    - Update "Current Development Status" section
+    - Adjust next priorities based on completed work
+    - Update timeline estimates if needed
+    - Add new features or technical debt items as discovered

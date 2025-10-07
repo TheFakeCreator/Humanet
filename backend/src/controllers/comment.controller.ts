@@ -29,11 +29,12 @@ export class CommentController {
   static async getComments(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id: ideaId } = req.params;
-      const comments = await CommentService.getCommentsByIdeaId(ideaId);
+      const userId = req.user?._id;
+      const comments = await CommentService.getCommentsByIdeaId(ideaId, userId);
       
       res.json({
         success: true,
-        data: { comments }
+        data: comments
       });
     } catch (error) {
       next(error);
@@ -81,6 +82,31 @@ export class CommentController {
       res.json({
         success: true,
         message: 'Comment deleted successfully'
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async voteComment(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      if (!req.user) {
+        res.status(401).json({
+          success: false,
+          error: 'Authentication required'
+        });
+        return;
+      }
+
+      const { commentId } = req.params;
+      const { voteType } = req.body;
+      
+      const comment = await CommentService.voteComment(commentId, req.user._id, voteType);
+      
+      res.json({
+        success: true,
+        data: { comment },
+        message: 'Vote recorded successfully'
       });
     } catch (error) {
       next(error);

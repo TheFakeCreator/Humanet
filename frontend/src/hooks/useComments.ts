@@ -4,6 +4,7 @@ import type { CommentDTO, PaginatedResponse } from '@humanet/shared';
 
 export interface CreateCommentData {
   text: string;
+  parentCommentId?: string;
 }
 
 export interface UpdateCommentData {
@@ -19,7 +20,7 @@ export interface CommentsParams {
 export const useComments = (ideaId: string, params?: CommentsParams) => {
   return useQuery({
     queryKey: ['comments', ideaId, params],
-    queryFn: async (): Promise<PaginatedResponse<CommentDTO>> => {
+    queryFn: async (): Promise<CommentDTO[]> => {
       const response = await api.get(`/ideas/${ideaId}/comments`, { params });
       return response.data.data;
     },
@@ -68,6 +69,21 @@ export const useDeleteComment = () => {
     },
     onSuccess: (_, commentId) => {
       queryClient.invalidateQueries({ queryKey: ['comments'] });
+    },
+  });
+};
+
+// Vote on comment
+export const useVoteComment = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: async ({ commentId, voteType }: { commentId: string; voteType: 'upvote' | 'downvote' | 'remove' }): Promise<CommentDTO> => {
+      const response = await api.post(`/ideas/comments/${commentId}/vote`, { voteType });
+      return response.data.data.comment;
+    },
+    onSuccess: (comment) => {
+      queryClient.invalidateQueries({ queryKey: ['comments', comment.ideaId] });
     },
   });
 };

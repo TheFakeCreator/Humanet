@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { CommentController } from '../controllers/comment.controller.js';
 import { authenticateToken, optionalAuth } from '../middlewares/auth.middleware.js';
 import { validateBody, validateParams } from '../middlewares/validation.middleware.js';
-import { createCommentSchema, updateCommentSchema } from '../validation/comment.schema.js';
+import { createCommentSchema, updateCommentSchema, voteCommentSchema } from '../validation/comment.schema.js';
 import { mongoIdSchema } from '../validation/idea.schema.js';
 import { commentLimiter } from '../middlewares/rate-limit.middleware.js';
 import config from '../config/index.js';
@@ -41,6 +41,13 @@ router.delete('/comments/:commentId',
   validateParams(commentIdSchema), 
   authenticateToken, 
   CommentController.deleteComment
+);
+
+router.post('/comments/:commentId/vote', 
+  validateParams(commentIdSchema), 
+  validateBody(voteCommentSchema),
+  authenticateToken, 
+  CommentController.voteComment
 );
 
 export default router;
