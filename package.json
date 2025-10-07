@@ -43,11 +43,7 @@
     "prettier": "^3.2.5"
   },
   "lint-staged": {
-    "frontend/**/*.{ts,tsx,js,jsx}": [
-      "pnpm --filter frontend lint --fix",
-      "prettier --write"
-    ],
-    "*.{ts,tsx,js,jsx}": [
+    "*.{ts,tsx,js,jsx,json,css,md}": [
       "prettier --write"
     ]
   },
