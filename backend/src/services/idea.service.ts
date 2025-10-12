@@ -27,10 +27,15 @@ export class IdeaService {
     const idea = await IdeaModel.create({
       ...data,
       author: authorId,
+      originalCreator: authorId, // Set the original creator to the current user
       parentId: data.parentId || null,
     });
 
-    await idea.populate('author', 'username karma');
+    await idea.populate([
+      { path: 'author', select: 'username karma' },
+      { path: 'originalCreator', select: 'username karma' },
+      { path: 'currentMaintainer', select: 'username karma' },
+    ]);
 
     // Auto-create repository if enabled
     if (options?.autoCreateRepository) {
@@ -54,6 +59,8 @@ export class IdeaService {
   static async getIdeaById(ideaId: string, userId?: string): Promise<IdeaDTO> {
     const idea = await IdeaModel.findById(ideaId)
       .populate('author', 'username karma')
+      .populate('originalCreator', 'username karma')
+      .populate('currentMaintainer', 'username karma')
       .populate('parentId', 'title author');
 
     if (!idea) {
@@ -67,7 +74,18 @@ export class IdeaService {
     params: IdeaSearchInput,
     userId?: string
   ): Promise<PaginatedResponse<IdeaDTO>> {
-    const { search, domain, tags, authorId, page, limit, sortBy, sortOrder } = params;
+    const {
+      search,
+      domain,
+      tags,
+      authorId,
+      ownershipType,
+      adoptionStatus,
+      page,
+      limit,
+      sortBy,
+      sortOrder,
+    } = params;
 
     // Build query
     const query: any = {};
@@ -88,6 +106,14 @@ export class IdeaService {
       query.author = authorId;
     }
 
+    if (ownershipType) {
+      query.ownershipType = ownershipType;
+    }
+
+    if (adoptionStatus) {
+      query.adoptionStatus = adoptionStatus;
+    }
+
     // Build sort
     const sort: any = {};
     if (search && !sortBy) {
@@ -105,6 +131,8 @@ export class IdeaService {
         .skip(skip)
         .limit(limit)
         .populate('author', 'username karma')
+        .populate('originalCreator', 'username karma')
+        .populate('currentMaintainer', 'username karma')
         .populate('parentId', 'title author'),
       IdeaModel.countDocuments(query),
     ]);
@@ -272,6 +300,56 @@ export class IdeaService {
       upvoters: idea.upvoters?.map((id: any) => id.toString()),
       hasUpvoted: userId ? idea.upvoters?.some((id: any) => id.toString() === userId) : undefined,
       forkCount: idea.forkCount,
+
+      // Ownership and Adoption System
+      ownershipType: idea.ownershipType,
+      currentMaintainer: idea.currentMaintainer
+        ? {
+            _id: idea.currentMaintainer._id?.toString() || idea.currentMaintainer.toString(),
+            username: idea.currentMaintainer.username || 'Unknown',
+            karma: idea.currentMaintainer.karma || 0,
+          }
+        : undefined,
+      originalCreator: idea.originalCreator
+        ? {
+            _id: idea.originalCreator._id?.toString() || idea.originalCreator.toString(),
+            username: idea.originalCreator.username || 'Unknown',
+            karma: idea.originalCreator.karma || 0,
+          }
+        : {
+            _id: 'unknown',
+            username: 'Unknown',
+            karma: 0,
+          },
+      adoptionStatus: idea.adoptionStatus,
+      adoptionRequestsCount: idea.adoptionRequests?.length || 0,
+      pendingAdoption: undefined, // Will be populated when needed
+
+      // Licensing
+      license: idea.license,
+
+      // Democratic voting (if active)
+      activeVoting:
+        idea.activeVoting && idea.activeVoting.votingEndsAt
+          ? {
+              candidates: Array.from(idea.activeVoting.candidates || []).map(
+                (candidateId: any) => ({
+                  _id: candidateId.toString(),
+                  username: 'Unknown', // Would need to populate
+                  votesReceived: 0, // Would need to calculate
+                })
+              ),
+              totalVotes: idea.activeVoting.votes ? idea.activeVoting.votes.size : 0,
+              votingEndsAt: idea.activeVoting.votingEndsAt.toISOString(),
+              hasUserVoted:
+                userId && idea.activeVoting.votes ? idea.activeVoting.votes.has(userId) : false,
+              userVotedFor:
+                userId && idea.activeVoting.votes
+                  ? idea.activeVoting.votes.get(userId)?.toString()
+                  : undefined,
+            }
+          : undefined,
+
       createdAt: idea.createdAt.toISOString(),
       updatedAt: idea.updatedAt.toISOString(),
     };

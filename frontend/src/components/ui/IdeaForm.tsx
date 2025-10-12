@@ -25,6 +25,20 @@ interface CreateIdeaFormData {
   domain?: string[];
   autoCreateRepository?: boolean;
   repositoryTemplate?: 'basic' | 'research' | 'technical';
+  ownershipType: 'self_maintained' | 'seeking_adopter';
+  license: {
+    type:
+      | 'MIT'
+      | 'Apache-2.0'
+      | 'GPL-3.0'
+      | 'BSD-3-Clause'
+      | 'CC-BY-4.0'
+      | 'CC-BY-SA-4.0'
+      | 'custom';
+    customText?: string;
+    allowCommercialUse: boolean;
+    requireAttribution: boolean;
+  };
 }
 
 interface IdeaFormProps {
@@ -44,6 +58,12 @@ export function IdeaForm({ onSuccess, onCancel }: IdeaFormProps) {
     domain: [],
     autoCreateRepository: true,
     repositoryTemplate: 'basic',
+    ownershipType: 'self_maintained',
+    license: {
+      type: 'MIT',
+      allowCommercialUse: true,
+      requireAttribution: true,
+    },
   });
 
   const [tagInput, setTagInput] = useState('');
@@ -82,7 +102,7 @@ export function IdeaForm({ onSuccess, onCancel }: IdeaFormProps) {
     }
 
     try {
-      // Clean up the data before sending - INCLUDE REPOSITORY OPTIONS
+      // Clean up the data before sending - INCLUDE REPOSITORY AND OWNERSHIP OPTIONS
       const cleanData = {
         title: formData.title.trim(),
         description: formData.description.trim(),
@@ -90,6 +110,8 @@ export function IdeaForm({ onSuccess, onCancel }: IdeaFormProps) {
         domain: formData.domain && formData.domain.length > 0 ? formData.domain : undefined,
         autoCreateRepository: formData.autoCreateRepository,
         repositoryTemplate: formData.repositoryTemplate,
+        ownershipType: formData.ownershipType,
+        license: formData.license,
       };
 
       console.log('🔧 Final data being sent to API:', cleanData);
@@ -152,18 +174,69 @@ export function IdeaForm({ onSuccess, onCancel }: IdeaFormProps) {
     {
       id: 'research',
       name: 'Research',
-      description: 'Academic research with methodology and analysis',
+      description: 'Academic research with methodology and references',
       icon: <Sparkles className="h-5 w-5" />,
-      files: ['idea.md', 'methodology.md', 'literature-review.md', 'analysis/'],
+      files: ['idea.md', 'methodology.md', 'literature.md', 'data/'],
     },
     {
       id: 'technical',
       name: 'Technical',
-      description: 'Software development with architecture and specs',
+      description: 'Technical project with architecture and specs',
       icon: <Settings className="h-5 w-5" />,
-      files: ['idea.md', 'architecture.md', 'technical-specs.md', 'docs/'],
+      files: ['idea.md', 'architecture.md', 'specs.md', 'src/'],
     },
   ];
+
+  const licenseTemplates = [
+    {
+      type: 'MIT',
+      name: 'MIT License',
+      description: 'Simple and permissive - allows commercial use',
+      allowCommercialUse: true,
+      requireAttribution: true,
+      popular: true,
+    },
+    {
+      type: 'Apache-2.0',
+      name: 'Apache 2.0',
+      description: 'Permissive with patent grant protection',
+      allowCommercialUse: true,
+      requireAttribution: true,
+      popular: true,
+    },
+    {
+      type: 'GPL-3.0',
+      name: 'GPL v3',
+      description: 'Copyleft - derivatives must be open source',
+      allowCommercialUse: true,
+      requireAttribution: true,
+      popular: false,
+    },
+    {
+      type: 'BSD-3-Clause',
+      name: 'BSD 3-Clause',
+      description: 'Similar to MIT with additional restrictions',
+      allowCommercialUse: true,
+      requireAttribution: true,
+      popular: false,
+    },
+    {
+      type: 'CC-BY-4.0',
+      name: 'Creative Commons BY',
+      description: 'Attribution required, perfect for creative works',
+      allowCommercialUse: true,
+      requireAttribution: true,
+      popular: false,
+    },
+    {
+      type: 'CC-BY-SA-4.0',
+      name: 'Creative Commons BY-SA',
+      description: 'Attribution + ShareAlike for creative works',
+      allowCommercialUse: true,
+      requireAttribution: true,
+      popular: false,
+    },
+  ] as const;
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
@@ -403,6 +476,236 @@ export function IdeaForm({ onSuccess, onCancel }: IdeaFormProps) {
                     ))}
                   </div>
                 )}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Ownership & Collaboration */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <GitBranch className="h-5 w-5" />
+              <span>Ownership & Collaboration</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-3">
+                How will you manage this idea? *
+              </label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <label
+                  className={`flex items-start space-x-3 p-4 border rounded-lg cursor-pointer transition-all ${
+                    formData.ownershipType === 'self_maintained'
+                      ? 'border-primary bg-primary/5 text-primary'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    value="self_maintained"
+                    checked={formData.ownershipType === 'self_maintained'}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        ownershipType: e.target.value as 'self_maintained' | 'seeking_adopter',
+                      })
+                    }
+                    className="mt-1"
+                  />
+                  <div>
+                    <div className="font-medium">I'll maintain it myself</div>
+                    <div className="text-sm text-gray-600 mt-1">
+                      You have the skills and time to develop this idea yourself. You'll retain full
+                      control over the direction and implementation.
+                    </div>
+                  </div>
+                </label>
+
+                <label
+                  className={`flex items-start space-x-3 p-4 border rounded-lg cursor-pointer transition-all ${
+                    formData.ownershipType === 'seeking_adopter'
+                      ? 'border-primary bg-primary/5 text-primary'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    value="seeking_adopter"
+                    checked={formData.ownershipType === 'seeking_adopter'}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        ownershipType: e.target.value as 'self_maintained' | 'seeking_adopter',
+                      })
+                    }
+                    className="mt-1"
+                  />
+                  <div>
+                    <div className="font-medium">Looking for an adopter</div>
+                    <div className="text-sm text-gray-600 mt-1">
+                      You want someone else to take ownership and develop this idea. Humanet will
+                      notify you when someone wants to adopt it, and you can choose the best
+                      candidate.
+                    </div>
+                  </div>
+                </label>
+              </div>
+
+              {formData.ownershipType === 'seeking_adopter' && (
+                <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div className="flex items-start space-x-2">
+                    <div className="text-blue-600 mt-0.5">ℹ️</div>
+                    <div className="text-sm text-blue-800">
+                      <strong>Note:</strong> You'll receive notifications when someone wants to
+                      adopt your idea. You can review their qualifications and plans before
+                      approving. If multiple people want to adopt it, the community will vote
+                      democratically to select the best candidate.
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Licensing */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <FileText className="h-5 w-5" />
+              <span>License & Usage Rights</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-3">
+                Choose a license for your idea *
+              </label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {licenseTemplates
+                  .filter((license) => license.popular)
+                  .map((license) => (
+                    <label
+                      key={license.type}
+                      className={`flex items-start space-x-3 p-4 border rounded-lg cursor-pointer transition-all ${
+                        formData.license.type === license.type
+                          ? 'border-primary bg-primary/5 text-primary'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        value={license.type}
+                        checked={formData.license.type === license.type}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            license: {
+                              ...formData.license,
+                              type: e.target.value as any,
+                              allowCommercialUse: license.allowCommercialUse,
+                              requireAttribution: license.requireAttribution,
+                            },
+                          })
+                        }
+                        className="mt-1"
+                      />
+                      <div className="flex-1">
+                        <div className="font-medium flex items-center space-x-2">
+                          <span>{license.name}</span>
+                          <Badge variant="secondary" className="text-xs">
+                            Popular
+                          </Badge>
+                        </div>
+                        <div className="text-sm text-gray-600 mt-1">{license.description}</div>
+                      </div>
+                    </label>
+                  ))}
+              </div>
+
+              <details className="mt-4">
+                <summary className="cursor-pointer text-sm text-gray-600 hover:text-gray-800">
+                  Show more license options
+                </summary>
+                <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {licenseTemplates
+                    .filter((license) => !license.popular)
+                    .map((license) => (
+                      <label
+                        key={license.type}
+                        className={`flex items-start space-x-3 p-4 border rounded-lg cursor-pointer transition-all ${
+                          formData.license.type === license.type
+                            ? 'border-primary bg-primary/5 text-primary'
+                            : 'border-gray-200 hover:border-gray-300'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          value={license.type}
+                          checked={formData.license.type === license.type}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              license: {
+                                ...formData.license,
+                                type: e.target.value as any,
+                                allowCommercialUse: license.allowCommercialUse,
+                                requireAttribution: license.requireAttribution,
+                              },
+                            })
+                          }
+                          className="mt-1"
+                        />
+                        <div className="flex-1">
+                          <div className="font-medium">{license.name}</div>
+                          <div className="text-sm text-gray-600 mt-1">{license.description}</div>
+                        </div>
+                      </label>
+                    ))}
+                </div>
+              </details>
+
+              {formData.license.type === 'custom' && (
+                <div className="mt-4">
+                  <label
+                    htmlFor="customLicense"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Custom License Text
+                  </label>
+                  <textarea
+                    id="customLicense"
+                    value={formData.license.customText || ''}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        license: { ...formData.license, customText: e.target.value },
+                      })
+                    }
+                    rows={6}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Enter your custom license terms..."
+                    required
+                  />
+                </div>
+              )}
+
+              <div className="mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                <div className="text-sm text-gray-700">
+                  <strong>Your license allows:</strong>
+                  <ul className="mt-2 space-y-1">
+                    <li>
+                      ✅ Attribution required: {formData.license.requireAttribution ? 'Yes' : 'No'}
+                    </li>
+                    <li>
+                      ✅ Commercial use:{' '}
+                      {formData.license.allowCommercialUse ? 'Allowed' : 'Not allowed'}
+                    </li>
+                    <li>✅ Modification and distribution</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </CardContent>

@@ -29,6 +29,30 @@ export const createIdeaSchema = z.object({
   // Repository options
   autoCreateRepository: z.boolean().optional().default(false),
   repositoryTemplate: z.enum(['basic', 'research', 'technical']).optional().default('basic'),
+
+  // Ownership and Adoption
+  ownershipType: z.enum(['self_maintained', 'seeking_adopter']).default('self_maintained'),
+
+  // Licensing
+  license: z
+    .object({
+      type: z.enum([
+        'MIT',
+        'Apache-2.0',
+        'GPL-3.0',
+        'BSD-3-Clause',
+        'CC-BY-4.0',
+        'CC-BY-SA-4.0',
+        'custom',
+      ]),
+      customText: z.string().max(5000).optional(),
+      allowCommercialUse: z.boolean(),
+      requireAttribution: z.boolean(),
+    })
+    .refine(
+      (data) => data.type !== 'custom' || (data.customText && data.customText.trim().length > 0),
+      { message: 'Custom license text is required when using custom license type' }
+    ),
 });
 
 export const updateIdeaSchema = z.object({
@@ -62,6 +86,8 @@ export const ideaSearchSchema = z.object({
     .string()
     .regex(/^[0-9a-fA-F]{24}$/)
     .optional(),
+  ownershipType: z.enum(['self_maintained', 'seeking_adopter']).optional(),
+  adoptionStatus: z.enum(['available', 'pending', 'adopted', 'not_available']).optional(),
   page: z.string().transform(Number).pipe(z.number().min(1)).optional().default('1'),
   limit: z.string().transform(Number).pipe(z.number().min(1).max(100)).optional().default('20'),
   sortBy: z.enum(['createdAt', 'upvotes', 'forkCount']).optional().default('createdAt'),

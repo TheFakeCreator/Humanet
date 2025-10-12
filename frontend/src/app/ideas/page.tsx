@@ -7,39 +7,55 @@ import { IdeaCard } from '@/components/ui/IdeaCard';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { CardLoader, ListLoader } from '@/components/ui/loading';
-import { 
-  Plus, 
-  Clock, 
-  Flame, 
-  GitFork, 
-  Monitor, 
-  Microscope, 
-  Briefcase, 
-  Users, 
-  Leaf, 
-  Cross, 
-  GraduationCap, 
-  Settings, 
-  Globe, 
+import {
+  Plus,
+  Clock,
+  Flame,
+  GitFork,
+  Monitor,
+  Microscope,
+  Briefcase,
+  Users,
+  Leaf,
+  Cross,
+  GraduationCap,
+  Settings,
+  Globe,
   Lightbulb,
   BarChart3,
-  AlertCircle
+  AlertCircle,
+  Crown,
+  UserPlus,
 } from 'lucide-react';
 
 export default function IdeasPage() {
   const { data: user } = useAuth();
   const [sortBy, setSortBy] = useState<'createdAt' | 'upvotes' | 'forkCount'>('createdAt');
   const [selectedDomain, setSelectedDomain] = useState<string>('');
+  const [selectedOwnershipType, setSelectedOwnershipType] = useState<string>('');
   const [page, setPage] = useState(1);
 
-  const { data: ideasData, isLoading, error } = useIdeas({ 
-    sortBy, 
-    domain: selectedDomain ? [selectedDomain] : undefined, 
-    page, 
-    limit: 10 
+  const {
+    data: ideasData,
+    isLoading,
+    error,
+  } = useIdeas({
+    sortBy,
+    domain: selectedDomain ? [selectedDomain] : undefined,
+    ownershipType: selectedOwnershipType
+      ? (selectedOwnershipType as 'self_maintained' | 'seeking_adopter')
+      : undefined,
+    page,
+    limit: 10,
   });
 
   if (isLoading) {
@@ -54,12 +70,12 @@ export default function IdeasPage() {
                 Post Idea
               </Button>
             </div>
-            
+
             <div className="flex gap-6">
               <div className="flex-1 max-w-3xl">
                 <ListLoader count={5} />
               </div>
-              
+
               <div className="w-80 space-y-4">
                 <CardLoader />
                 <CardLoader />
@@ -119,7 +135,10 @@ export default function IdeasPage() {
               <div className="flex flex-wrap gap-4 items-center">
                 <div className="flex items-center gap-2">
                   <label className="text-sm font-medium">Sort:</label>
-                  <Select value={sortBy} onValueChange={(value) => setSortBy(value as typeof sortBy)}>
+                  <Select
+                    value={sortBy}
+                    onValueChange={(value) => setSortBy(value as typeof sortBy)}
+                  >
                     <SelectTrigger className="w-40">
                       <SelectValue />
                     </SelectTrigger>
@@ -148,7 +167,10 @@ export default function IdeasPage() {
 
                 <div className="flex items-center gap-2">
                   <label className="text-sm font-medium">Domain:</label>
-                  <Select value={selectedDomain || "all"} onValueChange={(value) => setSelectedDomain(value === "all" ? "" : value)}>
+                  <Select
+                    value={selectedDomain || 'all'}
+                    onValueChange={(value) => setSelectedDomain(value === 'all' ? '' : value)}
+                  >
                     <SelectTrigger className="w-48">
                       <SelectValue placeholder="All domains" />
                     </SelectTrigger>
@@ -205,6 +227,35 @@ export default function IdeasPage() {
                     </SelectContent>
                   </Select>
                 </div>
+
+                <div className="flex items-center gap-2">
+                  <label className="text-sm font-medium">Ownership:</label>
+                  <Select
+                    value={selectedOwnershipType || 'all'}
+                    onValueChange={(value) =>
+                      setSelectedOwnershipType(value === 'all' ? '' : value)
+                    }
+                  >
+                    <SelectTrigger className="w-48">
+                      <SelectValue placeholder="All types" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Types</SelectItem>
+                      <SelectItem value="self_maintained">
+                        <div className="flex items-center gap-2">
+                          <Crown className="w-4 h-4" />
+                          Self-Maintained
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="seeking_adopter">
+                        <div className="flex items-center gap-2">
+                          <UserPlus className="w-4 h-4" />
+                          Seeking Adopter
+                        </div>
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
             </Card>
 
@@ -231,10 +282,7 @@ export default function IdeasPage() {
             ) : (
               <div className="space-y-3">
                 {ideas.map((idea) => (
-                  <IdeaCard
-                    key={idea._id}
-                    idea={idea}
-                  />
+                  <IdeaCard key={idea._id} idea={idea} />
                 ))}
               </div>
             )}
@@ -243,14 +291,10 @@ export default function IdeasPage() {
             {pagination && pagination.pages > 1 && (
               <div className="mt-6 flex justify-center">
                 <nav className="flex items-center space-x-2">
-                  <Button
-                    variant="outline"
-                    onClick={() => setPage(page - 1)}
-                    disabled={page <= 1}
-                  >
+                  <Button variant="outline" onClick={() => setPage(page - 1)} disabled={page <= 1}>
                     ← Previous
                   </Button>
-                  
+
                   <div className="flex space-x-1">
                     {[...Array(Math.min(pagination.pages, 7))].map((_, i) => {
                       let pageNum;
@@ -263,13 +307,13 @@ export default function IdeasPage() {
                       } else {
                         pageNum = page - 3 + i;
                       }
-                      
+
                       const isCurrentPage = pageNum === page;
-                      
+
                       return (
                         <Button
                           key={pageNum}
-                          variant={isCurrentPage ? "default" : "outline"}
+                          variant={isCurrentPage ? 'default' : 'outline'}
                           onClick={() => setPage(pageNum)}
                         >
                           {pageNum}
@@ -277,7 +321,7 @@ export default function IdeasPage() {
                       );
                     })}
                   </div>
-                  
+
                   <Button
                     variant="outline"
                     onClick={() => setPage(page + 1)}
@@ -332,8 +376,8 @@ export default function IdeasPage() {
               <CardContent className="space-y-2">
                 {/* All domains option */}
                 <Button
-                  variant={selectedDomain === "" ? "secondary" : "ghost"}
-                  onClick={() => setSelectedDomain("")}
+                  variant={selectedDomain === '' ? 'secondary' : 'ghost'}
+                  onClick={() => setSelectedDomain('')}
                   className="w-full justify-between h-auto py-2"
                 >
                   <span className="flex items-center gap-2">
@@ -344,19 +388,19 @@ export default function IdeasPage() {
                     {pagination?.total || 0}
                   </Badge>
                 </Button>
-                
+
                 {[
                   { name: 'Technology', icon: Monitor, count: 42 },
                   { name: 'Science', icon: Microscope, count: 28 },
                   { name: 'Business', icon: Briefcase, count: 35 },
                   { name: 'Social', icon: Users, count: 19 },
-                  { name: 'Environment', icon: Leaf, count: 23 }
+                  { name: 'Environment', icon: Leaf, count: 23 },
                 ].map((domain) => {
                   const IconComponent = domain.icon;
                   return (
                     <Button
                       key={domain.name}
-                      variant={selectedDomain === domain.name.toLowerCase() ? "secondary" : "ghost"}
+                      variant={selectedDomain === domain.name.toLowerCase() ? 'secondary' : 'ghost'}
                       onClick={() => setSelectedDomain(domain.name.toLowerCase())}
                       className="w-full justify-between h-auto py-2"
                     >

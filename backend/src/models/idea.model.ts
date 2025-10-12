@@ -59,6 +59,54 @@ export interface IIdea extends Document {
   fileCount: number; // Number of files in repository
   repositorySize: number; // Total size in bytes
 
+  // Ownership and Adoption System
+  ownershipType: 'self_maintained' | 'seeking_adopter'; // Creator's intent
+  currentMaintainer?: Types.ObjectId; // Current maintainer (initially author)
+  originalCreator: Types.ObjectId; // Always preserved, non-editable
+  adoptionStatus: 'available' | 'pending' | 'adopted' | 'not_available'; // Adoption state
+  adoptionRequests: Types.ObjectId[]; // Active adoption requests
+  pendingAdoption?: {
+    adopterId: Types.ObjectId;
+    requestedAt: Date;
+    approvedAt?: Date;
+    message?: string;
+  };
+  adoptionHistory: {
+    previousMaintainer: Types.ObjectId;
+    newMaintainer: Types.ObjectId;
+    transferredAt: Date;
+    reason: string;
+  }[];
+
+  // Licensing
+  license: {
+    type:
+      | 'MIT'
+      | 'Apache-2.0'
+      | 'GPL-3.0'
+      | 'BSD-3-Clause'
+      | 'CC-BY-4.0'
+      | 'CC-BY-SA-4.0'
+      | 'custom';
+    customText?: string; // For custom licenses
+    allowCommercialUse: boolean;
+    requireAttribution: boolean;
+  };
+
+  // Democratic voting for disputed adoptions
+  activeVoting?: {
+    candidateRequestIds: Types.ObjectId[]; // Adoption request IDs competing for adoption
+    votes: {
+      voterId: Types.ObjectId;
+      candidateRequestId: Types.ObjectId;
+      timestamp: Date;
+      supportingReason?: string;
+    }[];
+    votingEndsAt: Date;
+    startedAt: Date;
+    description: string;
+  };
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -301,6 +349,147 @@ const IdeaSchema = new Schema<IIdea>(
       default: 0,
       min: 0,
     },
+
+    // Ownership and Adoption System
+    ownershipType: {
+      type: String,
+      enum: ['self_maintained', 'seeking_adopter'],
+      required: true,
+      default: 'self_maintained',
+    },
+    currentMaintainer: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    originalCreator: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+      immutable: true, // Cannot be changed after creation
+    },
+    adoptionStatus: {
+      type: String,
+      enum: ['available', 'pending', 'adopted', 'not_available'],
+      default: function (this: IIdea) {
+        return this.ownershipType === 'seeking_adopter' ? 'available' : 'not_available';
+      },
+    },
+    adoptionRequests: {
+      type: [Schema.Types.ObjectId],
+      default: [],
+      ref: 'AdoptionRequest',
+    },
+    pendingAdoption: {
+      adopterId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+      requestedAt: {
+        type: Date,
+      },
+      approvedAt: {
+        type: Date,
+      },
+      message: {
+        type: String,
+        maxlength: 500,
+      },
+    },
+    adoptionHistory: [
+      {
+        previousMaintainer: {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+          required: true,
+        },
+        newMaintainer: {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+          required: true,
+        },
+        transferredAt: {
+          type: Date,
+          default: Date.now,
+        },
+        reason: {
+          type: String,
+          required: true,
+          maxlength: 200,
+        },
+      },
+    ],
+
+    // Licensing
+    license: {
+      type: {
+        type: String,
+        enum: [
+          'MIT',
+          'Apache-2.0',
+          'GPL-3.0',
+          'BSD-3-Clause',
+          'CC-BY-4.0',
+          'CC-BY-SA-4.0',
+          'custom',
+        ],
+        required: true,
+        default: 'MIT',
+      },
+      customText: {
+        type: String,
+        maxlength: 5000,
+      },
+      allowCommercialUse: {
+        type: Boolean,
+        required: true,
+        default: true,
+      },
+      requireAttribution: {
+        type: Boolean,
+        required: true,
+        default: true,
+      },
+    },
+
+    // Democratic voting for disputed adoptions
+    activeVoting: {
+      candidateRequestIds: {
+        type: [Schema.Types.ObjectId],
+        ref: 'AdoptionRequest',
+      },
+      votes: [
+        {
+          voterId: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+          },
+          candidateRequestId: {
+            type: Schema.Types.ObjectId,
+            ref: 'AdoptionRequest',
+            required: true,
+          },
+          timestamp: {
+            type: Date,
+            default: Date.now,
+          },
+          supportingReason: {
+            type: String,
+            maxlength: 500,
+          },
+        },
+      ],
+      votingEndsAt: {
+        type: Date,
+      },
+      startedAt: {
+        type: Date,
+      },
+      description: {
+        type: String,
+        maxlength: 500,
+      },
+    },
   },
   {
     timestamps: true,
@@ -349,6 +538,13 @@ IdeaSchema.index({ status: 1, visibility: 1, createdAt: -1 });
 IdeaSchema.index({ author: 1, status: 1, createdAt: -1 });
 IdeaSchema.index({ domain: 1, upvotes: -1, createdAt: -1 });
 
+// New indexes for ownership and adoption system
+IdeaSchema.index({ ownershipType: 1, adoptionStatus: 1 });
+IdeaSchema.index({ currentMaintainer: 1 });
+IdeaSchema.index({ originalCreator: 1 });
+IdeaSchema.index({ 'activeVoting.votingEndsAt': 1 });
+IdeaSchema.index({ 'license.type': 1 });
+
 // Methods
 IdeaSchema.methods.incrementView = function () {
   this.viewCount += 1;
@@ -364,11 +560,43 @@ IdeaSchema.methods.addCollaborator = function (userId: Types.ObjectId) {
 };
 
 IdeaSchema.methods.canEdit = function (userId: Types.ObjectId) {
-  return this.author.equals(userId) || this.collaborators.includes(userId);
+  // Original creator can always edit until adoption is complete
+  if (this.originalCreator && this.originalCreator.equals(userId)) {
+    return this.adoptionStatus !== 'adopted';
+  }
+  // Current maintainer can edit if adoption is complete
+  if (this.currentMaintainer && this.currentMaintainer.equals(userId)) {
+    return this.adoptionStatus === 'adopted';
+  }
+  // Collaborators can edit based on maintainer's permission
+  return this.collaborators.includes(userId);
 };
 
-// Pre-save middleware to calculate depth and fork path
+IdeaSchema.methods.canManage = function (userId: Types.ObjectId) {
+  // Only original creator can manage adoption process
+  return this.originalCreator && this.originalCreator.equals(userId);
+};
+
+// Pre-save middleware to calculate depth, fork path, and ownership
 IdeaSchema.pre<IIdea>('save', async function (next) {
+  // Set original creator and current maintainer for new ideas
+  if (this.isNew) {
+    if (!this.originalCreator) {
+      this.originalCreator = this.author;
+    }
+    if (!this.currentMaintainer) {
+      this.currentMaintainer = this.author;
+    }
+
+    // Set adoption status based on ownership type
+    if (this.ownershipType === 'seeking_adopter') {
+      this.adoptionStatus = 'available';
+    } else {
+      this.adoptionStatus = 'not_available';
+    }
+  }
+
+  // Handle fork path and depth calculation
   if (this.isNew && this.parentId) {
     try {
       const parent = await IdeaModel.findById(this.parentId);
@@ -381,6 +609,7 @@ IdeaSchema.pre<IIdea>('save', async function (next) {
       return next(error as Error);
     }
   }
+
   next();
 });
 
