@@ -14,6 +14,7 @@ interface VotingCandidate {
   qualifications: string;
   proposedChanges: string;
   timeline: string;
+  message: string;
 }
 
 interface VotingData {
@@ -76,6 +77,7 @@ export class VotingService {
       qualifications: request.qualifications,
       proposedChanges: request.proposedChanges,
       timeline: request.timeline,
+      message: request.message, // Include the original adoption request message
     }));
 
     const totalVotes = candidates.reduce((sum, candidate) => sum + candidate.votesReceived, 0);

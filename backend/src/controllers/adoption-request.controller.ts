@@ -195,4 +195,30 @@ export class AdoptionRequestController {
       next(error);
     }
   }
+
+  /**
+   * Manually trigger voting for an idea with multiple adoption requests
+   */
+  static async triggerVoting(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
+    try {
+      if (!req.user) {
+        res.status(401).json({
+          success: false,
+          error: 'Authentication required',
+        });
+        return;
+      }
+
+      const { ideaId } = req.params;
+      const result = await AdoptionRequestService.manuallyTriggerVoting(ideaId, req.user._id);
+
+      res.json({
+        success: true,
+        data: result,
+        message: 'Voting triggered successfully',
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }

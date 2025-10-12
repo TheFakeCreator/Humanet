@@ -15,8 +15,9 @@ export interface AdoptionRequest {
   proposedChanges: string;
   timeline: string;
   status: 'pending' | 'approved' | 'rejected';
-  createdAt: string;
-  updatedAt: string;
+  requestedAt: string;
+  respondedAt?: string;
+  expiresAt: string;
 }
 
 export interface CreateAdoptionRequestData {
@@ -27,7 +28,7 @@ export interface CreateAdoptionRequestData {
 }
 
 export interface RespondToAdoptionRequestData {
-  response: 'approve' | 'reject';
+  action: 'approve' | 'reject';
   message?: string;
 }
 
@@ -42,7 +43,7 @@ export const useCreateAdoptionRequest = () => {
     },
     onSuccess: (_, { ideaId }) => {
       // Invalidate the idea query to refresh the UI
-      queryClient.invalidateQueries({ queryKey: ['idea', ideaId] });
+      queryClient.invalidateQueries({ queryKey: ['ideas', ideaId] }); // Fixed: match useIdea hook query key
       queryClient.invalidateQueries({ queryKey: ['adoptionRequests', 'idea', ideaId] });
     },
   });
@@ -121,5 +122,23 @@ export const useAdoptionRequest = (requestId: string) => {
       return response.data.data as AdoptionRequest;
     },
     enabled: !!requestId,
+  });
+};
+
+// Trigger voting manually
+export const useTriggerVoting = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (ideaId: string) => {
+      const response = await api.post(`/adoption-requests/trigger-voting/${ideaId}`);
+      return response.data;
+    },
+    onSuccess: (_, ideaId) => {
+      // Invalidate related queries
+      queryClient.invalidateQueries({ queryKey: ['ideas', ideaId] }); // Fixed: match useIdea hook query key
+      queryClient.invalidateQueries({ queryKey: ['adoptionRequests', 'idea', ideaId] });
+      queryClient.invalidateQueries({ queryKey: ['voting', 'active', ideaId] });
+    },
   });
 };

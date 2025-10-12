@@ -4,6 +4,7 @@ import { AppError } from '../middlewares/error.middleware.js';
 import { CreateIdeaInput, IdeaSearchInput } from '../validation/idea.schema.js';
 import type { IdeaDTO, IdeaTreeNode, PaginatedResponse } from '@humanet/shared';
 import { IdeaRepositoryService } from './idea-repository.service.js';
+import { VotingService } from './voting.service.js';
 
 export class IdeaService {
   private static repositoryService = new IdeaRepositoryService();
@@ -53,7 +54,7 @@ export class IdeaService {
       }
     }
 
-    return this.mapToDTO(idea, authorId);
+    return await this.mapToDTO(idea, authorId);
   }
 
   static async getIdeaById(ideaId: string, userId?: string): Promise<IdeaDTO> {
@@ -67,7 +68,7 @@ export class IdeaService {
       throw new AppError('Idea not found', 404);
     }
 
-    return this.mapToDTO(idea, userId);
+    return await this.mapToDTO(idea, userId);
   }
 
   static async getIdeas(
@@ -137,7 +138,7 @@ export class IdeaService {
       IdeaModel.countDocuments(query),
     ]);
 
-    const data = ideas.map((idea) => this.mapToDTO(idea, userId));
+    const data = await Promise.all(ideas.map((idea) => this.mapToDTO(idea, userId)));
 
     return {
       data,
@@ -180,7 +181,7 @@ export class IdeaService {
     await UserModel.findByIdAndUpdate(originalIdea.author, { $inc: { karma: 2 } });
 
     await fork.populate('author', 'username karma');
-    return this.mapToDTO(fork, userId);
+    return await this.mapToDTO(fork, userId);
   }
 
   static async upvoteIdea(
@@ -272,7 +273,35 @@ export class IdeaService {
     return buildTree(ideaId, 0);
   }
 
-  private static mapToDTO(idea: any, userId?: string): IdeaDTO {
+  private static async mapToDTO(idea: any, userId?: string): Promise<IdeaDTO> {
+    // Get voting data if active
+    let activeVoting = undefined;
+    if (idea.activeVoting && idea.activeVoting.votingEndsAt) {
+      try {
+        const votingData = await VotingService.getActiveVoting(idea._id.toString(), userId);
+        if (votingData) {
+          activeVoting = {
+            candidates: votingData.candidates.map((candidate) => ({
+              _id: candidate.requestId,
+              username: candidate.requester.username,
+              votesReceived: candidate.votesReceived,
+              karma: candidate.requester.karma,
+              qualifications: candidate.qualifications,
+              proposedChanges: candidate.proposedChanges,
+              timeline: candidate.timeline,
+              message: candidate.message,
+            })),
+            totalVotes: votingData.totalVotes,
+            votingEndsAt: votingData.votingEndsAt.toISOString(),
+            hasUserVoted: votingData.userHasVoted,
+            userVotedFor: votingData.userVotedFor,
+          };
+        }
+      } catch (error) {
+        console.warn('Failed to get voting data for idea:', idea._id, error);
+      }
+    }
+
     return {
       _id: idea._id.toString(),
       title: idea.title,
@@ -329,26 +358,7 @@ export class IdeaService {
       license: idea.license,
 
       // Democratic voting (if active)
-      activeVoting:
-        idea.activeVoting && idea.activeVoting.votingEndsAt
-          ? {
-              candidates: Array.from(idea.activeVoting.candidates || []).map(
-                (candidateId: any) => ({
-                  _id: candidateId.toString(),
-                  username: 'Unknown', // Would need to populate
-                  votesReceived: 0, // Would need to calculate
-                })
-              ),
-              totalVotes: idea.activeVoting.votes ? idea.activeVoting.votes.size : 0,
-              votingEndsAt: idea.activeVoting.votingEndsAt.toISOString(),
-              hasUserVoted:
-                userId && idea.activeVoting.votes ? idea.activeVoting.votes.has(userId) : false,
-              userVotedFor:
-                userId && idea.activeVoting.votes
-                  ? idea.activeVoting.votes.get(userId)?.toString()
-                  : undefined,
-            }
-          : undefined,
+      activeVoting,
 
       createdAt: idea.createdAt.toISOString(),
       updatedAt: idea.updatedAt.toISOString(),

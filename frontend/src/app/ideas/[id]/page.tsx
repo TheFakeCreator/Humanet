@@ -8,7 +8,9 @@ import {
   useCreateAdoptionRequest,
   useAdoptionRequestsForIdea,
   useRespondToAdoptionRequest,
+  useTriggerVoting,
 } from '@/hooks/useAdoptionRequests';
+import { useSubmitVote } from '@/hooks/useVoting';
 import { CommentList } from '@/components/ui/CommentList';
 import { FamilyTreePreview } from '@/components/ui/FamilyTreePreview';
 import { FileSystemTab } from '@/components/ui/FileSystemTab';
@@ -18,6 +20,24 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from '@/components/ui/dialog';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from '@/hooks/use-toast';
 import {
@@ -44,6 +64,9 @@ import {
   Lock,
   CheckCircle,
   X,
+  AlertTriangle,
+  UserCheck,
+  ArrowRight,
 } from 'lucide-react';
 import { OwnershipType, AdoptionStatus } from '@shared/types/idea';
 
@@ -287,12 +310,18 @@ export default function IdeaDetailPage() {
   const upvoteMutation = useUpvoteIdea();
   const createAdoptionRequestMutation = useCreateAdoptionRequest();
 
-  // Only fetch adoption requests if user is the idea creator
+  // Only fetch adoption requests if user is the idea creator (for management purposes)
   const { data: adoptionRequests } = useAdoptionRequestsForIdea(ideaId, {
     enabled: user && idea && user._id === idea.originalCreator?._id,
   });
 
   const respondToAdoptionRequestMutation = useRespondToAdoptionRequest();
+  const submitVoteMutation = useSubmitVote();
+  const triggerVotingMutation = useTriggerVoting();
+
+  // Voting confirmation dialog state
+  const [votingDialogOpen, setVotingDialogOpen] = useState(false);
+  const [selectedCandidate, setSelectedCandidate] = useState<any>(null);
 
   const handleUpvote = () => {
     if (!idea?._id) return;
@@ -572,7 +601,7 @@ export default function IdeaDetailPage() {
                                       </div>
                                       <p className="text-sm text-yellow-700 mb-2">
                                         Requested on{' '}
-                                        {new Date(request.createdAt).toLocaleDateString()}
+                                        {new Date(request.requestedAt).toLocaleDateString()}
                                       </p>
                                       <div className="space-y-3">
                                         {request.message && (
@@ -627,7 +656,7 @@ export default function IdeaDetailPage() {
                                         try {
                                           await respondToAdoptionRequestMutation.mutateAsync({
                                             requestId: request._id,
-                                            data: { response: 'approve' },
+                                            data: { action: 'approve' },
                                           });
                                           toast({
                                             title: 'Adoption Approved',
@@ -656,7 +685,7 @@ export default function IdeaDetailPage() {
                                         try {
                                           await respondToAdoptionRequestMutation.mutateAsync({
                                             requestId: request._id,
-                                            data: { response: 'reject' },
+                                            data: { action: 'reject' },
                                           });
                                           toast({
                                             title: 'Adoption Request Declined',
@@ -708,6 +737,395 @@ export default function IdeaDetailPage() {
                       </CardContent>
                     </Card>
                   )}
+
+                {/* Trigger Voting Button - Only show for creators when there are multiple requests but no active voting */}
+                {user &&
+                  user._id === idea.originalCreator?._id &&
+                  adoptionRequests &&
+                  adoptionRequests.length >= 2 &&
+                  !idea.activeVoting && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Vote className="h-5 w-5" />
+                          Trigger Democratic Voting
+                        </CardTitle>
+                        <CardDescription>
+                          Multiple adoption requests detected. You can trigger community voting to
+                          let users decide.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Users className="h-4 w-4 text-blue-600" />
+                            <span className="font-medium text-blue-800">
+                              {adoptionRequests.length} adoption requests pending
+                            </span>
+                          </div>
+                          <p className="text-sm text-blue-700">
+                            Instead of choosing manually, you can let the community vote for the
+                            best candidate. This creates a fair, transparent selection process.
+                          </p>
+                        </div>
+
+                        <Button
+                          onClick={async () => {
+                            try {
+                              await triggerVotingMutation.mutateAsync(ideaId);
+                              toast({
+                                title: 'Voting Triggered',
+                                description:
+                                  'Community voting has been initiated. Users can now vote for their preferred candidate.',
+                              });
+                            } catch (error: any) {
+                              toast({
+                                title: 'Error',
+                                description:
+                                  error.response?.data?.message || 'Failed to trigger voting.',
+                                variant: 'destructive',
+                              });
+                            }
+                          }}
+                          disabled={triggerVotingMutation.isPending}
+                          className="w-full bg-blue-600 hover:bg-blue-700"
+                        >
+                          <Vote className="h-4 w-4 mr-2" />
+                          {triggerVotingMutation.isPending
+                            ? 'Starting Voting...'
+                            : 'Start Community Voting'}
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                {/* Democratic Voting Section */}
+                {idea.activeVoting && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Vote className="h-5 w-5" />
+                        Community Voting
+                      </CardTitle>
+                      <CardDescription>
+                        Multiple adoption requests triggered democratic voting. Community members
+                        vote for the best candidate.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        {/* Voting Status */}
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                              <Clock className="h-4 w-4 text-blue-600" />
+                              <span className="font-medium text-blue-800">
+                                {idea.activeVoting.hasUserVoted
+                                  ? 'You Have Voted'
+                                  : 'Voting Active'}
+                              </span>
+                            </div>
+                            <Badge
+                              variant="outline"
+                              className="bg-blue-100 text-blue-800 border-blue-300"
+                            >
+                              {idea.activeVoting.totalVotes} votes cast
+                            </Badge>
+                          </div>
+                          <p className="text-sm text-blue-700">
+                            Voting ends on{' '}
+                            {new Date(idea.activeVoting.votingEndsAt).toLocaleDateString()} at{' '}
+                            {new Date(idea.activeVoting.votingEndsAt).toLocaleTimeString()}
+                          </p>
+                          {idea.activeVoting.hasUserVoted ? (
+                            <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-md">
+                              <p className="text-sm text-green-700 flex items-center gap-2">
+                                <CheckCircle className="h-4 w-4 text-green-600" />
+                                Your vote has been cast and <strong>cannot be changed</strong>.
+                                Thank you for participating!
+                              </p>
+                              {idea.activeVoting.userVotedFor && (
+                                <p className="text-xs text-green-600 mt-1">
+                                  You voted for:{' '}
+                                  <strong>
+                                    {
+                                      idea.activeVoting.candidates.find(
+                                        (c) => c._id === idea.activeVoting?.userVotedFor
+                                      )?.username
+                                    }
+                                  </strong>
+                                </p>
+                              )}
+                            </div>
+                          ) : user ? (
+                            <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-md">
+                              <p className="text-sm text-amber-700 flex items-center gap-2">
+                                <AlertTriangle className="h-4 w-4 text-amber-600" />
+                                <strong>Remember:</strong> Your vote is final and cannot be changed
+                                once cast.
+                              </p>
+                            </div>
+                          ) : (
+                            <div className="mt-3 p-3 bg-gray-50 border border-gray-200 rounded-md">
+                              <p className="text-sm text-gray-600">
+                                Sign in to participate in this voting election.
+                              </p>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Candidates */}
+                        <div className="space-y-3">
+                          <h4 className="font-medium text-gray-900">
+                            Candidates ({idea.activeVoting.candidates.length})
+                          </h4>
+                          <div className="grid gap-3">
+                            {idea.activeVoting.candidates.map((candidate) => {
+                              const isUserVote = idea.activeVoting?.userVotedFor === candidate._id;
+                              const totalVotes = idea.activeVoting?.totalVotes || 0;
+                              const votePercentage =
+                                totalVotes > 0 ? (candidate.votesReceived / totalVotes) * 100 : 0;
+
+                              // Find the corresponding adoption request for additional details
+                              const candidateDetails = candidate; // Use candidate data from voting object
+
+                              return (
+                                <div
+                                  key={candidate._id}
+                                  className={`border rounded-lg p-4 ${
+                                    isUserVote ? 'border-green-300 bg-green-50' : 'border-gray-200'
+                                  }`}
+                                >
+                                  {/* Candidate Header */}
+                                  <div className="flex items-center justify-between mb-2">
+                                    <div className="flex items-center gap-2">
+                                      <User className="h-4 w-4 text-gray-500" />
+                                      <Link
+                                        href={`/users/${candidate.username}`}
+                                        className="font-medium text-lg text-blue-600 hover:text-blue-800 hover:underline transition-colors"
+                                      >
+                                        {candidate.username}
+                                      </Link>
+                                      {isUserVote && (
+                                        <Badge className="bg-green-100 text-green-800 border-green-300">
+                                          Your Vote
+                                        </Badge>
+                                      )}
+                                    </div>
+                                    <div className="text-right">
+                                      <div className="font-bold text-xl text-blue-600">
+                                        {candidate.votesReceived}
+                                      </div>
+                                      <div className="text-xs text-gray-500">
+                                        {votePercentage.toFixed(1)}% of votes
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  {/* Skills/Domains Tags */}
+                                  {candidateDetails && candidateDetails.qualifications && (
+                                    <div className="flex flex-wrap gap-1 mb-3">
+                                      {(() => {
+                                        // Extract meaningful skills from qualifications text
+                                        const skillKeywords = [
+                                          'JavaScript',
+                                          'TypeScript',
+                                          'React',
+                                          'Node.js',
+                                          'Python',
+                                          'Java',
+                                          'Go',
+                                          'Rust',
+                                          'Frontend',
+                                          'Backend',
+                                          'Full-stack',
+                                          'DevOps',
+                                          'Cloud',
+                                          'AWS',
+                                          'Azure',
+                                          'Docker',
+                                          'Kubernetes',
+                                          'AI',
+                                          'ML',
+                                          'Data Science',
+                                          'Blockchain',
+                                          'UI/UX',
+                                          'Design',
+                                          'Mobile',
+                                          'iOS',
+                                          'Android',
+                                          'Flutter',
+                                          'React Native',
+                                          'Leadership',
+                                          'Management',
+                                          'Startup',
+                                          'Enterprise',
+                                        ];
+
+                                        const qualText =
+                                          candidateDetails.qualifications.toLowerCase();
+                                        const foundSkills = skillKeywords
+                                          .filter((skill) => qualText.includes(skill.toLowerCase()))
+                                          .slice(0, 4);
+
+                                        // If no specific skills found, use domain-based tags
+                                        if (foundSkills.length === 0) {
+                                          const domainTags = idea.domain?.slice(0, 3) || [
+                                            'Technology',
+                                          ];
+                                          return domainTags.map((domain, index) => (
+                                            <Badge
+                                              key={index}
+                                              variant="secondary"
+                                              className="text-xs px-2 py-1"
+                                            >
+                                              {domain}
+                                            </Badge>
+                                          ));
+                                        }
+
+                                        return foundSkills.map((skill, index) => (
+                                          <Badge
+                                            key={index}
+                                            variant="secondary"
+                                            className="text-xs px-2 py-1"
+                                          >
+                                            {skill}
+                                          </Badge>
+                                        ));
+                                      })()}
+                                      <Badge
+                                        variant="outline"
+                                        className="text-xs px-2 py-1 text-gray-500"
+                                      >
+                                        {candidateDetails.karma || 0} karma
+                                      </Badge>
+                                    </div>
+                                  )}
+
+                                  {/* Vote Progress Bar */}
+                                  <div className="w-full bg-gray-200 rounded-full h-3 mb-3">
+                                    <div
+                                      className={`h-3 rounded-full transition-all duration-500 ${
+                                        isUserVote ? 'bg-green-500' : 'bg-blue-500'
+                                      }`}
+                                      style={{
+                                        width: `${Math.max(votePercentage, totalVotes === 0 ? 0 : 3)}%`,
+                                        minWidth: votePercentage > 0 ? '8px' : '0px',
+                                      }}
+                                    ></div>
+                                  </div>
+
+                                  {/* Expandable Details */}
+                                  {candidateDetails && candidateDetails.qualifications && (
+                                    <details className="mb-3 group">
+                                      <summary className="cursor-pointer text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1 select-none">
+                                        <svg
+                                          className="w-4 h-4 transition-transform group-open:rotate-90"
+                                          fill="none"
+                                          stroke="currentColor"
+                                          viewBox="0 0 24 24"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M9 5l7 7-7 7"
+                                          />
+                                        </svg>
+                                        View Candidate Application
+                                      </summary>
+                                      <div className="mt-3 space-y-3 border-t border-gray-200 pt-3 animate-in slide-in-from-top-1 duration-200">
+                                        <div className="grid gap-3 md:grid-cols-2">
+                                          {candidateDetails.message && (
+                                            <div>
+                                              <h5 className="font-medium text-sm text-gray-700 mb-1 flex items-center gap-1">
+                                                <MessageSquare className="h-3 w-3" />
+                                                Message
+                                              </h5>
+                                              <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-md border">
+                                                {candidateDetails.message}
+                                              </p>
+                                            </div>
+                                          )}
+                                          <div>
+                                            <h5 className="font-medium text-sm text-gray-700 mb-1 flex items-center gap-1">
+                                              <Award className="h-3 w-3" />
+                                              Qualifications
+                                            </h5>
+                                            <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-md border">
+                                              {candidateDetails.qualifications}
+                                            </p>
+                                          </div>
+                                        </div>
+                                        <div className="grid gap-3 md:grid-cols-2">
+                                          {candidateDetails.proposedChanges && (
+                                            <div>
+                                              <h5 className="font-medium text-sm text-gray-700 mb-1 flex items-center gap-1">
+                                                <Settings className="h-3 w-3" />
+                                                Proposed Changes
+                                              </h5>
+                                              <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-md border">
+                                                {candidateDetails.proposedChanges}
+                                              </p>
+                                            </div>
+                                          )}
+                                          {candidateDetails.timeline && (
+                                            <div>
+                                              <h5 className="font-medium text-sm text-gray-700 mb-1 flex items-center gap-1">
+                                                <Clock className="h-3 w-3" />
+                                                Timeline
+                                              </h5>
+                                              <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-md border">
+                                                {candidateDetails.timeline}
+                                              </p>
+                                            </div>
+                                          )}
+                                        </div>
+                                        <div className="flex items-center justify-between text-xs text-gray-500 pt-2 border-t border-gray-100">
+                                          <div className="flex items-center gap-4">
+                                            <span className="flex items-center gap-1">
+                                              <Star className="h-3 w-3" />
+                                              {candidateDetails.karma || 0} karma
+                                            </span>
+                                            <span className="text-gray-400">Candidate Profile</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </details>
+                                  )}
+
+                                  {/* Vote Button */}
+                                  {!idea.activeVoting?.hasUserVoted && user && (
+                                    <Button
+                                      size="sm"
+                                      variant={isUserVote ? 'default' : 'outline'}
+                                      className="w-full"
+                                      disabled={submitVoteMutation.isPending}
+                                      onClick={() => {
+                                        setSelectedCandidate(candidateDetails);
+                                        setVotingDialogOpen(true);
+                                      }}
+                                    >
+                                      <Vote className="h-4 w-4 mr-2" />
+                                      Vote for {candidate.username}
+                                    </Button>
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        {!user && (
+                          <div className="text-center py-4 text-gray-500">
+                            <p className="text-sm">Sign in to participate in voting</p>
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
 
                 {/* Ownership History */}
                 <Card>
@@ -1137,6 +1555,222 @@ export default function IdeaDetailPage() {
           </Card>
         </div>
       </div>
+
+      {/* Voting Confirmation Dialog */}
+      <AlertDialog open={votingDialogOpen} onOpenChange={setVotingDialogOpen}>
+        <AlertDialogContent className="max-w-2xl max-h-[80vh] w-[95vw] sm:w-full flex flex-col my-auto mx-auto overflow-hidden">
+          <AlertDialogHeader className="flex-shrink-0">
+            <AlertDialogTitle className="flex items-center gap-2">
+              <Vote className="h-5 w-5 text-blue-600" />
+              Confirm Your Vote
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-base">
+              You are about to cast your vote for{' '}
+              <span className="font-semibold text-gray-900">{selectedCandidate?.username}</span>.
+              Please review their profile and application carefully before proceeding.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+
+          <div className="flex-1 overflow-y-auto py-2 -mx-6 px-6 min-h-0">
+            {/* Scrollable content wrapper with negative margins for full width scrolling */}
+
+            {selectedCandidate && (
+              <div className="space-y-4 my-4">
+                {/* Candidate Summary */}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="bg-blue-100 p-2 rounded-full">
+                        <UserCheck className="h-5 w-5 text-blue-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-lg text-gray-900">
+                          {selectedCandidate.username}
+                        </h3>
+                        <p className="text-sm text-gray-600 flex items-center gap-1">
+                          <Star className="h-3 w-3" />
+                          {selectedCandidate.karma || 0} karma points
+                        </p>
+                      </div>
+                    </div>
+                    <Link
+                      href={`/users/${selectedCandidate.username}`}
+                      className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center gap-1"
+                    >
+                      View Profile <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  </div>
+
+                  {/* Skills Preview */}
+                  {selectedCandidate.qualifications && (
+                    <div className="flex flex-wrap gap-1 mb-3">
+                      {(() => {
+                        const skillKeywords = [
+                          'JavaScript',
+                          'TypeScript',
+                          'React',
+                          'Node.js',
+                          'Python',
+                          'Java',
+                          'Go',
+                          'Rust',
+                          'Frontend',
+                          'Backend',
+                          'Full-stack',
+                          'DevOps',
+                          'Cloud',
+                          'AWS',
+                          'Azure',
+                          'Docker',
+                          'Kubernetes',
+                          'AI',
+                          'ML',
+                          'Data Science',
+                          'Blockchain',
+                          'UI/UX',
+                          'Design',
+                          'Mobile',
+                          'iOS',
+                          'Android',
+                          'Flutter',
+                          'React Native',
+                          'Leadership',
+                          'Management',
+                          'Startup',
+                          'Enterprise',
+                        ];
+
+                        const qualText = selectedCandidate.qualifications.toLowerCase();
+                        const foundSkills = skillKeywords
+                          .filter((skill) => qualText.includes(skill.toLowerCase()))
+                          .slice(0, 4);
+
+                        if (foundSkills.length === 0) {
+                          const domainTags = idea?.domain?.slice(0, 3) || ['Technology'];
+                          return domainTags.map((domain, index) => (
+                            <Badge key={index} variant="secondary" className="text-xs">
+                              {domain}
+                            </Badge>
+                          ));
+                        }
+
+                        return foundSkills.map((skill, index) => (
+                          <Badge key={index} variant="secondary" className="text-xs">
+                            {skill}
+                          </Badge>
+                        ));
+                      })()}
+                    </div>
+                  )}
+                </div>
+
+                {/* Application Details */}
+                <div className="space-y-3">
+                  <h4 className="font-medium text-gray-900 flex items-center gap-2">
+                    <FileText className="h-4 w-4" />
+                    Application Summary
+                  </h4>
+
+                  <div className="grid gap-3 text-sm">
+                    {selectedCandidate.message && (
+                      <div className="bg-gray-50 p-3 rounded-md border">
+                        <h5 className="font-medium text-gray-700 mb-1">Message:</h5>
+                        <p className="text-gray-600">{selectedCandidate.message}</p>
+                      </div>
+                    )}
+
+                    {selectedCandidate.qualifications && (
+                      <div className="bg-gray-50 p-3 rounded-md border">
+                        <h5 className="font-medium text-gray-700 mb-1">Qualifications:</h5>
+                        <p className="text-gray-600">{selectedCandidate.qualifications}</p>
+                      </div>
+                    )}
+
+                    {selectedCandidate.proposedChanges && (
+                      <div className="bg-gray-50 p-3 rounded-md border">
+                        <h5 className="font-medium text-gray-700 mb-1">Proposed Changes:</h5>
+                        <p className="text-gray-600">{selectedCandidate.proposedChanges}</p>
+                      </div>
+                    )}
+
+                    {selectedCandidate.timeline && (
+                      <div className="bg-gray-50 p-3 rounded-md border">
+                        <h5 className="font-medium text-gray-700 mb-1">Timeline:</h5>
+                        <p className="text-gray-600">{selectedCandidate.timeline}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Important Notice */}
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm">
+                      <h5 className="font-medium text-amber-800 mb-1">Important Notice</h5>
+                      <p className="text-amber-700">
+                        Your vote is <strong>final and cannot be changed</strong> once submitted.
+                        Make sure you've reviewed the candidate's profile and qualifications
+                        carefully.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          {/* End scrollable content wrapper */}
+
+          <AlertDialogFooter className="gap-3 flex-shrink-0 border-t pt-3">
+            <AlertDialogCancel className="flex items-center gap-2">
+              <X className="h-4 w-4" />
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async () => {
+                if (!selectedCandidate) return;
+
+                try {
+                  await submitVoteMutation.mutateAsync({
+                    ideaId,
+                    data: {
+                      candidateRequestId: selectedCandidate._id,
+                      supportingReason: `I believe ${selectedCandidate.username} is the best candidate for this adoption based on their qualifications and proposed approach.`,
+                    },
+                  });
+                  toast({
+                    title: 'Vote Cast Successfully! 🗳️',
+                    description: `Your vote for ${selectedCandidate.username} has been recorded and cannot be changed.`,
+                  });
+                  setVotingDialogOpen(false);
+                  setSelectedCandidate(null);
+                } catch (error: any) {
+                  toast({
+                    title: 'Voting Failed',
+                    description:
+                      error.response?.data?.message || 'Failed to submit vote. Please try again.',
+                    variant: 'destructive',
+                  });
+                }
+              }}
+              disabled={submitVoteMutation.isPending}
+              className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2"
+            >
+              {submitVoteMutation.isPending ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  Casting Vote...
+                </>
+              ) : (
+                <>
+                  <CheckCircle className="h-4 w-4" />
+                  Cast My Vote
+                </>
+              )}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

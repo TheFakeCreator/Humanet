@@ -83,4 +83,15 @@ router.get(
   AdoptionRequestController.getAdoptionRequestById
 );
 
+/**
+ * @route   POST /api/adoption-requests/trigger-voting/:ideaId
+ * @desc    Manually trigger voting for an idea with multiple adoption requests
+ * @access  Private (Original creator only)
+ */
+router.post(
+  '/trigger-voting/:ideaId',
+  validateParams(getIdeaRequestsSchema.shape.params),
+  AdoptionRequestController.triggerVoting
+);
+
 export default router;

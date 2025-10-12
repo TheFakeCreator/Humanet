@@ -112,6 +112,29 @@ export class AdoptionRequestService {
       $push: { adoptionRequests: adoptionRequest._id },
     });
 
+    // Check if we should auto-trigger democratic voting
+    // If this is the 3rd request (total of 3+ pending requests), automatically start voting
+    const totalPendingRequests = await AdoptionRequestModel.countDocuments({
+      ideaId,
+      status: 'pending',
+    });
+
+    if (totalPendingRequests >= 3) {
+      // Get all pending request IDs for voting
+      const allPendingRequests = await AdoptionRequestModel.find({
+        ideaId,
+        status: 'pending',
+      }).select('_id');
+
+      const requestIds = allPendingRequests.map((req: any) => req._id.toString());
+
+      // Check if voting is not already active
+      const idea = await IdeaModel.findById(ideaId).select('activeVoting');
+      if (!idea?.activeVoting) {
+        await this.initiateVoting(ideaId, requestIds);
+      }
+    }
+
     // TODO: Send notification to idea creator
 
     return this.mapToDTO(adoptionRequest);
@@ -292,6 +315,54 @@ export class AdoptionRequestService {
   }
 
   /**
+   * Manually trigger voting for an idea with multiple adoption requests
+   */
+  static async manuallyTriggerVoting(
+    ideaId: string,
+    userId: string
+  ): Promise<{ votingTriggered: boolean; message: string }> {
+    // Verify user is the original creator of the idea
+    const idea = await IdeaModel.findById(ideaId);
+    if (!idea) {
+      throw new AppError('Idea not found', 404);
+    }
+
+    if (idea.originalCreator.toString() !== userId) {
+      throw new AppError('Only the idea creator can trigger voting', 403);
+    }
+
+    // Check if voting is already active
+    if (idea.activeVoting) {
+      return {
+        votingTriggered: false,
+        message: 'Voting is already active for this idea',
+      };
+    }
+
+    // Get all pending adoption requests
+    const pendingRequests = await AdoptionRequestModel.find({
+      ideaId,
+      status: 'pending',
+    }).select('_id');
+
+    if (pendingRequests.length < 2) {
+      return {
+        votingTriggered: false,
+        message: `Need at least 2 adoption requests to trigger voting. Currently have ${pendingRequests.length}.`,
+      };
+    }
+
+    // Trigger voting
+    const requestIds = pendingRequests.map((req: any) => req._id.toString());
+    await this.initiateVoting(ideaId, requestIds);
+
+    return {
+      votingTriggered: true,
+      message: `Voting triggered successfully with ${pendingRequests.length} candidates.`,
+    };
+  }
+
+  /**
    * Initiate democratic voting for multiple candidates
    */
   private static async initiateVoting(
@@ -311,8 +382,8 @@ export class AdoptionRequestService {
     await IdeaModel.findByIdAndUpdate(ideaId, {
       adoptionStatus: 'pending',
       activeVoting: {
-        candidates: candidateRequestIds,
-        votes: new Map(),
+        candidateRequestIds: candidateRequestIds,
+        votes: [],
         votingEndsAt,
         startedAt: new Date(),
         description: 'Community voting to select the best adopter for this idea',

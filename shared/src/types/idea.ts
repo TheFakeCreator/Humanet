@@ -84,6 +84,11 @@ export interface IdeaDTO {
       _id: string;
       username: string;
       votesReceived: number;
+      karma?: number;
+      qualifications?: string;
+      proposedChanges?: string;
+      timeline?: string;
+      message?: string;
     }>;
     totalVotes: number;
     votingEndsAt: string;
