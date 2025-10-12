@@ -27,6 +27,9 @@
     "db:cleanup:dry": "tsx scripts/db-utils.ts cleanup --dry-run",
     "db:migrate": "tsx scripts/db-utils.ts migrate",
     "db:export-stats": "tsx scripts/db-utils.ts export-stats",
+    "voting:scheduler": "tsx scripts/voting-scheduler.ts",
+    "voting:scheduler:once": "tsx scripts/voting-scheduler.ts --once",
+    "voting:scheduler:verbose": "tsx scripts/voting-scheduler.ts --verbose",
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {

@@ -1,6 +1,7 @@
 import { Types } from 'mongoose';
 import { AdoptionRequestModel, IdeaModel } from '../models/index.js';
 import { AppError } from '../middlewares/error.middleware.js';
+import config from '../config/index.js';
 
 interface VotingCandidate {
   requestId: string;
@@ -210,12 +211,22 @@ export class VotingService {
     // Check if voting period has ended or if there are votes to process
     const votingEnded = new Date() > idea.activeVoting.votingEndsAt;
     const hasVotes = idea.activeVoting.votes.length > 0;
+    const totalVotes = idea.activeVoting.votes.length;
+    const minimumVotes = config.VOTING_MINIMUM_VOTES;
 
     if (!votingEnded && !hasVotes) {
       throw new AppError('Voting is still active and no votes have been cast', 400);
     }
 
-    // Count votes and determine winner
+    // Check minimum vote threshold for democratic legitimacy
+    if (totalVotes < minimumVotes) {
+      throw new AppError(
+        `Insufficient votes for conclusion. Minimum ${minimumVotes} votes required, but only ${totalVotes} votes were cast. Consider extending the voting period or lowering the threshold.`,
+        400
+      );
+    }
+
+    // Count votes and determine winner with tie-breaking
     const voteCounts = new Map<string, number>();
     idea.activeVoting.votes.forEach((vote: any) => {
       const candidateId = vote.candidateRequestId.toString();
@@ -226,14 +237,62 @@ export class VotingService {
       throw new AppError('No votes were cast during the voting period', 400);
     }
 
-    // Find winner (candidate with most votes)
-    let winnerRequestId = '';
-    let maxVotes = 0;
-    for (const [candidateId, votes] of voteCounts.entries()) {
-      if (votes > maxVotes) {
-        maxVotes = votes;
-        winnerRequestId = candidateId;
-      }
+    // Find winner with sophisticated tie-breaking
+    const maxVotes = Math.max(...Array.from(voteCounts.values()));
+    const tiedCandidates = Array.from(voteCounts.entries())
+      .filter(([_, votes]) => votes === maxVotes)
+      .map(([candidateId, _]) => candidateId);
+
+    let winnerRequestId: string;
+
+    if (tiedCandidates.length === 1) {
+      // Clear winner
+      winnerRequestId = tiedCandidates[0];
+    } else {
+      // Tie-breaking: Select based on multiple criteria
+      console.log(`Tie detected: ${tiedCandidates.length} candidates with ${maxVotes} votes each`);
+
+      // Get candidate details for tie-breaking
+      const candidateDetails = await AdoptionRequestModel.find({
+        _id: { $in: tiedCandidates },
+      }).populate('requesterId', 'username karma createdAt');
+
+      // Tie-breaking criteria (in order of priority):
+      // 1. Higher karma score
+      // 2. Earlier adoption request submission
+      // 3. Lexicographical username order (for absolute consistency)
+      const sortedCandidates = candidateDetails.sort((a, b) => {
+        const karmaA = (a.requesterId as any).karma || 0;
+        const karmaB = (b.requesterId as any).karma || 0;
+
+        // Primary: Higher karma wins
+        if (karmaA !== karmaB) {
+          return karmaB - karmaA; // Higher karma first
+        }
+
+        // Secondary: Earlier request wins
+        const timeA = new Date(a.requestedAt).getTime();
+        const timeB = new Date(b.requestedAt).getTime();
+        if (timeA !== timeB) {
+          return timeA - timeB; // Earlier first
+        }
+
+        // Tertiary: Alphabetical username order (for consistency)
+        const usernameA = (a.requesterId as any).username || '';
+        const usernameB = (b.requesterId as any).username || '';
+        return usernameA.localeCompare(usernameB);
+      });
+
+      winnerRequestId = (sortedCandidates[0] as any)._id.toString();
+
+      // Log tie-breaking decision for transparency
+      const winner = sortedCandidates[0];
+      const winnerUsername = (winner.requesterId as any).username;
+      const winnerKarma = (winner.requesterId as any).karma || 0;
+
+      console.log(
+        `Tie-breaking winner: ${winnerUsername} (karma: ${winnerKarma}, requested: ${winner.requestedAt})`
+      );
     }
 
     // Get winner details
@@ -307,12 +366,37 @@ export class VotingService {
       activeVoting: { $exists: true },
     });
 
+    console.log(`Found ${expiredVotingIdeas.length} expired voting ideas to process`);
+
     for (const idea of expiredVotingIdeas) {
       try {
         await this.concludeVoting((idea as any)._id.toString(), idea.originalCreator.toString());
+        console.log(`Successfully concluded voting for idea: ${(idea as any)._id}`);
       } catch (error) {
-        console.error(`Failed to conclude voting for idea ${(idea as any)._id}:`, error);
-        // Continue with other ideas even if one fails
+        const errorMessage = error instanceof Error ? error.message : String(error);
+
+        // Handle insufficient votes gracefully in automated mode
+        if (errorMessage.includes('Insufficient votes for conclusion')) {
+          console.warn(
+            `Voting for idea ${(idea as any)._id} has insufficient votes. Extending voting period by 3 days.`
+          );
+
+          // Extend voting period by 3 days to allow more participation
+          const threeDaysFromNow = new Date();
+          threeDaysFromNow.setDate(threeDaysFromNow.getDate() + 3);
+
+          await IdeaModel.updateOne(
+            { _id: (idea as any)._id },
+            { 'activeVoting.votingEndsAt': threeDaysFromNow }
+          );
+
+          console.log(
+            `Extended voting period for idea ${(idea as any)._id} until ${threeDaysFromNow.toISOString()}`
+          );
+        } else {
+          console.error(`Failed to conclude voting for idea ${(idea as any)._id}:`, errorMessage);
+          // Continue with other ideas even if one fails
+        }
       }
     }
   }

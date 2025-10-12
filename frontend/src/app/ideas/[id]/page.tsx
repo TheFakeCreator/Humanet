@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useIdea, useUpvoteIdea, useForkIdea } from '@/hooks/useIdeas';
@@ -10,7 +10,7 @@ import {
   useRespondToAdoptionRequest,
   useTriggerVoting,
 } from '@/hooks/useAdoptionRequests';
-import { useSubmitVote } from '@/hooks/useVoting';
+import { useSubmitVote, useConcludeVoting, useVotingResults } from '@/hooks/useVoting';
 import { CommentList } from '@/components/ui/CommentList';
 import { FamilyTreePreview } from '@/components/ui/FamilyTreePreview';
 import { FileSystemTab } from '@/components/ui/FileSystemTab';
@@ -69,6 +69,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { OwnershipType, AdoptionStatus } from '@shared/types/idea';
+import { formatNumber, formatVoteCount, formatPercentage } from '@/lib/utils';
 
 // Ownership Badge Component
 const OwnershipBadge = ({
@@ -318,10 +319,51 @@ export default function IdeaDetailPage() {
   const respondToAdoptionRequestMutation = useRespondToAdoptionRequest();
   const submitVoteMutation = useSubmitVote();
   const triggerVotingMutation = useTriggerVoting();
+  const concludeVotingMutation = useConcludeVoting();
+
+  // Get voting results if there's no active voting (concluded voting)
+  const { data: votingResults } = useVotingResults(ideaId);
+  const hasCompletedVoting = !idea?.activeVoting && votingResults;
 
   // Voting confirmation dialog state
   const [votingDialogOpen, setVotingDialogOpen] = useState(false);
   const [selectedCandidate, setSelectedCandidate] = useState<any>(null);
+
+  // Countdown timer state
+  const [timeRemaining, setTimeRemaining] = useState<{
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+    expired: boolean;
+  } | null>(null);
+
+  // Update countdown timer
+  useEffect(() => {
+    if (!idea?.activeVoting?.votingEndsAt) return;
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const endTime = new Date(idea.activeVoting!.votingEndsAt).getTime();
+      const difference = endTime - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        setTimeRemaining({ days, hours, minutes, seconds, expired: false });
+      } else {
+        setTimeRemaining({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: true });
+      }
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(interval);
+  }, [idea?.activeVoting?.votingEndsAt]);
 
   const handleUpvote = () => {
     if (!idea?._id) return;
@@ -815,28 +857,138 @@ export default function IdeaDetailPage() {
                     <CardContent>
                       <div className="space-y-4">
                         {/* Voting Status */}
-                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                          <div className="flex items-center justify-between mb-2">
+                        <div
+                          className={`border rounded-lg p-4 ${
+                            timeRemaining?.expired
+                              ? 'bg-red-50 border-red-200'
+                              : 'bg-blue-50 border-blue-200'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-3">
                             <div className="flex items-center gap-2">
-                              <Clock className="h-4 w-4 text-blue-600" />
-                              <span className="font-medium text-blue-800">
-                                {idea.activeVoting.hasUserVoted
-                                  ? 'You Have Voted'
-                                  : 'Voting Active'}
+                              {timeRemaining?.expired ? (
+                                <AlertTriangle className="h-4 w-4 text-red-600" />
+                              ) : (
+                                <Clock className="h-4 w-4 text-blue-600" />
+                              )}
+                              <span
+                                className={`font-medium ${
+                                  timeRemaining?.expired ? 'text-red-800' : 'text-blue-800'
+                                }`}
+                              >
+                                {timeRemaining?.expired
+                                  ? 'Voting Expired'
+                                  : idea.activeVoting.hasUserVoted
+                                    ? 'You Have Voted'
+                                    : 'Voting Active'}
                               </span>
                             </div>
                             <Badge
                               variant="outline"
-                              className="bg-blue-100 text-blue-800 border-blue-300"
+                              className={
+                                timeRemaining?.expired
+                                  ? 'bg-red-100 text-red-800 border-red-300'
+                                  : 'bg-blue-100 text-blue-800 border-blue-300'
+                              }
                             >
-                              {idea.activeVoting.totalVotes} votes cast
+                              {formatVoteCount(idea.activeVoting.totalVotes)} cast
                             </Badge>
                           </div>
-                          <p className="text-sm text-blue-700">
-                            Voting ends on{' '}
+
+                          {/* Countdown Timer */}
+                          {timeRemaining && !timeRemaining.expired && (
+                            <div className="mb-3">
+                              <div className="flex items-center gap-1 text-lg font-mono font-semibold text-blue-700 mb-1">
+                                {timeRemaining.days > 0 && (
+                                  <span className="bg-blue-100 px-2 py-1 rounded text-sm">
+                                    {timeRemaining.days}d
+                                  </span>
+                                )}
+                                <span className="bg-blue-100 px-2 py-1 rounded text-sm">
+                                  {timeRemaining.hours.toString().padStart(2, '0')}h
+                                </span>
+                                <span className="bg-blue-100 px-2 py-1 rounded text-sm">
+                                  {timeRemaining.minutes.toString().padStart(2, '0')}m
+                                </span>
+                                <span className="bg-blue-100 px-2 py-1 rounded text-sm">
+                                  {timeRemaining.seconds.toString().padStart(2, '0')}s
+                                </span>
+                              </div>
+                              <p className="text-xs text-blue-600">Time remaining to vote</p>
+                            </div>
+                          )}
+
+                          {/* Expiration Notice */}
+                          {timeRemaining?.expired && (
+                            <div className="mb-3 p-2 bg-red-100 border border-red-200 rounded">
+                              <p className="text-sm text-red-700 font-medium">
+                                ⏰ Voting period has ended
+                              </p>
+                              <p className="text-xs text-red-600">
+                                Final voting ended on{' '}
+                                {new Date(idea.activeVoting.votingEndsAt).toLocaleDateString()}
+                              </p>
+                            </div>
+                          )}
+
+                          {/* Detailed End Time */}
+                          <p
+                            className={`text-sm ${
+                              timeRemaining?.expired ? 'text-red-700' : 'text-blue-700'
+                            }`}
+                          >
+                            Voting {timeRemaining?.expired ? 'ended' : 'ends'} on{' '}
                             {new Date(idea.activeVoting.votingEndsAt).toLocaleDateString()} at{' '}
                             {new Date(idea.activeVoting.votingEndsAt).toLocaleTimeString()}
                           </p>
+
+                          {/* Minimum Vote Progress */}
+                          {(() => {
+                            const minimumVotes = 3; // This should match backend config
+                            const currentVotes = idea.activeVoting.totalVotes;
+                            const progressPercentage = Math.min(
+                              (currentVotes / minimumVotes) * 100,
+                              100
+                            );
+                            const isMinimumMet = currentVotes >= minimumVotes;
+
+                            return (
+                              <div className="mt-3 p-3 bg-gray-50 border border-gray-200 rounded-md">
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="text-sm font-medium text-gray-700">
+                                    Democratic Threshold
+                                  </span>
+                                  <span
+                                    className={`text-sm font-medium ${
+                                      isMinimumMet ? 'text-green-600' : 'text-amber-600'
+                                    }`}
+                                  >
+                                    {formatNumber(currentVotes)}/{formatNumber(minimumVotes)} votes
+                                  </span>
+                                </div>
+                                <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                  <div
+                                    className={`h-2 rounded-full transition-all duration-500 ${
+                                      isMinimumMet ? 'bg-green-500' : 'bg-amber-500'
+                                    }`}
+                                    style={{ width: `${Math.max(progressPercentage, 5)}%` }}
+                                  ></div>
+                                </div>
+                                <p className="text-xs text-gray-600">
+                                  {isMinimumMet ? (
+                                    <span className="text-green-600">
+                                      ✓ Minimum votes reached. Voting can be concluded.
+                                    </span>
+                                  ) : (
+                                    <span>
+                                      {minimumVotes - currentVotes} more votes needed for valid
+                                      conclusion
+                                    </span>
+                                  )}
+                                </p>
+                              </div>
+                            );
+                          })()}
                           {idea.activeVoting.hasUserVoted ? (
                             <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-md">
                               <p className="text-sm text-green-700 flex items-center gap-2">
@@ -998,7 +1150,7 @@ export default function IdeaDetailPage() {
                                         variant="outline"
                                         className="text-xs px-2 py-1 text-gray-500"
                                       >
-                                        {candidateDetails.karma || 0} karma
+                                        {formatNumber(candidateDetails.karma || 0)} karma
                                       </Badge>
                                     </div>
                                   )}
@@ -1122,6 +1274,213 @@ export default function IdeaDetailPage() {
                             <p className="text-sm">Sign in to participate in voting</p>
                           </div>
                         )}
+
+                        {/* Conclude Voting Button for Idea Creator */}
+                        {user &&
+                          idea.originalCreator?._id === user._id &&
+                          idea.activeVoting &&
+                          new Date() > new Date(idea.activeVoting.votingEndsAt) && (
+                            <div className="pt-4 border-t border-gray-200">
+                              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                                <div className="flex items-start gap-3">
+                                  <AlertTriangle className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
+                                  <div>
+                                    <h5 className="font-medium text-amber-800 mb-1">
+                                      Voting Period Expired
+                                    </h5>
+                                    <p className="text-sm text-amber-700 mb-3">
+                                      The voting period has ended. As the idea creator, you can now
+                                      conclude the voting to determine the winner and transfer
+                                      ownership.
+                                    </p>
+                                    <Button
+                                      onClick={async () => {
+                                        try {
+                                          const result =
+                                            await concludeVotingMutation.mutateAsync(ideaId);
+                                          toast({
+                                            title: 'Voting Concluded! 🎉',
+                                            description: `${result.winner.username} has been selected as the new maintainer with ${result.finalVoteCount} votes.`,
+                                          });
+                                        } catch (error: any) {
+                                          toast({
+                                            title: 'Failed to Conclude Voting',
+                                            description:
+                                              error.response?.data?.message ||
+                                              'Something went wrong. Please try again.',
+                                            variant: 'destructive',
+                                          });
+                                        }
+                                      }}
+                                      disabled={concludeVotingMutation.isPending}
+                                      className="bg-amber-600 hover:bg-amber-700 text-white"
+                                      size="sm"
+                                    >
+                                      {concludeVotingMutation.isPending ? (
+                                        <>
+                                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                                          Concluding...
+                                        </>
+                                      ) : (
+                                        <>
+                                          <CheckCircle className="h-4 w-4 mr-2" />
+                                          Conclude Voting
+                                        </>
+                                      )}
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Voting Results Display (for concluded voting) */}
+                {hasCompletedVoting && votingResults && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <CheckCircle className="h-5 w-5 text-green-600" />
+                        Voting Results
+                      </CardTitle>
+                      <CardDescription>
+                        Democratic voting has concluded. Here are the final results.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        {/* Winner Announcement */}
+                        {(() => {
+                          const winner = votingResults.candidates.reduce(
+                            (prev: any, current: any) =>
+                              prev.votesReceived > current.votesReceived ? prev : current
+                          );
+                          return (
+                            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                              <div className="flex items-center gap-3 mb-3">
+                                <div className="p-2 bg-green-100 rounded-full">
+                                  <Crown className="h-5 w-5 text-green-600" />
+                                </div>
+                                <div>
+                                  <h4 className="font-semibold text-green-800">
+                                    🎉 Winner: {winner.requester.username}
+                                  </h4>
+                                  <p className="text-sm text-green-700">
+                                    Selected with {formatVoteCount(winner.votesReceived)} out of{' '}
+                                    {formatVoteCount(votingResults.totalVotes)} total (
+                                    {formatPercentage(
+                                      (winner.votesReceived / votingResults.totalVotes) * 100
+                                    )}
+                                    )
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="text-sm text-green-700">
+                                <Link
+                                  href={`/users/${winner.requester.username}`}
+                                  className="font-medium hover:text-green-800 underline"
+                                >
+                                  {winner.requester.username}
+                                </Link>{' '}
+                                is now the maintainer of this idea.
+                              </div>
+                            </div>
+                          );
+                        })()}
+
+                        {/* Vote Breakdown */}
+                        <div>
+                          <h5 className="font-medium text-gray-900 mb-3">Final Vote Count</h5>
+                          <div className="space-y-2">
+                            {votingResults.candidates
+                              .sort((a: any, b: any) => b.votesReceived - a.votesReceived)
+                              .map((candidate: any, index: number) => {
+                                const percentage =
+                                  votingResults.totalVotes > 0
+                                    ? (candidate.votesReceived / votingResults.totalVotes) * 100
+                                    : 0;
+                                const isWinner = index === 0;
+
+                                return (
+                                  <div
+                                    key={candidate.requestId}
+                                    className={`p-3 rounded-lg border ${
+                                      isWinner
+                                        ? 'border-green-300 bg-green-50'
+                                        : 'border-gray-200 bg-gray-50'
+                                    }`}
+                                  >
+                                    <div className="flex items-center justify-between mb-2">
+                                      <div className="flex items-center gap-2">
+                                        {isWinner && <Crown className="h-4 w-4 text-green-600" />}
+                                        <Link
+                                          href={`/users/${candidate.requester.username}`}
+                                          className="font-medium hover:text-blue-600 hover:underline"
+                                        >
+                                          {candidate.requester.username}
+                                        </Link>
+                                        <Badge variant="outline" className="text-xs">
+                                          {formatNumber(candidate.requester.karma)} karma
+                                        </Badge>
+                                        {isWinner && (
+                                          <Badge className="bg-green-100 text-green-800 border-green-300">
+                                            Winner
+                                          </Badge>
+                                        )}
+                                      </div>
+                                      <div className="text-sm font-medium text-gray-700">
+                                        {formatVoteCount(candidate.votesReceived)} (
+                                        {formatPercentage(percentage)})
+                                      </div>
+                                    </div>
+
+                                    {/* Progress Bar */}
+                                    <div className="w-full bg-gray-200 rounded-full h-2">
+                                      <div
+                                        className={`h-2 rounded-full transition-all duration-500 ${
+                                          isWinner ? 'bg-green-500' : 'bg-gray-400'
+                                        }`}
+                                        style={{
+                                          width: `${Math.max(percentage, 2)}%`,
+                                        }}
+                                      ></div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        </div>
+
+                        {/* Voting Summary */}
+                        <div className="border-t border-gray-200 pt-4">
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                            <div>
+                              <div className="text-lg font-semibold text-gray-900">
+                                {formatNumber(votingResults.totalVotes)}
+                              </div>
+                              <div className="text-xs text-gray-500">Total Votes</div>
+                            </div>
+                            <div>
+                              <div className="text-lg font-semibold text-gray-900">
+                                {formatNumber(votingResults.candidates.length)}
+                              </div>
+                              <div className="text-xs text-gray-500">Candidates</div>
+                            </div>
+                            <div>
+                              <div className="text-lg font-semibold text-gray-900">
+                                {new Date(votingResults.votingEndsAt).toLocaleDateString()}
+                              </div>
+                              <div className="text-xs text-gray-500">Concluded On</div>
+                            </div>
+                            <div>
+                              <div className="text-lg font-semibold text-green-600">Democratic</div>
+                              <div className="text-xs text-gray-500">Selection Method</div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>

@@ -70,3 +70,23 @@ export const useVotingResults = (ideaId: string) => {
     enabled: !!ideaId,
   });
 };
+
+// Conclude voting (idea creator only)
+export const useConcludeVoting = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (ideaId: string) => {
+      const response = await api.post(`/voting/${ideaId}/conclude`);
+      return response.data.data;
+    },
+    onSuccess: (_, ideaId) => {
+      // Invalidate all related queries to refresh the UI
+      queryClient.invalidateQueries({ queryKey: ['voting', 'active', ideaId] });
+      queryClient.invalidateQueries({ queryKey: ['voting', 'results', ideaId] });
+      queryClient.invalidateQueries({ queryKey: ['ideas', ideaId] });
+      queryClient.invalidateQueries({ queryKey: ['adoptionRequests', 'idea', ideaId] });
+      queryClient.invalidateQueries({ queryKey: ['ideas'] }); // Refresh ideas list
+    },
+  });
+};
